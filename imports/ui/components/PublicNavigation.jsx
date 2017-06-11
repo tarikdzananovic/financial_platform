@@ -14,3 +14,4 @@ const PublicNavigation = () => (
 );
 
 export default PublicNavigation;
+

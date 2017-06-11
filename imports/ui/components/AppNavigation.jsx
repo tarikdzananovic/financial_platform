@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import PublicNavigation from './PublicNavigation.jsx';
 import AuthenticatedNavigation from './AuthenticatedNavigation.jsx';
 
