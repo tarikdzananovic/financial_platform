@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { Recaptcha } from 'react-recaptcha';
 import handleSignup from '../../modules/signup';
 
 export default class Signup extends React.Component {
@@ -64,6 +65,9 @@ export default class Signup extends React.Component {
                                     placeholder="Password"
                                 />
                             </FormGroup>
+                            <Recaptcha
+                                sitekey="xxxxxxxxxxxxxxxxxxxx"
+                            />
                             <Button type="submit" bsStyle="success">Sign Up</Button>
                         </form>
                         <p>Already have an account? <Link to="/login">Log In</Link>.</p>
