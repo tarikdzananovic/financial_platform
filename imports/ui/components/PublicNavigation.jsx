@@ -3,7 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem } from 'react-bootstrap';
 
 const PublicNavigation = () => (
-    <Nav pullRight>
+        <Nav pullRight>
         <LinkContainer to="signup">
             <NavItem eventKey={ 1 } href="/signup">Sign Up</NavItem>
         </LinkContainer>

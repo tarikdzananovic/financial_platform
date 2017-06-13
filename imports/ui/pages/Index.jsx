@@ -5,9 +5,8 @@ const Index = () => (
     <div className="Index">
         <Jumbotron className="text-center">
             <h2>Base</h2>
-            <p>A starting point for Meteor applications.</p>
-            <p><a className="btn btn-success" href="https://themeteorchef.com/base" role="button">Read the Documentation</a></p>
-            <p style={ { fontSize: '16px', color: '#aaa' } }>Currently at v4.14.0</p>
+            <p>A starting point for EZ_B application</p>
+            <p><a className="btn btn-success" href="https://github.com/tarikdzananovic/financial_platform" role="button">Visit Github</a></p>
         </Jumbotron>
     </div>
 );
