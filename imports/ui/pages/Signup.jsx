@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import { Recaptcha } from 'react-recaptcha';
 import handleSignup from '../../modules/signup';
+
+var Recaptcha = require('react-recaptcha');
+
+// specifying your onload callback function
+var callback = function () {
+    console.log('Done!!!!');
+};
 
 export default class Signup extends React.Component {
     componentDidMount() {
@@ -12,6 +18,7 @@ export default class Signup extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
     }
+
 
     render() {
         return (
@@ -65,9 +72,13 @@ export default class Signup extends React.Component {
                                     placeholder="Password"
                                 />
                             </FormGroup>
+
                             <Recaptcha
-                                sitekey="xxxxxxxxxxxxxxxxxxxx"
+                                sitekey="6LeLeCUUAAAAALbJxeNOM1-9WJL6QU4299_zseDY"
+                                render="explicit"
+                                onloadCallback={callback}
                             />
+
                             <Button type="submit" bsStyle="success">Sign Up</Button>
                         </form>
                         <p>Already have an account? <Link to="/login">Log In</Link>.</p>
