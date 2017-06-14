@@ -1,7 +1,8 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 
-const Index = () => (
+
+const PublicIndex = () => (
     <div className="Index">
         <Jumbotron className="text-center">
             <h2>Base</h2>
@@ -11,4 +12,4 @@ const Index = () => (
     </div>
 );
 
-export default Index;
+export default PublicIndex;
