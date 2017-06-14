@@ -22,6 +22,8 @@ const getUserData = () => ({
 const signup = () => {
     const user = getUserData();
 
+    console.log("User: " + JSON.stringify(user));
+
     Accounts.createUser(user, (error) => {
         if (error) {
             Bert.alert(error.reason, 'danger');
@@ -47,8 +49,7 @@ const validate = () => {
             },
             password: {
                 required: true,
-                minLength: 6,
-            }
+            },
         },
         messages: {
             firstName: {
@@ -63,7 +64,6 @@ const validate = () => {
             },
             password: {
                 required: 'Need a password here.',
-                minLength: 'Use at least six characters, please.',
             },
         },
         submitHandler() { signup(); },
