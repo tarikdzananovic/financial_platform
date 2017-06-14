@@ -3,11 +3,16 @@ import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import handleSignup from '../../modules/signup';
 
-var Recaptcha = require('react-recaptcha');
+const Recaptcha = require('react-recaptcha');
 
 // specifying your onload callback function
-var callback = function () {
+let callback = function () {
     console.log('Done!!!!');
+};
+
+// specifying verify callback function
+let verifyCallback = function (response) {
+    console.log(response);
 };
 
 export default class Signup extends React.Component {
@@ -54,6 +59,32 @@ export default class Signup extends React.Component {
                                     </FormGroup>
                                 </Col>
                             </Row>
+
+                            <Row>
+                                <Col xs={ 6 } sm={ 6 }>
+                                    <FormGroup>
+                                        <ControlLabel>Phone</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            ref="phone"
+                                            name="phone"
+                                            placeholder="Phone"
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col xs={ 6 } sm={ 6 }>
+                                    <FormGroup>
+                                        <ControlLabel>Address</ControlLabel>
+                                        <FormControl
+                                            type="text"
+                                            ref="address"
+                                            name="address"
+                                            placeholder="Address"
+                                        />
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+
                             <FormGroup>
                                 <ControlLabel>Email Address</ControlLabel>
                                 <FormControl
@@ -77,6 +108,8 @@ export default class Signup extends React.Component {
                                 sitekey="6LeLeCUUAAAAALbJxeNOM1-9WJL6QU4299_zseDY"
                                 render="explicit"
                                 onloadCallback={callback}
+                                verifyCallback={verifyCallback}
+                                theme="dark"
                             />
 
                             <Button type="submit" bsStyle="success">Sign Up</Button>

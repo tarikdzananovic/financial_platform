@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
 import App from '../../ui/layouts/App.jsx';
-import Index from '../../ui/pages/Index.jsx';
+import Index from '../../ui/layouts/Index.jsx';
 import Signup from '../../ui/pages/Signup.jsx';
 import Login from '../../ui/pages/Login.jsx';
 import NotFound from '../../ui/pages/NotFound.jsx';
