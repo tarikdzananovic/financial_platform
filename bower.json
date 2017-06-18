@@ -1,0 +1,27 @@
+{
+  "name": "smartadmin-reactjs",
+  "version": "0.0.1",
+  "authors": [
+    "Yura Griga <grigach@gmail.com>"
+  ],
+  "main": "main.html",
+  "keywords": [
+    "smartadmin",
+    "reactjs"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  },
+  "resolutions": {
+    "jquery": ">= 1.9.0",
+    "font-awesome": ">=4.2.0"
+  }
+}
