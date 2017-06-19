@@ -19,7 +19,7 @@ let ToggleMenu = React.createClass({
 		return (
             <div id="hide-menu" className={this.props.className}>
                 <span>
-                    <a href-void onClick={this.toggleMenu} title="Collapse Menu"><i className="fa fa-reorder"/></a>
+                    <a href onClick={this.toggleMenu} title="Collapse Menu"><i className="fa fa-reorder"/></a>
                 </span>
             </div>
 

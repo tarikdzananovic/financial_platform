@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
-import './validation.js';
+import '../validation.js';
 
 let component;
 

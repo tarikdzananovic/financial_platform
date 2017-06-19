@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
 import LoadHtml from '../../components/utils/LoadHtml'
-import handleSignup from '../../../modules/signup';
+import handleSignup from '../../../modules/auth/signup';
 import MaskedInput from '../../components/forms/inputs/MaskedInput';
 import UiValidate from '../../components/forms/validation/UiValidate';
 

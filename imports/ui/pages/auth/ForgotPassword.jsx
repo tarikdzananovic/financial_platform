@@ -58,18 +58,6 @@ export default class ForgotPassword extends React.Component {
                                                     <input type="email" name="email"/>
                                                     <b className="tooltip tooltip-top-right"><i className="fa fa-envelope txt-color-teal"/> Please enter email address for password reset</b></label>
                                             </section>
-                                            <section>
-										<span className="timeline-seperator text-center text-primary"> <span className="font-sm">OR</span>
-                            </span></section>
-                                            <section>
-                                                <label className="label">Your Username</label>
-                                                <label className="input"> <i className="icon-append fa fa-user"/>
-                                                    <input type="text" name="username"/>
-                                                    <b className="tooltip tooltip-top-right"><i className="fa fa-user txt-color-teal"/> Enter your username</b> </label>
-                                                <div className="note">
-                                                    <a href="#/login">I remembered my password!</a>
-                                                </div>
-                                            </section>
 
                                         </fieldset>
                                         <footer>
