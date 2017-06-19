@@ -17,10 +17,10 @@ enumerations of service types etc.
 
 Having *Contract Blank* object the users of the system should be able to create *Contract* by filling blanks.
 
-Contract participant implicit ID is an generic name of contract participant. Such approach is widely used 
+Implicit ID is generic name of contract participant. Such approach is widely used 
 in contract writing. E.g. contract have paragraph naming some unspecified company as an Agent. Upon initiation
-of *Contract Talk* the contract participants must be explicitly identified by assiging explicit IDs to implicit ones
-used in *Contract Blank*
+of *Contract Talk* the contract participants must be explicitly identified by assigning explicit IDs to implicit 
+ones used in *Contract Blank*
 
 *Contract Blank* with some but not all term values assigned is *Partially Filled Contract Blank*.
 It is also possible to attach some term value ranges or fixed term values to *PFCB* narrowing down negtiation path.
