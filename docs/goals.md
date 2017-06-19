@@ -8,10 +8,11 @@ Contract Blank (CB)
 E.g. https://freelegalforms.uslegal.com/employment-contracts/marketing-and-advertising-agreement/
 
 *Contract Blank* object has:
--- text of contract with ommisions of participants identities as well as some or all contract term values.
--- dates...
--- implicit IDs for all contract participants
--- term names and specification of possible term values. Possible term values could be compensation amount ranges,
+
+- text of contract with ommisions of participants identities as well as some or all contract term values.
+- dates...
+- implicit IDs for all contract participants
+- term names and specification of possible term values. Possible term values could be compensation amount ranges,
 enumerations of service types etc.
 
 Having *Contract Blank* object the users of the system should be able to create *Contract* by filling blanks.
