@@ -47,6 +47,23 @@ const validate = () => {
                 required: 'Need a password here.',
             },
         },
+        errorElement: 'em',
+        errorClass: 'invalid',
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
+            $(element).parent().addClass('state-error').removeClass('state-success');
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+            $(element).parent().removeClass('state-error').addClass('state-success');
+        },
+        errorPlacement : function(error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        },
         submitHandler() { login(); },
     });
 };

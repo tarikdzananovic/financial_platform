@@ -1,371 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" line="95" mnemonic="0" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d03d2d9-a778-4e44-8415-4d84dc9424a1" name="Default" comment="Authenticated and public Index established">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/ajax-loader.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/alpha.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/female.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/male.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/sunny-big.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/sunny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/blank.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/clear.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/colorblind-friendly/pt1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/colorblind-friendly/pt2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/colorblind-friendly/pt3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/cover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/64x64.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/basic.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/chat.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/demo-smartbig-alert.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/demo-smartmedium-alert.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/demo-smartsmall-alert.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/7.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/8.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/9.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/detail-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/detail-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/e-comm/detail-3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/hero.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/image-placeholder-64x64.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/iphoneview.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-collapse-minified.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-collapse.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-hidden.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-menutop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-rtl-menutop.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/layout-rtl.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-dark.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-glass.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-google.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-pixel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/layout-skins/skin-ultralight.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/m1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/m2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/m3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/newsletter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/responseimg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/s1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/s2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/s3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/sa-demo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/sample.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/sidebar.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/sidebarhero.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/site-1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/site-2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/video.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/widget-colorpicker.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/dropzone/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/dropzone/spritemap.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/dropzone/spritemap@2x.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/favicon/1favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/favicon/favicon.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/favicon/favicon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/favicon/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/flags/de.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/flags/es.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/flags/flags.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/flags/us.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/glass.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/gradient/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/gradient/login.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/hue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/americanexpress.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/mastercard.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/paypal.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/visa.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jcrop/Jcrop.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_flat_0_999999_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_flat_0_aaaaaa_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_glass_55_fbf9ee_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_glass_75_dadada_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_glass_75_e6e6e6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_glass_75_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_highlight-soft_75_cccccc_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-bg_inset-soft_95_fef1ec_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_2e83ff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_428bca_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_454545_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_555555_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_888888_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_999999_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_cd0a0a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_f0ad4e_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_f6cf3b_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/jqueryui/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo-blacknwhite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo-blue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo-o.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo-pale.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo-white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/mappin-default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/minus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/mybg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/divider.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/graphy-xs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/graphy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/lightpaperfibers.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/movable.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/nistri-xs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/nistri.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/overlay-pattern.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/paper-xs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/paper.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/pattern.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/sneaker_mesh_fabric-xs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/sneaker_mesh_fabric.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/tileable_wood_texture-xs.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/tileable_wood_texture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/4.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/realestate/6.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/ribbon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sa-dark.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sa-default.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/saturation.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/select2-spinner.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sort_asc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sort_asc_disabled.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sort_both.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sort_desc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/sort_desc_disabled.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/ipad-landscape.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/ipad-portrait.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/iphone.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/sptouch-icon-iphone.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/touch-icon-ipad-retina.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/touch-icon-ipad.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/splash/touch-icon-iphone-retina.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/index.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-10.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-11.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-12.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-13.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-14.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-15.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-16.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-17.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-18.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-19.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-20-bw.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-20.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-21.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-22.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-23.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-24.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-5.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-6.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-7.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-8.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-full-9.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-10.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-11.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-12.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-13.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-14.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-15.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-16.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-17.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-18.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-19.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-20.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-21.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-22.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-23.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-24.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-5.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-6.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-7.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-8.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/superbox/superbox-thumb-9.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/ajaxversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/angularversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/dotnetversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/htmlversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/phpversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/versions/reactversion.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/violate.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/voicecommand/active-btn.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/vt-menu.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/demo.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/invoice.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/lockscreen.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-production-plugins.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-production.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-rtl.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-skins.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/css/your_style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/readme.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/avatars/copyright.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/demo/copyright.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/glass-image-copyright.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/invoice/license.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/styles/img/pattern/license-info.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/activities/Message.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/activities/Notification.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/activities/Task.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/commons/countries.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/MarkdownEditor.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/SmartCKEditor.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/SmartDestroySummernote.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/SmartEditSummernote.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/SmartJcrop.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/editors/Summernote.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Clockpicker.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Colorpicker.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Dropzone.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/DualListbox.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/IonSlider.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Knob.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/MaskedInput.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/NoUiSlider.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/OnOffSwitch.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Select2.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Tagsinput.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/Timepicker.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/UiDatepicker.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/UiSlider.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/UiSpinner.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/inputs/XEditable.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/validation/BootstrapValidator.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/validation/UiValidate.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/wizards/FuelUxWizard.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/forms/wizards/Wizard.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/i18n/LanguageActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/i18n/LanguageStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/i18n/Msg.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/FullScreen.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/MinifyMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/ResetWidgets.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/SearchMobile.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/SpeechButton.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/actions/ToggleMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/demo/DemoActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/demo/DemoStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/demo/DemoStylesSwitcher.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/less/layout.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/actions/NavigationActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/classes/History.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/components/BigBreadcrumbs.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/components/SmallBreadcrumbs.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/components/SmartMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/components/SmartMenuItem.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/components/SmartMenuList.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/stores/MenuItem.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/navigation/stores/NavigationStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/tools/DeviceDetect.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/widgets/JarvisWidget.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/widgets/WidgetDefaults.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/layout/widgets/WidgetGrid.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/user/actions/UserActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/user/components/LoginInfo.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/user/components/ToggleShortcut.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/user/stores/UserStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/utils/HtmlRender.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/utils/LoadHtml.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/utils/Moment.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/utils/mixins/ElementHolder.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/utils/mixins/ScriptLoader.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/FullScreen.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/MinifyMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/ResetWidgets.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/SearchMobile.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/SpeechButton.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/actions/ToggleMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/demo/DemoActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/demo/DemoStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/demo/DemoStylesSwitcher.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/less/layout.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/actions/NavigationActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/classes/History.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/components/BigBreadcrumbs.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/components/SmallBreadcrumbs.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/components/SmartMenu.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/components/SmartMenuItem.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/components/SmartMenuList.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/stores/MenuItem.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/navigation/stores/NavigationStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/tools/DeviceDetect.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/widgets/JarvisWidget.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/widgets/WidgetDefaults.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/layout/widgets/WidgetGrid.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/Home.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/auth/ForgotPassword.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Footer.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Header.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Layout.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Navigation.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Ribbon.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/Shortcut.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/SubHeader.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/header/RecentProjects.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/pages/layout/tools/StaticPageLoader.jsx" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/pages/Login.jsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/pages/Signup.jsx" afterPath="" />
+    <list default="true" id="8d03d2d9-a778-4e44-8415-4d84dc9424a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/main.html" afterPath="$PROJECT_DIR$/client/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/modules/signup.js" afterPath="$PROJECT_DIR$/imports/modules/signup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/startup/client/routes.jsx" afterPath="$PROJECT_DIR$/imports/startup/client/routes.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/layouts/App.jsx" afterPath="$PROJECT_DIR$/imports/ui/layouts/App.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/client/styles/css/bootstrap.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/client/styles/css/font-awesome.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/smartadmin-production-plugins.min.css" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-production-plugins.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/smartadmin-production.min.css" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-production.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/smartadmin-skins.min.css" afterPath="$PROJECT_DIR$/client/styles/css/smartadmin-skins.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/css/your_style.css" afterPath="$PROJECT_DIR$/client/styles/css/your_style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome-webfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/client/styles/fonts/fontawesome4.2/fontawesome-webfont.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/client/styles/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/img/glass-image-copyright.txt" afterPath="$PROJECT_DIR$/client/styles/img/glass-image-copyright.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/img/invoice/license.txt" afterPath="$PROJECT_DIR$/client/styles/img/invoice/license.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/styles/img/pattern/license-info.txt" afterPath="$PROJECT_DIR$/client/styles/img/pattern/license-info.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/modules/login.js" afterPath="$PROJECT_DIR$/imports/modules/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx" afterPath="$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx" afterPath="$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -389,7 +46,7 @@
       <file leaf-file-name="AppNavigation.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/containers/AppNavigation.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="18">
               <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="39" />
               <folding />
             </state>
@@ -399,8 +56,20 @@
       <file leaf-file-name="Signup.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="100" column="81" lean-forward="true" selection-start-line="100" selection-start-column="81" selection-end-line="100" selection-end-column="81" />
+            <state relative-caret-position="279">
+              <caret line="53" column="86" lean-forward="true" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="86" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="124">
+              <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -408,11 +77,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signup.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/modules/login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="70" column="46" lean-forward="false" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActivitiesDropdown.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#890#3238#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LanguageSelector.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#580#4348#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signup.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/modules/signup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="16" column="46" lean-forward="true" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+            <state relative-caret-position="1836">
+              <caret line="102" column="8" lean-forward="true" selection-start-line="102" selection-start-column="8" selection-end-line="118" selection-end-column="10" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#49#94#0" expanded="true" />
@@ -424,8 +129,8 @@
       <file leaf-file-name="UiValidate.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/validation/UiValidate.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+            <state relative-caret-position="180">
+              <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -436,21 +141,11 @@
       <file leaf-file-name="BootstrapValidator.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/validation/BootstrapValidator.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <state relative-caret-position="162">
+              <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScriptLoader.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/utils/mixins/ScriptLoader.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -460,16 +155,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="486">
               <caret line="27" column="33" lean-forward="false" selection-start-line="27" selection-start-column="33" selection-end-line="28" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deferred.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/jquery/src/deferred.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-504">
-              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -500,8 +185,9 @@
       <find>nova</find>
       <find>UiV</find>
       <find>onSu</find>
-      <find>form</find>
+      <find>React.createClass</find>
       <find>email</find>
+      <find>form</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -510,7 +196,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/imports/startup/server/index.js" />
         <option value="$PROJECT_DIR$/imports/startup/server/accounts/email-templates.js" />
         <option value="$PROJECT_DIR$/imports/startup/server/api.js" />
         <option value="$PROJECT_DIR$/imports/startup/server/fixtures.js" />
@@ -521,7 +206,6 @@
         <option value="$PROJECT_DIR$/imports/api/documents/server/publications.js" />
         <option value="$PROJECT_DIR$/imports/modules/validation.js" />
         <option value="$PROJECT_DIR$/imports/ui/pages/NotFound.jsx" />
-        <option value="$PROJECT_DIR$/imports/modules/login.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/PublicNavigation.jsx" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/client/stylesheets/module/_Signup.scss" />
@@ -550,9 +234,7 @@
         <option value="$PROJECT_DIR$/imports/ui/pages/layout/Layout.jsx" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/node_modules/lodash/package.json" />
-        <option value="$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" />
         <option value="$PROJECT_DIR$/imports/ui/pages/Home.jsx" />
-        <option value="$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx" />
         <option value="$PROJECT_DIR$/imports/startup/client/routes.jsx" />
         <option value="$PROJECT_DIR$/webpack/webpack.dev.config.js" />
         <option value="$PROJECT_DIR$/webpack/webpack.build.config.js" />
@@ -561,6 +243,10 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/imports/modules/signup.js" />
         <option value="$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx" />
+        <option value="$PROJECT_DIR$/imports/modules/login.js" />
+        <option value="$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx" />
       </list>
     </option>
   </component>
@@ -576,10 +262,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1615" />
-    <option name="height" value="1026" />
+    <option name="width" value="1680" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -607,6 +291,130 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="auth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="financial_platform" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imports" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -755,7 +563,8 @@
       <workItem from="1497375753727" duration="1300000" />
       <workItem from="1497460593345" duration="6863000" />
       <workItem from="1497696427028" duration="21325000" />
-      <workItem from="1497782443808" duration="19054000" />
+      <workItem from="1497782443808" duration="19783000" />
+      <workItem from="1497890376931" duration="4385000" />
     </task>
     <task id="LOCAL-00001" summary="Update Readme file">
       <created>1497376524672</created>
@@ -771,22 +580,29 @@
       <option name="project" value="LOCAL" />
       <updated>1497472962319</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Signup form with validation with new design">
+      <created>1497803841232</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1497803841232</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137642000" />
+    <option name="totallyTimeSpent" value="142756000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1615" height="1026" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19256966" sideWeight="0.66611296" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1922619" sideWeight="0.6574501" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36698213" sideWeight="0.504644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3491062" sideWeight="0.49535602" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.349" sideWeight="0.50714284" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.349" sideWeight="0.49285713" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19256966" sideWeight="0.33388704" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1922619" sideWeight="0.34254992" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.49306932" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934928" sideWeight="0.496875" order="7" side_tool="false" content_ui="tabs" />
@@ -810,7 +626,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Update Readme file" />
     <MESSAGE value="Authenticated and public Index established" />
-    <option name="LAST_COMMIT_MESSAGE" value="Authenticated and public Index established" />
+    <MESSAGE value="Signup form with validation with new design" />
+    <option name="LAST_COMMIT_MESSAGE" value="Signup form with validation with new design" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -820,25 +637,11 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/activities/Task.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/utils/Moment.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -941,7 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,14 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="21" lean-forward="false" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/startup/client/routes.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1053,14 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="48" column="34" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="48" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/inputs/MaskedInput.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -1069,57 +855,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/containers/AppNavigation.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/jquery/src/deferred.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
+        <state relative-caret-position="144">
           <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack/webpack.dev.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="50" lean-forward="false" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack/webpack.build.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="14" lean-forward="false" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js" />
+    <entry file="file://$PROJECT_DIR$/webpack/scripts.js" />
+    <entry file="file://$PROJECT_DIR$/webpack/webpack.dev.config.js" />
+    <entry file="file://$PROJECT_DIR$/webpack/webpack.build.config.js" />
     <entry file="file://$PROJECT_DIR$/imports/ui/components/utils/mixins/ScriptLoader.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="558">
           <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
           <folding />
         </state>
@@ -1129,17 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="111" column="20" lean-forward="false" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/validation/BootstrapValidator.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1151,49 +890,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redux-form/es/reduxForm.js">
+    <entry file="file://$PROJECT_DIR$/node_modules/redux-form/es/reduxForm.js" />
+    <entry file="file://$PROJECT_DIR$/node_modules/redux-form/es/Field.js" />
+    <entry file="file://$PROJECT_DIR$/imports/ui/containers/AppNavigation.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="39" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/redux-form/es/Field.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="100" column="81" lean-forward="true" selection-start-line="100" selection-start-column="81" selection-end-line="100" selection-end-column="81" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/validation/UiValidate.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+        <state relative-caret-position="180">
+          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/forms/validation/BootstrapValidator.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="36" lean-forward="true" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/i18n/LanguageSelector.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="46" column="10" lean-forward="false" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#580#4348#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/imports/modules/signup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="16" column="46" lean-forward="true" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+        <state relative-caret-position="1836">
+          <caret line="102" column="8" lean-forward="true" selection-start-line="102" selection-start-column="8" selection-end-line="118" selection-end-column="10" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#49#94#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Signup.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="53" column="86" lean-forward="true" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/pages/auth/Login.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="55" column="51" lean-forward="true" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/modules/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="70" column="46" lean-forward="false" selection-start-line="70" selection-start-column="46" selection-end-line="70" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/activities/ActivitiesDropdown.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#890#3238#0" expanded="false" />
           </folding>
         </state>
       </provider>

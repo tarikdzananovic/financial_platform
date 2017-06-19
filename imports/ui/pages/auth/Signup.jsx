@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
@@ -85,9 +85,9 @@ export default class Signup extends React.Component {
                                                         </label>
                                                     </section>
                                                     <section className="col col-6">
-                                                        <label className="input">
+                                                        <lcreateClassabel className="input">
                                                             <input type="text" name="lastName" placeholder="Last name"/>
-                                                        </label>
+                                                        </lcreateClassabel>
                                                     </section>
                                                 </div>
 

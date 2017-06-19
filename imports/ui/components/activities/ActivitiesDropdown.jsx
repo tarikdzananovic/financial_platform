@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react';
 import classnames from 'classnames'
 import Moment from '../utils/Moment.jsx'
 
@@ -14,18 +14,22 @@ let Components = {
     Task: Task
 };
 
-let ActivitiesDropdown = React.createClass({
-    getInitialState: function () {
-        return {
+export default class ActivitiesDropdown extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
             activity: {
                 items: []
             },
             activities: [],
-            lastUpdate: new Date()
-        }
-    },
-    _active: false,
-    render: function () {
+            lastUpdate: new Date(),
+        };
+    }
+
+    _active: false;
+
+    render  () {
         let activities = this.state.activities;
         let activity = this.state.activity;
         let count = _.sum(activities, function (a) {
@@ -80,15 +84,16 @@ let ActivitiesDropdown = React.createClass({
 
                 </div>
             </div>
-        )
-    },
-    _setActivity: function (_activity) {
+        );
+    }
+
+    _setActivity = (_activity) => {
         this.setState({
             activity: _activity
         })
-    },
+    }
 
-    _toggleDropdown: function (e) {
+    _toggleDropdown = (e) => {
         e.preventDefault();
         let $dropdown = $(this.refs.dropdown);
         let $dropdownToggle = $(this.refs.dropdownToggle);
@@ -101,19 +106,22 @@ let ActivitiesDropdown = React.createClass({
 
         this._active = !this._active;
         $dropdownToggle.toggleClass('active', this._active)
-    },
-    componentWillMount: function () {
+    }
+
+    componentWillMount() {
         this._fetch()
-    },
-    _update: function(){
+    }
+
+    _update = () => {
         $(this.refs.loadingText).html('Loading...');
         $(this.refs.loadingSpin).addClass('fa-spin');
         this._fetch().then(function(){
             $(this.refs.loadingText).html('');
             $(this.refs.loadingSpin).removeClass('fa-spin');
         }.bind(this))
-    },
-    _fetch: function () {
+    }
+
+    _fetch = () => {
         return $.getJSON(this.props.url).then(function (activities) {
             this.setState({
                 activities: activities,
@@ -122,7 +130,5 @@ let ActivitiesDropdown = React.createClass({
             })
         }.bind(this))
     }
+}
 
-});
-
-export default ActivitiesDropdown

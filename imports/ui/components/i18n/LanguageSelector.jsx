@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Reflux from 'reflux'
 import classnames from 'classnames'
 import LanguageActions from './LanguageActions'
 import LanguageStore from './LanguageStore'
 
-let LanguageSelector = React.createClass({
-    getInitialState: function(){
+export default class LanguageSelector extends React.Component {
+
+    getInitialState() {
         return LanguageStore.getData()
-    },
-    mixins: [Reflux.connect(LanguageStore)],
-    componentWillMount: function(){
+    }
+
+    mixins: [Reflux.connect(LanguageStore)];
+
+    componentWillMount() {
         LanguageActions.init();
-    },
-    render: function () {
+    }
+
+    render () {
         let languages = this.state.languages;
         let language = this.state.language;
         return (
@@ -40,12 +44,12 @@ let LanguageSelector = React.createClass({
                     </ul>
                 </li>
             </ul>
-        )
-    },
-    _selectLanguage: function(language){
+        );
+    }
+
+    _selectLanguage(language) {
         LanguageStore.setLanguage(language)
         LanguageActions.select(language)
     }
-});
+}
 
-export default LanguageSelector

@@ -49,37 +49,38 @@ export default class Login extends React.Component {
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                 <div className="well no-padding">
-                                    <UiValidate>
-                                        <form action="#/dashboard" id="login-form" className="smart-form client-form">
-                                            <header>
-                                                Sign In
-                                            </header>
-                                            <fieldset>
-                                                <section>
-                                                    <label className="label">E-mail</label>
-                                                    <label className="input"> <i className="icon-append fa fa-user"/>
-                                                        <input type="email" name="email" data-smart-validate-input="" data-required="" data-email="" data-message-required="Please enter your email address" data-message-email="Please enter a VALID email address"/>
-                                                        <b className="tooltip tooltip-top-right"><i className="fa fa-user txt-color-teal"/>
-                                                            Please enter email address</b></label>
-                                                </section>
-                                                <section>
-                                                    <label className="label">Password</label>
-                                                    <label className="input"> <i className="icon-append fa fa-lock"/>
-                                                        <input type="password" name="password" data-smart-validate-input="" data-required="" data-minlength="3" data-maxnlength="20" data-message="Please enter your email password"/>
-                                                        <b className="tooltip tooltip-top-right"><i className="fa fa-lock txt-color-teal"/> Enter
-                                                            your password</b> </label>
+                                    <form id="login-form" className="smart-form client-form" noValidate="noValidate"
+                                          ref={ form => (this.loginForm = form) }
+                                    >
+                                        <header>
+                                            Sign In
+                                        </header>
+                                        <fieldset>
+                                            <section>
+                                                <label className="label">E-mail</label>
+                                                <label className="input"> <i className="icon-append fa fa-user"/>
+                                                    <input type="email" name="emailAddress" data-smart-validate-input="" data-required="" data-email="" data-message-required="Please enter your email address" data-message-email="Please enter a VALID email address"/>
+                                                    <b className="tooltip tooltip-top-right"><i className="fa fa-user txt-color-teal"/>
+                                                        Please enter email address</b></label>
+                                            </section>
+                                            <section>
+                                                <label className="label">Password</label>
+                                                <label className="input"> <i className="icon-append fa fa-lock"/>
+                                                    <input type="password" name="password" data-smart-validate-input="" data-required="" data-minlength="3" data-maxnlength="20" data-message="Please enter your email password"/>
+                                                    <b className="tooltip tooltip-top-right"><i className="fa fa-lock txt-color-teal"/> Enter
+                                                        your password</b> </label>
 
-                                                    <div className="note">
-                                                        <a href="/forgot-password">Forgot password?</a>
-                                                    </div>
-                                                </section>
-                                            </fieldset>
-                                            <footer>
-                                                <button type="submit" className="btn btn-primary">
-                                                    Sign in
-                                                </button>
-                                            </footer>
-                                        </form></UiValidate>
+                                                <div className="note">
+                                                    <a href="/forgot-password">Forgot password?</a>
+                                                </div>
+                                            </section>
+                                        </fieldset>
+                                        <footer>
+                                            <button type="submit" className="btn btn-primary">
+                                                Sign in
+                                            </button>
+                                        </footer>
+                                    </form>
                                 </div>
                             </div>
                         </div>
