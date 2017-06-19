@@ -53,8 +53,8 @@ Contract
 legal difference from contract done by usual means.
 
 
-Complete example
-================
+Code examples
+=============
 
 Contract Blank Creation
 -----------------------
@@ -72,29 +72,31 @@ cb.terms = {"duties": AdContractDutiesList(), "compensation": MoneyRange(0, 1000
 print "ALL SET" if cb.isCompletelyFilled() else "PARTIALLY FILLED"
 ```
 
-Contract Talk Invite Setup for Biz
-----------------------------------
+Contract Talk Invite Setup
+--------------------------
 
 ```
-biz = ...
-cb = get_ContractBlank("EACA")
-cti = CTI(cb)
-cti.cb.implicit_ids["Company"] = biz.official_identification
+cb = GetContractBlankByName("EACA")
+
+# create contract talk invite. It has contract blank which defines possible contact talk.
+# it is possible to fill some term values to narrow negotiations from begining
+cti = CTI()
+cti.cb = GetContractBlankByName("EACA")
+cti.cb.implicit_ids["Company"] = biz.official_identification # biz in Contract will be designated as Company
 cti.cb.dates = ...
-cti.cb.terms["duties"] = InternetAdCampaing()
-cti.cb.compensation = MoneyRange(0, 200)
-biz.addActiveCTI(cti)
+cti.cb.terms["duties"] = InternetAdCampaing() # expected duties of Agent: ad campaing
+cti.cb.compensation = MoneyRange(0, 200) # compensation between $0 and $200
+biz.addActiveCTI(cti) # biz start showing its interested in contract specified by PFCB
 ```
 
 Contract Talk
 -------------
 
 ```
-# within session of o_biz
+# other biz session
 
 cti_id = ...
-cti = getCTI(cti_id)
-
+cti = getCTI(cti_id) # now we have CTI
 ct = obiz.sendContractTalkRequest(cti) # other side gets notification, contract talk object returns
 
 ```
