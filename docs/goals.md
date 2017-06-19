@@ -28,9 +28,9 @@ It is also possible to attach some term value ranges or fixed term values to *PF
 Contract Talk Invitation (CTI)
 ------------------------------
 
-*CTI* objects are created by certain *Biz* to indicate the interest of entering in the contract.
+*CTI* object is created by certain *Biz* to indicate the interest of entering in the contract.
 *CTI* object should have enough information to start contract negotiations.
-Thus *CTI* object has ref to *Partially Filled Contract Blank*. 
+Thus *CTI* object has ref to *Partially Filled Contract Blank*.
 *CTI* also should assign explicit ID to contract participant intended for the *Biz* which creates the *CTI*.
 
 Interested counterparty can use particular *CTI* object to initiate *Contract Talk*.
