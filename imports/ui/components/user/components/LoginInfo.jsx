@@ -1,20 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
 import UserStore from '../stores/UserStore'
 import ToggleShortcut from './ToggleShortcut.jsx'
+import { Meteor } from 'meteor/meteor';
+
+const userName = () => {
+    const user = Meteor.user();
+    console.log("Entered setting userName " + JSON.stringify(user));
+    const name = user && user.profile ? user.profile.name : '';
+    return user ? `${name.first} ${name.last}` : '';
+};
 
 
-let LoginInfo = React.createClass({
-    getInitialState: function () {
-        return {}
-    },
-    componentWillMount: function () {
+export default class LoginInfo extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username: userName(),
+            picture: "/apple-touch-icon-precomposed.png",
+        };
+    }
+
+    componentWillMount () {
 		UserStore.listen(function (data) {
             this.setState(data)
         }.bind(this))
-    },
-	render: function(){
-		return (
+    }
 
+	render(){
+		return (
 			<div className="login-info">
 			    <span>
 			        <ToggleShortcut>
@@ -23,8 +38,7 @@ let LoginInfo = React.createClass({
 			        </ToggleShortcut>
 			     </span>
 			</div>
-		)
+		);
 	}
-});
+}
 
-export default LoginInfo

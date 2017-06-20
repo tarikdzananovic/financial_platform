@@ -1,8 +1,11 @@
 import React from 'react';
 
+import handleRecoverPassword from '../../../modules/auth/forgot-password';
+
 
 export default class ForgotPassword extends React.Component {
     componentDidMount() {
+        handleRecoverPassword( { component: this });
     }
 
     handleSubmit(event) {
@@ -45,7 +48,8 @@ export default class ForgotPassword extends React.Component {
                             </div>
                             <div className="col-xs-12 col-sm-12 col-md-5 col-lg-4">
                                 <div className="well no-padding">
-                                    <form action="#/login" id="login-form" className="smart-form client-form">
+                                    <form action="#/login" id="login-form" className="smart-form client-form" noValidate="noValidate"
+                                          ref={ form => (this.forgetPasswordForm = form) }>
                                         <header>
                                             Forgot Password
                                         </header>
@@ -55,7 +59,7 @@ export default class ForgotPassword extends React.Component {
                                             <section>
                                                 <label className="label">Enter your email address</label>
                                                 <label className="input"> <i className="icon-append fa fa-envelope"/>
-                                                    <input type="email" name="email"/>
+                                                    <input type="email" name="emailAddress"/>
                                                     <b className="tooltip tooltip-top-right"><i className="fa fa-envelope txt-color-teal"/> Please enter email address for password reset</b></label>
                                             </section>
 
