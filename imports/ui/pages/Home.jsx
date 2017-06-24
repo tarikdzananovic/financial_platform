@@ -1,8 +1,4 @@
-import React from 'react'
-
-import BigBreadcrumbs from '../layout/navigation/components/BigBreadcrumbs';
-
-const composer = (props, onData) => onData(null, { hasUser: Meteor.user() });
+import React from 'react';
 
 export default () => (
     <div id="content">

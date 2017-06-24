@@ -2,7 +2,7 @@
  * Created by griga on 11/24/15.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 
 import SmartMenu from '../../components/layout/navigation/components/SmartMenu'
 
@@ -12,8 +12,8 @@ import LoginInfo from '../../components/user/components/LoginInfo.jsx'
 
 let rawItems = [];
 
-let Navigation = React.createClass({
-    render: function () {
+export default class Navigation extends Component {
+    render() {
         return (
             <aside id="left-panel">
                 <LoginInfo />
@@ -22,9 +22,6 @@ let Navigation = React.createClass({
                 </nav>
                 <MinifyMenu />
             </aside>
-        )
+        );
     }
-});
-
-
-export default Navigation
+}

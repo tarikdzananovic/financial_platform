@@ -1,5 +1,7 @@
 import React from 'react'
 
+import classnames from 'classnames'
+
 import SmartMenuItem from './SmartMenuItem.jsx'
 
 
@@ -10,7 +12,7 @@ let SmartMenuList = React.createClass({
             <ul {...props}>
                 {items.map(function (item) {
                     return <SmartMenuItem item={item} key={item._id}/>
-                    }.bind(this))}
+                }.bind(this))}
             </ul>
         )
     }

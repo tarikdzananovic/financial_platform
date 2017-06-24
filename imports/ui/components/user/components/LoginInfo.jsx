@@ -5,7 +5,6 @@ import { Meteor } from 'meteor/meteor';
 
 const userName = () => {
     const user = Meteor.user();
-    console.log("Entered setting userName " + JSON.stringify(user));
     const name = user && user.profile ? user.profile.name : '';
     return user ? `${name.first} ${name.last}` : '';
 };
@@ -22,13 +21,13 @@ export default class LoginInfo extends Component {
         };
     }
 
-    componentWillMount () {
+    componentWillMount() {
 		UserStore.listen(function (data) {
             this.setState(data)
         }.bind(this))
     }
 
-	render(){
+	render() {
 		return (
 			<div className="login-info">
 			    <span>

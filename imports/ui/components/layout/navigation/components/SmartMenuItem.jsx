@@ -12,8 +12,6 @@ import NavigationStore from '../stores/NavigationStore.js'
 
 import {findDOMNode} from 'react-dom'
 
-
-
 let SmartMenuItem = React.createClass({
     getDefaultProps: function(){
         return {
@@ -67,7 +65,7 @@ let SmartMenuItem = React.createClass({
         var title = !item.parent ? <span className="menu-item-parent"><Msg phrase={item.title} /></span> : <Msg phrase={item.title} />;
         var badge = item.badge ? <span className={item.badge.class}>{item.badge.label || ''}</span> : null;
         var childItems = item.items ? <SmartMenuList style={{
-        display: (item.isOpen ? 'block' : 'none')
+            display: (item.isOpen ? 'block' : 'none')
         }} isTop={false} items={item.items}/> : null;
 
         var icon = item.icon ? (

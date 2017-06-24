@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import Header from './Header.jsx'
 import Navigation from './Navigation.jsx'
@@ -10,11 +10,12 @@ import UserActions from '../../components/user/actions/UserActions'
 
 //require('../../components/layout/less/layout.less');
 
-let Layout = React.createClass({
-    componentWillMount: function () {
+export default class Layout extends Component{
+    componentWillMount() {
         UserActions.init();
-    },
-    render: function(){
+    }
+
+    render(){
         return (
             <div>
                 <Header />
@@ -28,8 +29,6 @@ let Layout = React.createClass({
                 <Footer />
                 <Shortcut />
             </div>
-        )
+        );
     }
-});
-
-export default Layout
+}
