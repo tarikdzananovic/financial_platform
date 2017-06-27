@@ -18,7 +18,7 @@ let ToggleShortcut = React.createClass({
 		function shortcutButtonsHide() {
 			$shortcut.animate({
 				height : "hide"
-			}, 300, "easeOutCirc");
+			}, 300, null);
 			$('body').removeClass('shortcut-on');
 			$(document).off('mouseup.smartShortcut');
 			$shortcut.off('click.smartShortcut', 'a');
@@ -29,7 +29,7 @@ let ToggleShortcut = React.createClass({
 		function shortcutButtonsShow() {
 			$shortcut.animate({
 				height : "show"
-			}, 200, "easeOutCirc");
+			}, 200, null);
 			$('body').addClass('shortcut-on');
 
 			// SHORTCUT buttons goes away if mouse is clicked outside of the area

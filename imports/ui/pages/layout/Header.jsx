@@ -13,10 +13,22 @@ import ActivitiesDropdown from '../../components/activities/ActivitiesDropdown.j
 import RecentProjects from './header/RecentProjects.jsx'
 import handleLogout from '../../../modules/auth/logout';
 
+import bizEditor from '../../../modules/biz-editor';
+import { Meteor } from 'meteor/meteor';
+
 let Header = React.createClass({
 
     logout() {
-        handleLogout();
+        //handleLogout();
+        let biz = {
+            "userId": Meteor.user()._id,
+            "name" : "Biz1",
+            "email": "biz1@example.com",
+            "phone": "0123456789",
+            "address": "Baker Street 22B"
+        };
+        console.log("User id: " + Meteor.user()._id);
+        bizEditor(biz);
     },
 
     render: function () {
