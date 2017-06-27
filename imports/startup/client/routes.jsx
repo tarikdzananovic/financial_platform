@@ -29,11 +29,12 @@ Meteor.startup(() => {
                 <Redirect from="/" to="/home"/>
                 <IndexRoute component={Home}/>
                 <Route path="home" component={Home}/>
+                <Route path="profile" component={Profile}/>
             </Route>
             <Route path="login" component={Login}/>
             <Route path="forgot-password" component={ForgotPassword}/>
             <Route path="register" component={Signup}/>
-            <Route path="profile" component={Profile}/>
+
             <Route path="*" component={ NotFound } />
         </Router>,
         document.getElementById('react-root')

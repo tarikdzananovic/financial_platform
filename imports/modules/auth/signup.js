@@ -15,8 +15,8 @@ const getUserData = () => ({
         name: {
             first: document.querySelector('[name="firstName"]').value,
             last: document.querySelector('[name="lastName"]').value,
-            gender: document.querySelector('[name="gender"]').value,
         },
+        gender: document.querySelector('[name="gender"]').value,
         phone: document.querySelector('[name="phone"]').value,
         address: document.querySelector('[name="address"]').value,
     },
