@@ -10,15 +10,21 @@ import MinifyMenu from '../../components/layout/actions/MinifyMenu.jsx'
 
 import LoginInfo from '../../components/user/components/LoginInfo.jsx'
 
-let rawItems = [];
-
 export default class Navigation extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            menuItems: []
+        };
+    }
+
     render() {
         return (
             <aside id="left-panel">
                 <LoginInfo />
                 <nav>
-                    <SmartMenu rawItems={rawItems} />
+                    <SmartMenu rawItems={this.state.menuItems} />
                 </nav>
                 <MinifyMenu />
             </aside>

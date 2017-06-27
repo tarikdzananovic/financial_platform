@@ -29,6 +29,7 @@ Meteor.startup(() => {
                 <Redirect from="/" to="/home"/>
                 <IndexRoute component={Home}/>
                 <Route path="home" component={Home}/>
+                <Route path="biz/new" component={Home}/>
             </Route>
             <Route path="login" component={Login}/>
             <Route path="forgot-password" component={ForgotPassword}/>

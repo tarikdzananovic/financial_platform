@@ -4,22 +4,40 @@
 
 import React from 'react'
 import Reflux from 'reflux'
-import _ from 'lodash'
-import {Link}  from 'react-router'
-import classnames from 'classnames'
 
 import SmartMenuList from './SmartMenuList.jsx'
 
 import NavigationStore from './../stores/NavigationStore.js'
-import NavigationActions from './../actions/NavigationActions.js'
+import NavigationActions from './../actions/NavigationActions'
 
 let SmartMenu = React.createClass({
     mixins:[Reflux.connect(NavigationStore)],
+
     getInitialState: function () {
-        if(this.props.rawItems){
-            NavigationStore.initRawItems(this.props.rawItems)
+        return {
+            loading: !NavigationStore.loaded,
+            items: []
         }
-        return NavigationStore.getData()
+    },
+
+    componentWillMount() {
+        if (!NavigationStore.loaded) NavigationActions.getItems();
+    },
+
+    componentDidMount(){
+        this.listenTo(NavigationStore, this.handleNavigationItems);
+    },
+    componentWillUnmount(){
+        this._unsubscribe();
+    },
+
+    handleNavigationItems(data) {
+        if(data.items){
+            this.setState({
+                loading: false,
+                items: data.items
+            });
+        }
     },
     render: function () {
         return (

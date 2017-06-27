@@ -1,9 +1,10 @@
 import Reflux from 'reflux'
-import NavigationActions from './../actions/NavigationActions.js'
 
 import MenuItem from './MenuItem.js'
 
 import History from '../classes/History.js'
+
+import NavigationActions from './../actions/NavigationActions.js'
 
 let data = {
     item: undefined,
@@ -13,7 +14,31 @@ let data = {
 
 
 let NavigationStore = Reflux.createStore({
+
+    load:false,
+
+    listenables: NavigationActions,
+
+    onGetItemsCompleted: function (items) {
+        data.items = this.normalize(items);
+        this.load = true;
+        this._setInitialItem(data.items);
+        this.trigger(data);
+    },
+
+    onActivate: function (item) {
+        data.item = item;
+        if(item.route)
+            History.pushState(null, item.route)
+        this.trigger({
+            item: item
+        })
+    },
+
     initRawItems: function(rawItems){
+        if(!rawItems){
+            rawItems = [];
+        }
         data.items = this.normalize(rawItems);
         this._setInitialItem(data.items)
     },
@@ -27,19 +52,6 @@ let NavigationStore = Reflux.createStore({
             }
         }.bind(this))
 
-    },
-    listenables: NavigationActions,
-    onGetItemsCompleted: function (_data) {
-        data.items = this.normalize(_data.items);
-        this.trigger(data)
-    },
-    onActivate: function (item) {
-        data.item = item;
-        if(item.route)
-            History.pushState(null, item.route)
-        this.trigger({
-            item: item
-        })
     },
     normalize: function (items) {
         return _.map(items, function (item) {

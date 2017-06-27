@@ -22,11 +22,13 @@ let BigBreadcrumbs = React.createClass({
 
     onNavigationChange: function (data) {
         let item = data.item;
-        if(item.route) {
-            this.state.items = [];
-            this.state.icon = '';
-            this._addCrumb(item);
-            this.forceUpdate()
+        if(item){
+            if(item.route) {
+                this.state.items = [];
+                this.state.icon = '';
+                this._addCrumb(item);
+                this.forceUpdate()
+            }
         }
 
     },
@@ -43,14 +45,14 @@ let BigBreadcrumbs = React.createClass({
 
         return (
             <div className={this.props.className + ' big-breadcrumbs'}>
-                <h1 className="page-title txt-color-blueDark">
+                <h3 className="page-title txt-color-blueDark">
                     <i className={this.state.icon}/>{' ' + first}
                     {_.rest(this.state.items).map(function (item) {
                         return <span key={_.uniqueId('big-breadcrumb-')}>
                             <span className="page-title-separator">&gt;</span>
                             {item}</span>
                     })}
-                </h1>
+                </h3>
             </div>
         )
     }
