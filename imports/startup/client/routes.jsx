@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory, Redirect } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, hashHistory, Redirect } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
 
@@ -11,6 +11,7 @@ import ForgotPassword from '../../ui/pages/auth/ForgotPassword';
 import Home from '../../ui/pages/Home';
 import Layout from '../../ui/pages/layout/Layout';
 import Profile from '../../ui/pages/Profile';
+import BizCreation from '../../ui/pages/biz/BizCreation'
 
 const authenticate = (nextState, replace) => {
     if (!Meteor.loggingIn() && !Meteor.userId()) {
@@ -24,13 +25,15 @@ const authenticate = (nextState, replace) => {
 
 Meteor.startup(() => {
     render(
-        <Router history={ browserHistory }>
+        <Router history={ hashHistory }>
             <Route path="/" component={Layout} onEnter={authenticate}>
                 <Redirect from="/" to="/home"/>
                 <IndexRoute component={Home}/>
                 <Route path="home" component={Home}/>
-                <Route path="biz/new" component={Home}/>
+
                 <Route path="profile" component={Profile}/>
+                <Route path="biz/new" component={BizCreation}/>
+
             </Route>
             <Route path="login" component={Login}/>
             <Route path="forgot-password" component={ForgotPassword}/>

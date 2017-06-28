@@ -66,7 +66,7 @@ let SmartMenuItem = React.createClass({
         var badge = item.badge ? <span className={item.badge.class}>{item.badge.label || ''}</span> : null;
         var childItems = item.items ? <SmartMenuList style={{
             display: (item.isOpen ? 'block' : 'none')
-        }} isTop={false} items={item.items}/> : null;
+        }} items={item.items}/> : null;
 
         var icon = item.icon ? (
             item.counter ? <i className={item.icon}><em>{item.counter}</em></i> : <i className={item.icon}/>
@@ -81,6 +81,8 @@ let SmartMenuItem = React.createClass({
         </Link> : <a href={item.href || '#'} onClick={this._handleClick} title={item.title}>
             {icon} {title} {badge}{collapseSign}
         </a>;
+
+
 
         let itemClasses = classnames({
             open: item.isOpen,

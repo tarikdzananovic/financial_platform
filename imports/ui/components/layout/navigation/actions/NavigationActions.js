@@ -21,15 +21,29 @@ var NavigationActions = Reflux.createActions({
 });
 
 NavigationActions.getItems.listen(function () {
-    console.log('TODO: call API to load navigation');
+    //TODO:: call end point to get user biz cabinets
     var createNewBiz = {};
     createNewBiz._id = 0;
     createNewBiz.title = "New BIZ";
     createNewBiz.icon = "fa fa-lg fa-fw fa-plus-circle"
     createNewBiz.route = "/biz/new";
 
+    var settings = {};
+    settings._id = 1;
+    settings.title = "Settings";
+    settings.icon = "fa fa-lg fa-fw fa-gear";
+
+    var settingsItems = [];
+    var profile = {};
+    profile.title = "My Profile";
+    profile.icon = "fa fa-lg fa-fw fa-user"
+    profile.route = "/profile";
+    settingsItems.push(profile);
+    settings.items = settingsItems;
+
     var items = [];
     items.push(createNewBiz);
+    items.push(settings);
 
     NavigationActions.getItems.completed(items);
 });
