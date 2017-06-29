@@ -2,7 +2,7 @@
  * Created by griga on 11/17/15.
  */
 
-import React from 'react'
+import React, { Component } from 'react'
 
 import ToggleMenu from '../../components/layout/actions/ToggleMenu.jsx'
 import SearchMobile from '../../components/layout/actions/SearchMobile.jsx'
@@ -15,12 +15,26 @@ import handleLogout from '../../../modules/auth/logout';
 
 import bizEditor from '../../../modules/biz-editor';
 import { Meteor } from 'meteor/meteor';
+import { Bizes } from '../../../api/bizes.js';
 
-let Header = React.createClass({
+import bizesList from '../../../modules/biz-editor';
+
+export default class Header extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            bizes: Meteor.subscribe('bizes'),
+        };
+
+        this.logout = this.logout.bind(this);
+    }
 
     logout() {
         //handleLogout();
-        let biz = {
+
+        /*let biz = {
             "userId": Meteor.user()._id,
             "name" : "Biz1",
             "email": "biz1@example.com",
@@ -28,11 +42,19 @@ let Header = React.createClass({
             "address": "Baker Street 22B"
         };
         console.log("User id: " + Meteor.user()._id);
-        bizEditor(biz);
-    },
+        bizEditor(biz);*/
 
-    render: function () {
-        return <header id="header">
+
+
+
+
+
+        bizesList();
+
+    }
+
+    render() {
+        return (<header id="header">
             <div id="logo-group">
                 <span id="logo">
                 </span>
@@ -129,8 +151,9 @@ let Header = React.createClass({
 
 
         </header>
+        );
     }
-});
+}
 
 
-export default Header
+

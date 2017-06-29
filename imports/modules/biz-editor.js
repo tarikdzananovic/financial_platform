@@ -3,7 +3,12 @@
 import { browserHistory } from 'react-router';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { upsertBiz } from '../api/bizes/methods.js';
+
+import  '../api/bizes.js';
 import './validation.js';
+
+import { Meteor } from 'meteor/meteor';
+import { Bizes } from '../api/bizes.js';
 
 let component;
 
@@ -44,8 +49,9 @@ const upsertRaw = (biz) => {
 
     console.log("Upsert object: " + JSON.stringify(upsert));
 
-    upsertBiz.call(upsert, (error, response) => {
+    Meteor.call('bizes.upsert', upsert, function(error, response) {
         if (error) {
+            console.log("Error: " + JSON.stringify(error));
             Bert.alert(error.reason, 'danger');
         } else {
             //component.documentEditorForm.reset();
@@ -53,6 +59,17 @@ const upsertRaw = (biz) => {
             //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
         }
     });
+
+    /*upsertBiz.call(upsert, (error, response) => {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //component.documentEditorForm.reset();
+            Bert.alert(confirmation, 'success');
+            //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
+        }
+    });*/
 
 };
 
@@ -78,9 +95,40 @@ const upsertRaw = (biz) => {
     });
 };*/
 
-export default function bizEditor(options) {
+/*export default function bizEditor(options) {
     //component = options.component;
     //validate();
 
     upsertRaw(options);
+}*/
+
+export default function bizesList() {
+
+    /*Meteor.call('bizes.get', function(error, response) {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //component.documentEditorForm.reset();
+            console.log("Bizes: " + response);
+            response.map((biz) => {
+               console.log("Biz list: " + JSON.stringify(biz));
+            });
+            //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
+        }
+    });*/
+
+    Meteor.call('bizes.getForUser', Meteor.user()._id, function(error, response) {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //component.documentEditorForm.reset();
+
+            response.map((biz) => {
+                console.log("Biz list: " + JSON.stringify(biz));
+            });
+            //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
+        }
+    });
 }
