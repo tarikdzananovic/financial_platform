@@ -20,7 +20,7 @@ export default class ForgotPassword extends React.Component {
                     <div id="logo-group">
                     </div>
 
-                    <span id="extr-page-header-space"> <span className="hidden-mobile hiddex-xs">Need an account?</span> <a href="/register" className="btn btn-danger">Create account</a> </span>
+                    <span id="extr-page-header-space"> <span className="hidden-mobile hiddex-xs">Need an account?</span> <a href="#/register" className="btn btn-danger">Create account</a> </span>
 
                 </header>
                 <div id="main" role="main" className="animated fadeInDown">

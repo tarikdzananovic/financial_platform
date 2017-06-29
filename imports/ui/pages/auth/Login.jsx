@@ -20,7 +20,7 @@ export default class Login extends Component {
                         {/*<span id="logo"> <img src="styles/img/logo.png" alt="SmartAdmin"/> </span>*/}
                     </div>
 
-                    <span id="extr-page-header-space"> <span className="hidden-mobile hiddex-xs">Need an account?</span>&nbsp;<a href="/register" className="btn btn-danger">Sign Up</a> </span>
+                    <span id="extr-page-header-space"> <span className="hidden-mobile hiddex-xs">Need an account?</span>&nbsp;<a href="#/register" className="btn btn-danger">Sign Up</a> </span>
 
                 </header>
                 <div id="main" role="main" className="animated fadeInDown">
@@ -69,7 +69,7 @@ export default class Login extends Component {
                                                         your password</b> </label>
 
                                                 <div className="note">
-                                                    <a href="/forgot-password">Forgot password?</a>
+                                                    <a href="#/forgot-password">Forgot password?</a>
                                                 </div>
                                             </section>
                                         </fieldset>

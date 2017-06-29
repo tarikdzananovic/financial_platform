@@ -29,7 +29,7 @@ export default class Signup extends React.Component {
 
                     <span id="extr-page-header-space">
                         <span className="hidden-mobile hiddex-xs">Already registered?</span>&nbsp;
-                        <a href="/login" className="btn btn-danger">Sign In</a> </span>
+                        <a href="#/login" className="btn btn-danger">Sign In</a> </span>
                 </header>
 
 

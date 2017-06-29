@@ -38,13 +38,12 @@ Meteor.startup(() => {
                     <Route path="new" component={BizCreation}/>
                     <Route path=":id" component={BizCreation}/>
                 </Route>
-
-
-
             </Route>
-            <Route path="login" component={Login}/>
-            <Route path="forgot-password" component={ForgotPassword}/>
-            <Route path="register" component={Signup}/>
+
+
+            <Route path="/login" component={Login}/>
+            <Route path="/forgot-password" component={ForgotPassword}/>
+            <Route path="/register" component={Signup}/>
 
             <Route path="*" component={ NotFound } />
         </Router>,
