@@ -2,14 +2,16 @@
  * Created by lejlatarik on 6/28/17.
  */
 import { browserHistory} from 'react-router';
-import { Accounts} from 'meteor/accounts-base';
+import { Meteor} from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
+
 
 let component;
 
 const getBizData = () => ({
-    first: document.querySelector('[name="name"]').value,
+    userId: Meteor.user()._id,
+    name: document.querySelector('[name="name"]').value,
     email: document.querySelector('[name="email"]').value,
     phone: document.querySelector('[name="phone"]').value,
     address: document.querySelector('[name="address"]').value
@@ -17,6 +19,22 @@ const getBizData = () => ({
 
 const createBIZ = () => {
     //TODO:: call api end point to save BIZ
+    const { biz } = component.props;
+    const confirmation = biz && biz._id ? 'Biz updated!' : 'Biz added!';
+    const upsert = getBizData();
+
+    if (biz && biz._id) upsert._id = biz._id;
+
+    Meteor.call('bizes.upsert', upsert, function(error, response) {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //component.documentEditorForm.reset();
+            Bert.alert(confirmation, 'success');
+            browserHistory.push('/');
+        }
+    });
 };
 
 const validate = () => {

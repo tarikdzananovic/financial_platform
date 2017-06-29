@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import UserStore from '../stores/UserStore'
 import ToggleShortcut from './ToggleShortcut.jsx'
 import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 
 const userName = () => {
     const user = Meteor.user();
@@ -10,7 +11,7 @@ const userName = () => {
 };
 
 
-export default class LoginInfo extends Component {
+class LoginInfo extends Component {
 
     constructor(props) {
         super(props);
@@ -33,11 +34,22 @@ export default class LoginInfo extends Component {
 			    <span>
 			        <ToggleShortcut>
 			            <img src={this.state.picture} alt="me"
-							 className="online" /><span>{ this.state.username }</span><i className="fa fa-angle-down" />
+							 className="online" /><span >{ this.props.currentUser }</span><i className="fa fa-angle-down" />
 			        </ToggleShortcut>
 			     </span>
 			</div>
 		);
 	}
 }
+
+LoginInfo.propTypes = {
+  currentUser: PropTypes.string,
+};
+
+export default createContainer(() => {
+
+    return {
+      currentUser: userName(),
+    };
+}, LoginInfo);
 

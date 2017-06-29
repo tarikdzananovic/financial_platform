@@ -3,6 +3,7 @@
  */
 
 import Reflux from 'reflux'
+import { Meteor } from 'meteor/meteor';
 
 /*let NavigationActions = Reflux.createActions({
     getItems: {asyncResult: true}
@@ -22,6 +23,21 @@ var NavigationActions = Reflux.createActions({
 
 NavigationActions.getItems.listen(function () {
     //TODO:: call end point to get user biz cabinets
+
+    Meteor.call('bizes.get', function(error, response) {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //component.documentEditorForm.reset();
+            console.log("Bizes: " + response);
+            response.map((biz) => {
+                console.log("Biz list: " + JSON.stringify(biz));
+            });
+            //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
+        }
+    });
+
     var createNewBiz = {};
     createNewBiz._id = 0;
     createNewBiz.title = "New BIZ";
