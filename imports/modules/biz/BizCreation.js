@@ -1,10 +1,11 @@
 /**
  * Created by lejlatarik on 6/28/17.
  */
-import { browserHistory} from 'react-router';
+import { hashHistory} from 'react-router';
 import { Meteor} from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
+import NavigationActions from '../../ui/components/layout/navigation/actions/NavigationActions'
 
 
 let component;
@@ -32,7 +33,8 @@ const createBIZ = () => {
         } else {
             //component.documentEditorForm.reset();
             Bert.alert(confirmation, 'success');
-            browserHistory.push('/');
+            hashHistory.push('/');
+            NavigationActions.getItems();
         }
     });
 };

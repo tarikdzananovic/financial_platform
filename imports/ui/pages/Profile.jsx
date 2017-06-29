@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Meteor} from 'meteor/meteor';
-import { browserHistory} from 'react-router';
+import { hashHistory} from 'react-router';
+import { createContainer } from 'meteor/react-meteor-data';
 
-
-export default class Profile extends Component {
+class Profile extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            user: Meteor.user(),
+            user: props.currentUser,
         };
 
         console.log("Logged in user: " +JSON.stringify(this.state.user));
@@ -26,7 +26,7 @@ export default class Profile extends Component {
         e.preventDefault();
         console.log("Submit profile BLABLABLA");
         Meteor.users.update(Meteor.userId(), {$set: {profile: this.state.user.profile}});
-        browserHistory.push('/');
+        hashHistory.push('/');
 
     }
 
@@ -125,3 +125,14 @@ export default class Profile extends Component {
         );
     }
 }
+
+Profile.propTypes = {
+    currentUser: PropTypes.object,
+};
+
+export default createContainer(() => {
+
+    return {
+        currentUser: Meteor.user(),
+    };
+}, Profile);

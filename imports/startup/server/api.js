@@ -5,3 +5,4 @@ import '../../api/bizes/methods.js';
 import '../../api/bizes/server/publications.js';
 
 import '../../api/bizes.js';
+import '../../api/contracts.js';

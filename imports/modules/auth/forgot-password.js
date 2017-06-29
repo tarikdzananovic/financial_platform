@@ -1,4 +1,4 @@
-import { browserHistory} from 'react-router';
+import { hashHistory} from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
@@ -12,7 +12,7 @@ const handleRecovery = () => {
         if (error) {
             Bert.alert(error.reason, 'warning');
         } else {
-            browserHistory.push('/login');
+            hashHistory.push('/login');
             Bert.alert('Check your inbox for a reset link!', 'success');
         }
     });

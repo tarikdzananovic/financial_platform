@@ -33,8 +33,6 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
-        console.log("Bizes number: " + JSON.stringify(Bizes.find({}).count()));
-
         return Bizes.upsert({ _id: biz._id }, { $set: biz });
     },
     'bizes.remove'(bizId) {

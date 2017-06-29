@@ -21,6 +21,40 @@ var NavigationActions = Reflux.createActions({
     'fromMap': {}
 });
 
+var getNewBizMenuItem = function (id) {
+    var createNewBiz = {};
+    createNewBiz._id = id;
+    createNewBiz.title = "New BIZ";
+    createNewBiz.icon = "fa fa-lg fa-fw fa-plus-circle";
+    createNewBiz.route = "/biz/new";
+    return createNewBiz;
+};
+
+var getSettingsMenuItem = function (id) {
+    var settings = {};
+    settings._id = id;
+    settings.title = "Settings";
+    settings.icon = "fa fa-lg fa-fw fa-gear";
+
+    var settingsItems = [];
+    var profile = {};
+    profile.title = "My Profile";
+    profile.icon = "fa fa-lg fa-fw fa-user";
+    profile.route = "/profile";
+    settingsItems.push(profile);
+    settings.items = settingsItems;
+    return settings;
+};
+
+var getBizMenuItem = function (biz, id) {
+    var bizItem = {};
+    bizItem._id = id;
+    bizItem.title = biz.name;
+    bizItem.icon = "fa fa-lg fa-fw fa-circle-o";
+    bizItem.route = "/biz/"+biz._id;
+    return bizItem;
+}
+
 NavigationActions.getItems.listen(function () {
     //TODO:: call end point to get user biz cabinets
 
@@ -29,39 +63,27 @@ NavigationActions.getItems.listen(function () {
             console.log("Error: " + JSON.stringify(error));
             Bert.alert(error.reason, 'danger');
         } else {
-            //component.documentEditorForm.reset();
+
             console.log("Bizes: " + response);
+
+            var items = [];
+            items.push(getNewBizMenuItem(items.length));
             response.map((biz) => {
-                console.log("Biz list: " + JSON.stringify(biz));
+                items.push(getBizMenuItem(biz, items.length));
+                //console.log("Biz list: " + JSON.stringify(biz));
             });
+            
+            items.push(getSettingsMenuItem(items.length));
+
+            NavigationActions.getItems.completed(items);     
+            //component.documentEditorForm.reset();
+            //console.log("Bizes: " + response);
+            //response.map((biz) => {
+                //console.log("Biz list: " + JSON.stringify(biz));
+            //});
             //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
         }
     });
-
-    var createNewBiz = {};
-    createNewBiz._id = 0;
-    createNewBiz.title = "New BIZ";
-    createNewBiz.icon = "fa fa-lg fa-fw fa-plus-circle"
-    createNewBiz.route = "/biz/new";
-
-    var settings = {};
-    settings._id = 1;
-    settings.title = "Settings";
-    settings.icon = "fa fa-lg fa-fw fa-gear";
-
-    var settingsItems = [];
-    var profile = {};
-    profile.title = "My Profile";
-    profile.icon = "fa fa-lg fa-fw fa-user"
-    profile.route = "/profile";
-    settingsItems.push(profile);
-    settings.items = settingsItems;
-
-    var items = [];
-    items.push(createNewBiz);
-    items.push(settings);
-
-    NavigationActions.getItems.completed(items);
 });
 
 

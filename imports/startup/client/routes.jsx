@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory, hashHistory, Redirect } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
 
@@ -33,6 +33,13 @@ Meteor.startup(() => {
 
                 <Route path="profile" component={Profile}/>
                 <Route path="biz/new" component={BizCreation}/>
+
+                <Route path="biz">
+                    <Route path="new" component={BizCreation}/>
+                    <Route path=":id" component={BizCreation}/>
+                </Route>
+
+
 
             </Route>
             <Route path="login" component={Login}/>

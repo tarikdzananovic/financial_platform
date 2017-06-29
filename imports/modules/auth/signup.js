@@ -1,7 +1,7 @@
 /**
  * Created by tarikdzananovic on 6/9/17.
  */
-import { browserHistory} from 'react-router';
+import { hashHistory} from 'react-router';
 import { Accounts} from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
@@ -32,7 +32,7 @@ const signup = () => {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            browserHistory.push('/');
+            hashHistory.push('/');
             Bert.alert('Welcome!', 'success');
         }
     });

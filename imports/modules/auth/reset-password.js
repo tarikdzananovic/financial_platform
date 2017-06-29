@@ -2,7 +2,7 @@
  * Created by tarikdzananovic on 6/15/17.
  */
 
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import { Accounts } from 'meteor/accounts-base'
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
@@ -16,7 +16,7 @@ const handleReset = () => {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            browserHistory.push('/');
+            hashHistory.push('/');
             Bert.alert('Password reset!', 'success');
         }
     });

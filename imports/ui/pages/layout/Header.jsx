@@ -32,7 +32,7 @@ export default class Header extends Component {
     }
 
     logout() {
-        //handleLogout();
+        handleLogout();
 
         /*let biz = {
             "userId": Meteor.user()._id,
@@ -42,14 +42,8 @@ export default class Header extends Component {
             "address": "Baker Street 22B"
         };
         console.log("User id: " + Meteor.user()._id);
-        bizEditor(biz);*/
-
-
-
-
-
-
-        bizesList();
+        bizEditor(biz);
+        bizesList();*/
 
     }
 
