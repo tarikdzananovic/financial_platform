@@ -1,7 +1,7 @@
 /**
  * Created by tarikdzananovic on 6/8/17.
  */
-import { Mongo } from 'meteor/mongo';
+/*import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Factory } from 'meteor/dburles:factory';
 
@@ -21,6 +21,10 @@ Bizes.deny({
 });
 
 Bizes.schema = new SimpleSchema({
+    userId: {
+        type: String,
+        label: 'The userId of biz owner'
+    },
     name: {
         type: String,
         label: 'The name of the biz.',
@@ -42,8 +46,10 @@ Bizes.schema = new SimpleSchema({
 Bizes.attachSchema(Bizes.schema);
 
 Factory.define('biz', Bizes, {
+    userId: () => 'Factory UserId',
     name: () => 'Factory Name',
     email: () => 'Factory Email',
     phone: () => 'Factory Phone',
     address: () => 'Factory Address',
 });
+*/

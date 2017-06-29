@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Meteor} from 'meteor/meteor';
+import { browserHistory} from 'react-router';
 
 
 export default class Profile extends Component {
@@ -25,6 +26,7 @@ export default class Profile extends Component {
         e.preventDefault();
         console.log("Submit profile BLABLABLA");
         Meteor.users.update(Meteor.userId(), {$set: {profile: this.state.user.profile}});
+        browserHistory.push('/');
 
     }
 
