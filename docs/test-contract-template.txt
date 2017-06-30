@@ -1,0 +1,17 @@
+Agreement
+=========
+
+This is an agreement between {CompanyLegalID} and {AgentLegalID} named in the text below as Company and Agent.
+
+Company is hiring Agent to run advertising campaing of Company's businesses.
+Exact advertising service type is {AgentServiceType}.
+
+Agent will run advertising campaing between start and end dates.
+Start date: {StartDate} 
+End date: (EndDate) 
+
+Agent compensation will be ${CompensationAmount} paid by Company to Agent at Start date.
+
+Terms are accepted by Company: {CompanyLegalSignature}
+Terms are accepted by Agent: {AgentLegalSignature}
+Date: {ContractAcceptanceDate}

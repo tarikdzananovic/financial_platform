@@ -1,102 +1,53 @@
 Contract Negotiations
 =====================
 
-Contract Blank (CB)
--------------------
+Contract Template (CTmpl)
+-------------------------
 
-*Contract Blank* is a text where it is possible to fill blank spaces to create a contract.
-E.g. https://freelegalforms.uslegal.com/employment-contracts/marketing-and-advertising-agreement/
+CTmpl has:
 
-*Contract Blank* object has:
+- CTmpl.text where it is possible to fill blank spaces to create a contract. Look at test-contract-template.txt as simple examples. Informal and more complete example: https://freelegalforms.uslegal.com/employment-contracts/marketing-and-advertising-agreement/
+- list of IDs used CTmpl text -- CTmpl.legalIDs
+- list of contract terms used CTmpl text -- CTmpl.contractTermKeys
+- list of contract term value types -- CTmpl.contractTermValueTypes
 
-- text of contract with ommisions of participants identities as well as some or all contract term values.
-- dates...
-- implicit IDs for all contract participants
-- term names and specification of possible term values. Possible term values could be compensation amount ranges,
-enumerations of service types etc.
-
-Having *Contract Blank* object the users of the system should be able to create *Contract* by filling blanks.
-
-Implicit ID is generic name of contract participant. Such approach is widely used 
-in contract writing. E.g. contract have paragraph naming some unspecified company as an Agent. Upon initiation
-of *Contract Talk* the contract participants must be explicitly identified by assigning explicit IDs to implicit 
-ones used in *Contract Blank*
-
-*Contract Blank* with some but not all term values assigned is *Partially Filled Contract Blank*.
-It is also possible to attach some term value ranges or fixed term values to *PFCB* narrowing down negtiation path.
+For test template text we have attributes:
+ ctmpl.text = open('test-contract-template.txt').readlines()
+ ctmpl.legalIDs = {'CompanyLegalID': None, 'AgentLegalID': None}
+ ctmpl.contractTermKeys = ['AgentServiceType', 'StartDate', 'EndDate', 'CompensationAmount']
+ ctmpl.contractTermValueTypes = [string, date, date, double]
 
 Contract Talk Invitation (CTI)
 ------------------------------
 
-*CTI* object is created by certain *Biz* to indicate the interest of entering in the contract.
-*CTI* object should have enough information to start contract negotiations.
-Thus *CTI* object has ref to *Partially Filled Contract Blank*.
-*CTI* also should assign explicit ID to contract participant intended for the *Biz* which creates the *CTI*.
+CTI object is created by Biz. Biz should set CTI object attributes:
 
-Interested counterparty can use particular *CTI* object to initiate *Contract Talk*.
-Request to start *Contract Talk* using particular *CTI* coming from counterparty
-will supply missing explicit identity of contract participant. After that *Contract Talk* can be initiated
-using *PFCB* from *CTI* object.
+on first screen:
+- CTI.contract_template <- ..., choose *Contract Template* from list of available contract templates
+- CTI.legalIDs <- CTI.contract_template.legalIDs
+- CTI.contractTerms <- dict(keys: CTI.contract_template.contractTermsKeys, values: all None)
+
+on second screen:
+- CTI.legalIDs -- specify Biz role by setting appropriate item to be Biz legal ID.
+E.g. if Biz is advertiser then assignment to be used: CTI.legalIDs['AgentLegalID'] <- Biz.legalID
+- optionally specify some contract term values: CTI.contractTerm['CompensationAmount'] <- 200.0
+- submit CTI object
+
+Once CTI object created it should become visible for all Bizes in the system.
+Counterparty Biz (cBiz) should be able to select interesting CTI. Once CTI is selected by cBiz
+the *Contract Talk* object is created.
 
 Contract Talk
 -------------
 
 *Contract Talk* is the established communication channel between two *Biz* parties.
-*Contract Talk* is used to completely fill *PFCB*. Once filled we have all data to apply electronic signature 
-and create *Contract*
+*Contract Talk* keeps three version of contractTerms, one per Biz party and *AcceptedTerms*. 
+Each party can either show it's own term value or accept counterparty variant.
+Once term is accepted it is stored in *AcceptedTerms*.
+
+Once all terms are ok then both parties need to accept contract terms from *AcceptedTerms* dict.
+Acceptence by all parties creates *Contract*.
 
 Contract
 --------
 
-*Contract* is signed tuple (*Contract Blank*, *ImplicitID -> ExplicitID map*, *Term Values*).
-*Contract* is convertible to human- and machine- readable forms. In human-readable form *Contract* should have no 
-legal difference from contract done by usual means.
-
-
-Code examples
-=============
-
-Contract Blank Creation
------------------------
-
-```
-cb = ContractBlank()
-cb.id = ...
-cb.short_name = "EACA"
-cb.name = "EXCLUSIVE ADVERTISING AND CONSULTING AGREEMENT"
-cb.text = ... # see https://freelegalforms.uslegal.com/employment-contracts/marketing-and-advertising-agreement/
-cb.dates = ...
-cb.implicit_ids = {"Agent": None, "Company": None} # keys are used in cb.text
-cb.terms = {"duties": AdContractDutiesList(), "compensation": MoneyRange(0, 1000), "state": USStatesList()}
-
-print "ALL SET" if cb.isCompletelyFilled() else "PARTIALLY FILLED"
-```
-
-Contract Talk Invite Setup
---------------------------
-
-```
-cb = GetContractBlankByName("EACA")
-
-# create contract talk invite. It has contract blank which defines possible contact talk.
-# it is possible to fill some term values to narrow negotiations from begining
-cti = CTI()
-cti.cb = GetContractBlankByName("EACA")
-cti.cb.implicit_ids["Company"] = biz.official_identification # biz in Contract will be designated as Company
-cti.cb.dates = ...
-cti.cb.terms["duties"] = InternetAdCampaing() # expected duties of Agent: ad campaing
-cti.cb.compensation = MoneyRange(0, 200) # compensation between $0 and $200
-biz.addActiveCTI(cti) # biz start showing its interested in contract specified by PFCB
-```
-
-Contract Talk
--------------
-
-```
-# other biz session
-
-cti_id = ...
-cti = getCTI(cti_id) # now we have CTI
-ct = obiz.sendContractTalkRequest(cti) # other side gets notification, contract talk object returns
-
-```
