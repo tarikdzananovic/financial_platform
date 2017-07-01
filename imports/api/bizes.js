@@ -27,14 +27,21 @@ Meteor.methods({
         check(biz.email, String);
         check(biz.phone, String);
         check(biz.address, String);
-        check(biz.legalId, String);
+        //check(biz.legalId, String);
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
 
-        return Bizes.upsert({ _id: biz._id }, { $set: biz });
+        return Bizes.update({ _id: biz._id }, {
+            $set: {
+                name: biz.name,
+                email: biz.email,
+                phone: biz.phone,
+                address: biz.address
+            }
+        }, { upsert: true });
     },
     'bizes.remove'(bizId) {
         check(bizId, String);
@@ -43,15 +50,19 @@ Meteor.methods({
     },
 
     'bizes.get'() {
-        return Bizes.find().fetch();
+        return Bizes.find({}, {_id: 1, name: 1}).fetch();
     },
 
     'bizes.getForUser'(userId) {
-        return Bizes.find({userId: userId}).fetch();
+        return Bizes.find({userId: userId}, {_id: 1, name: 1});
     },
 
-    'bizes.getBizInfoBasic'(bizId) {
-        return Bizes.find({_id: bizId});
+    'bizes.getInfoBasic'(bizId) {
+        return Bizes.findOne({_id: bizId}, {fields: { name: 1, userId: 1 }});
+    },
+
+    'bizes.getInfoForEdit'(bizId) {
+        return Bizes.findOne({_id : bizId}, { fields: { name: 1, email: 1, address:1, phone: 1} });
     },
 
 });

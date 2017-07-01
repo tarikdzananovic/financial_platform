@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Meteor} from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 
 import handleBizEdit from '../../../modules/biz/BizEdit';
+import { Bizes } from '../../../api/bizes.js';
 
-
-export default class BizEdit extends Component {
+class BizEdit extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
             biz: {},
-            bizCabinetLocation: window.location.hash.replace('edit', 'cabinet')
-
+            bizCabinetLocation: window.location.hash.replace('edit', 'cabinet'),
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -25,41 +26,39 @@ export default class BizEdit extends Component {
         handleBizEdit({component: this});
     }
 
+    componentWillReceiveProps(nextProps, nextState) {
+        this.setState({
+            biz: nextProps.biz
+        });
+    }
+
     _onSubmit(e) {
         e.preventDefault();
     }
 
     handleNameChange(e) {
-        if(e){
-
-            let bizObj = this.state.biz;
-            bizObj.name= e.target.value;
-            this.setState({ biz: bizObj});
-        }
+        let bizObj = this.state.biz;
+        bizObj.name= e.target.value;
+        this.setState({ biz: bizObj});
     }
     handleEmailChange(e) {
-        if(e){
-            let bizObj = this.state.biz;
-            bizObj.email= e.target.value;
-            this.setState({ biz: bizObj});
-        }
+        let bizObj = this.state.biz;
+        bizObj.email= e.target.value;
+        this.setState({ biz: bizObj});
     }
     handlePhoneChange(e) {
-        if(e){
-            let bizObj = this.state.biz;
-            bizObj.phone= e.target.value;
-            this.setState({ biz: bizObj});
-        }
+        let bizObj = this.state.biz;
+        bizObj.phone= e.target.value;
+        this.setState({ biz: bizObj});
     }
     handleAddressChange(e) {
-        if(e){
             let bizObj = this.state.biz;
             bizObj.address= e.target.value;
             this.setState({ biz: bizObj});
-        }
     }
 
     render() {
+
         return (
             <form id="checkout-form" className="smart-form" noValidate="novalidate"
                   onSubmit={this._onSubmit}
@@ -77,12 +76,12 @@ export default class BizEdit extends Component {
                     <div className="row">
                         <section className="col col-6">
                             <label className="input"> <i className="icon-prepend fa fa-user"/>
-                                <input type="text" name="name" placeholder="BIZ Name" value={ this.state.biz.name } onChange={this.handleNameChange()}/>
+                                <input type="text" name="name" placeholder="BIZ Name" value={ this.state.biz.name } onChange={this.handleNameChange}/>
                             </label>
                         </section>
                         <section className="col col-6">
                             <label className="input"> <i className="icon-prepend fa fa-user"/>
-                                <input type="email" name="email" placeholder="Email" value={ this.state.biz.email } onChange={this.handleEmailChange()} />
+                                <input type="email" name="email" placeholder="Email" value={ this.state.biz.email } onChange={this.handleEmailChange} />
                             </label>
                         </section>
                     </div>
@@ -95,7 +94,7 @@ export default class BizEdit extends Component {
                         </section>
                         <section className="col col-6">
                             <label className="input"> <i className="icon-prepend fa fa-envelope-o"/>
-                                <input type="text" name="address" placeholder="Address" value={ this.state.biz.address } onChange={ this.handleAddressChange()}/>
+                                <input type="text" name="address" placeholder="Address" value={ this.state.biz.address } onChange={this.handleAddressChange}/>
                             </label>
                         </section>
                     </div>
@@ -115,3 +114,19 @@ export default class BizEdit extends Component {
         );
     }
 }
+
+BizEdit.propTypes = {
+    biz: PropTypes.object,
+};
+
+export default createContainer(({params}) => {
+
+    const subscription = Meteor.subscribe('bizes');
+    const loading =  !subscription.ready();
+    const biz = Bizes.findOne({_id : params.id}, { fields: { name: 1, email: 1, address:1, phone: 1} });
+    const bizExists = !loading && !!biz;
+    return {
+        biz: bizExists ? biz : {},
+    };
+
+}, BizEdit);
