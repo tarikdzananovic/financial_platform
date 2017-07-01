@@ -27,6 +27,7 @@ Meteor.methods({
         check(biz.email, String);
         check(biz.phone, String);
         check(biz.address, String);
+        check(biz.legalId, String);
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -47,6 +48,10 @@ Meteor.methods({
 
     'bizes.getForUser'(userId) {
         return Bizes.find({userId: userId}).fetch();
+    },
+
+    'bizes.getBizInfoBasic'(bizId) {
+        return Bizes.find({_id: bizId});
     },
 
 });

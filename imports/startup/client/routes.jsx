@@ -12,6 +12,7 @@ import Home from '../../ui/pages/Home';
 import Layout from '../../ui/pages/layout/Layout';
 import Profile from '../../ui/pages/Profile';
 import BizCreation from '../../ui/pages/biz/BizCreation'
+import ContractInvite from '../../ui/pages/contract/ContractInvite.jsx';
 
 const authenticate = (nextState, replace) => {
     if (!Meteor.loggingIn() && !Meteor.userId()) {
@@ -36,6 +37,7 @@ Meteor.startup(() => {
 
                 <Route path="biz">
                     <Route path="new" component={BizCreation}/>
+                    <Route path="contractInvite" component={ContractInvite}/>
                     <Route path=":id" component={BizCreation}/>
                 </Route>
             </Route>
