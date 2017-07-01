@@ -7,7 +7,8 @@ export default class BizCabinet extends Component {
 
         this.state = {
             biz: {},
-            editLocation : window.location.hash.replace('cabinet', 'edit')
+            editLocation : window.location.hash.replace('cabinet', 'edit'),
+            ctiLocation: window.location.hash.replace('cabinet', 'contractInvite')
         };
     }
 
@@ -28,9 +29,8 @@ export default class BizCabinet extends Component {
                             <a href={this.state.editLocation} className="btn bg-color-blueLight txt-color-white">
                                 <i className="fa fa-edit fa-5x"></i> Edit Biz</a>
                         </li>
-                        <li></li>
                         <li>
-                            <a href="" className="btn bg-color-green txt-color-white">
+                            <a href={this.state.ctiLocation} className="btn bg-color-green txt-color-white">
                                 <i className="fa fa-file-text-o fa-5x"></i> Create CTI</a>
                         </li>
                     </ul>
