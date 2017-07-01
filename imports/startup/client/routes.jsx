@@ -14,6 +14,7 @@ import Profile from '../../ui/pages/Profile';
 import BizCreation from '../../ui/pages/biz/BizCreation'
 import BizCabinet from '../../ui/pages/biz/BizCabinet'
 import BizEdit from '../../ui/pages/biz/BizEdit'
+import ContractInvite from '../../ui/pages/contract/ContractInvite.jsx';
 
 const authenticate = (nextState, replace) => {
     if (!Meteor.loggingIn() && !Meteor.userId()) {
@@ -41,6 +42,7 @@ Meteor.startup(() => {
                     <Redirect from=":id" to=":id/cabinet"/>
                     <Route path=":id">
                         <Route path="edit" component={BizEdit}/>
+                        <Route path="contractInvite" component={ContractInvite}/>
                         <Route path="cabinet" component={BizCabinet}/>
                     </Route>
                 </Route>

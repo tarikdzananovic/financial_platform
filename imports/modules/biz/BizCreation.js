@@ -15,7 +15,8 @@ const getBizData = () => ({
     name: document.querySelector('[name="name"]').value,
     email: document.querySelector('[name="email"]').value,
     phone: document.querySelector('[name="phone"]').value,
-    address: document.querySelector('[name="address"]').value
+    address: document.querySelector('[name="address"]').value,
+    legalId: document.querySelector('[name = "legalId"]').value,
 });
 
 const createBIZ = () => {
@@ -63,7 +64,10 @@ const validate = () => {
             phone: {
                 required: true,
                 phoneUS: true
-            }
+            },
+            legalId: {
+                required: true
+            },
         },
 
         // Messages for form validation
@@ -81,7 +85,10 @@ const validate = () => {
             phone: {
                 required: 'Please enter BIZ phone',
                 phoneUS: 'Please enter a valid US phone number'
-            }
+            },
+            legalId: {
+                required: 'Please enter BIZ legal ID'
+            },
         },
         errorElement: 'em',
         errorClass: 'invalid',
