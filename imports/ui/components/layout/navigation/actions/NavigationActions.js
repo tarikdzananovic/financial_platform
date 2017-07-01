@@ -30,6 +30,25 @@ var getNewBizMenuItem = function (id) {
     return createNewBiz;
 };
 
+var getBizsMenuItem = function (id) {
+    var bizMenu = {};
+    bizMenu._id = id;
+    bizMenu.title = "My BIZs";
+    bizMenu.icon = "fa fa-lg fa-fw fa-suitcase";
+    bizMenu.items = [];
+    return bizMenu;
+};
+
+
+var getBizMenuItem = function (biz, id) {
+    var bizItem = {};
+    bizItem._id = id;
+    bizItem.title = biz.name;
+    bizItem.icon = "fa fa-lg fa-fw fa-circle-o";
+    bizItem.route = "/biz/"+biz._id;
+    return bizItem;
+};
+
 var getSettingsMenuItem = function (id) {
     var settings = {};
     settings._id = id;
@@ -46,33 +65,20 @@ var getSettingsMenuItem = function (id) {
     return settings;
 };
 
-var getBizMenuItem = function (biz, id) {
-    var bizItem = {};
-    bizItem._id = id;
-    bizItem.title = biz.name;
-    bizItem.icon = "fa fa-lg fa-fw fa-circle-o";
-    bizItem.route = "/biz/"+biz._id;
-    return bizItem;
-}
-
 NavigationActions.getItems.listen(function () {
     //TODO:: call end point to get user biz cabinets
 
     Meteor.call('bizes.get', function(error, response) {
         if (error) {
-            console.log("Error: " + JSON.stringify(error));
             Bert.alert(error.reason, 'danger');
         } else {
-
-            console.log("Bizes: " + response);
-
             var items = [];
             items.push(getNewBizMenuItem(items.length));
+            var bizMenu = getBizsMenuItem(items.length);
             response.map((biz) => {
-                items.push(getBizMenuItem(biz, items.length));
-                //console.log("Biz list: " + JSON.stringify(biz));
+                bizMenu.items.push(getBizMenuItem(biz, items.length));
             });
-            
+            items.push(bizMenu);
             items.push(getSettingsMenuItem(items.length));
 
             NavigationActions.getItems.completed(items);     
