@@ -4,7 +4,9 @@
 import { Meteor} from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import '../validation.js';
+import { hashHistory} from 'react-router';
 
+import NavigationActions from '../../ui/components/layout/navigation/actions/NavigationActions'
 
 let component;
 
@@ -18,10 +20,24 @@ const getBizData = () => ({
 
 const saveBiz = () => {
     //TODO:: call api end point to save BIZ
+    const confirmation = 'Biz updated!';
+    const upsert = getBizData();
+
+    upsert._id = component.props.params.id;
+
+    Meteor.call('bizes.upsert', upsert, function(error, response) {
+        if (error) {
+            console.log("Error: " + JSON.stringify(error));
+            Bert.alert(error.reason, 'danger');
+        } else {
+            Bert.alert(confirmation, 'success');
+            hashHistory.push('/biz/' + upsert._id + '/cabinet');
+            NavigationActions.getItems();
+        }
+    });
 };
 
 const validate = () => {
-    console.log('validate-method');
     jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
         return this.optional(element) || phone_number.length > 9 &&

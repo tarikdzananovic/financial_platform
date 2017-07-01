@@ -20,7 +20,6 @@ const getBizData = () => ({
 });
 
 const createBIZ = () => {
-    //TODO:: call api end point to save BIZ
     const { biz } = component.props;
     const confirmation = biz && biz._id ? 'Biz updated!' : 'Biz added!';
     const upsert = getBizData();
