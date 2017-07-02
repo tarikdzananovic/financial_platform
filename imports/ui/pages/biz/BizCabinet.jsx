@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types'
 import { Meteor} from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Bizes } from '../../../api/bizes.js';
+import { ContractInvites } from '../../../api/contracts/contractInvites.js';
 
 class BizCabinet extends Component {
 
@@ -18,6 +19,11 @@ class BizCabinet extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
+
+        nextProps.contractInvites.map((contractInvite) => {
+            console.log("Contract invites for biz: " + JSON.stringify(contractInvite));
+        });
+
         this.setState({
             biz: nextProps.biz,
             publicCabinet : nextProps.biz.userId !== Meteor.user()._id,
@@ -63,16 +69,25 @@ class BizCabinet extends Component {
 
 BizCabinet.propTypes = {
     biz: PropTypes.object,
+    contractInvites: PropTypes.array,
 };
 
 export default createContainer(({params}) => {
 
-    const subscription = Meteor.subscribe('bizes');
-    const loading =  !subscription.ready();
+    const subscriptionBizes = Meteor.subscribe('bizes');
+    const loadingBizes =  !subscriptionBizes.ready();
     const biz = Bizes.findOne({_id: params.id}, {fields: { name: 1, userId: 1 }});
-    const bizExists = !loading && !!biz;
+    const bizExists = !loadingBizes && !!biz;
+
+
+    const subscriptionContractInvites = Meteor.subscribe('contractInvites');
+    const loadingContractInvites =  !subscriptionContractInvites.ready();
+    const contractInvites = ContractInvites.find({bizId: params.id}).fetch();
+    const contractInvitesExist = !loadingContractInvites && !!contractInvites;
+
     return {
         biz: bizExists ? biz : {},
+        contractInvites: contractInvitesExist ? contractInvites : [],
     };
 
 }, BizCabinet);

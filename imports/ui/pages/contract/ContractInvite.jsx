@@ -4,24 +4,15 @@ import { createContainer } from 'meteor/react-meteor-data';
 import Wizard from '../../components/forms/wizards/Wizard';
 import getContractInviteTemplate from '../../../contract/cti/ContractTemplate'
 
+import { Meteor } from 'meteor/meteor';
+import { Bert } from 'meteor/themeteorchef:bert';
+import { hashHistory} from 'react-router';
+
 class ContractTemplate extends Component {
 
     constructor(props){
         super(props);
     }
-
-    getContractTerms() {
-        let object = this.props.template.contractTerms;
-        var contractTerms = Object.keys(object).map(function(key) {
-            return (
-                <li key={key}>
-                    <span className="text">{this.props.template.contractTerms[key]}</span>
-                </li>
-            );
-        }.bind(this));
-        return contractTerms;
-    }
-
 
     render() {
 
@@ -140,7 +131,27 @@ export default class ContractInvite extends Component {
     }
 
     _onWizardComplete(data){
+        console.log("ID: " + this.props.params.id);
         console.log('Wizard completed with state ' + JSON.stringify(this.state.template));
+
+        let contractInvite = {
+            bizId: this.props.params.id,
+            template: this.state.template.template,
+            legalIds: this.state.template.legalIds,
+            contractTerms: this.state.template.contractTerms
+        };
+
+        const confirmation = 'Contract invite added';
+
+        Meteor.call('contractInvites.upsert', contractInvite, function(error, response) {
+            if (error) {
+                console.log("Error: " + JSON.stringify(error));
+                Bert.alert(error.reason, 'danger');
+            } else {
+                Bert.alert(confirmation, 'success');
+                hashHistory.push('/biz/' + contractInvite.bizId + '/cabinet');
+            }
+        });
     }
 
     _onStepChange(data){

@@ -31,7 +31,7 @@ Meteor.methods({
             $set: {
                 bizId: contractInvite.bizId,
                 template: contractInvite.template,
-                legalIDs: contractInvite.legalIDs,
+                legalIds: contractInvite.legalIds,
                 contractTerms: contractInvite.contractTerms
             }
         }, { upsert: true });
