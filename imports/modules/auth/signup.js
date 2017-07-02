@@ -23,10 +23,7 @@ const getUserData = () => ({
 });
 
 const signup = () => {
-    console.log('sign up method');
     const user = getUserData();
-
-    console.log("User: " + JSON.stringify(user));
 
     Accounts.createUser(user, (error) => {
         if (error) {
@@ -39,7 +36,6 @@ const signup = () => {
 };
 
 const validate = () => {
-    console.log('validate-method');
     $(component.signupForm).validate({
         rules: {
             email: {

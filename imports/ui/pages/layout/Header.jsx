@@ -13,11 +13,7 @@ import ActivitiesDropdown from '../../components/activities/ActivitiesDropdown.j
 import RecentProjects from './header/RecentProjects.jsx'
 import handleLogout from '../../../modules/auth/logout';
 
-import bizEditor from '../../../modules/biz-editor';
 import { Meteor } from 'meteor/meteor';
-import { Bizes } from '../../../api/bizes.js';
-
-import bizesList from '../../../modules/biz-editor';
 
 export default class Header extends Component {
 

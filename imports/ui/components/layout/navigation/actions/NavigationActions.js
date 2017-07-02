@@ -5,16 +5,6 @@
 import Reflux from 'reflux'
 import { Meteor } from 'meteor/meteor';
 
-/*let NavigationActions = Reflux.createActions({
-    getItems: {asyncResult: true}
-});
-
-NavigationActions.getItems.listen( function() {
-    console.log('listen to navigation actions');
-   /!* $.getJSON('api/menu-items.json')
-        .then( this.completed, this.failed )*!/
-});*/
-
 var NavigationActions = Reflux.createActions({
     'getItems' : {children : ['completed', 'failed']},
     'activate': {},
@@ -82,8 +72,8 @@ NavigationActions.getItems.listen(function () {
             items.push(getSettingsMenuItem(items.length));
 
             NavigationActions.getItems.completed(items);     
-            //component.documentEditorForm.reset();
-            //console.log("Bizes: " + response);
+
+            console.log("Bizes: " + response);
             //response.map((biz) => {
                 //console.log("Biz list: " + JSON.stringify(biz));
             //});

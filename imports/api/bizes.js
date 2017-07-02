@@ -10,11 +10,6 @@ export const Bizes = new Mongo.Collection('bizes');
 
 if (Meteor.isServer) {
     // This code only runs on the server
-    console.log("Publications started!!!");
-
-    let bizes = Bizes.find().fetch();
-    console.log("Bizes count " + bizes.length);
-
     Meteor.publish('bizes', function bizesPublication() {
         return Bizes.find();
     });
@@ -50,11 +45,11 @@ Meteor.methods({
     },
 
     'bizes.get'() {
-        return Bizes.find({}, {_id: 1, name: 1}).fetch();
+        return Bizes.find({}, {fields: {_id: 1, name: 1}});
     },
 
     'bizes.getForUser'(userId) {
-        return Bizes.find({userId: userId}, {_id: 1, name: 1});
+        return Bizes.find({userId: userId}, {fields: {_id: 1, name: 1}});
     },
 
     'bizes.getInfoBasic'(bizId) {

@@ -19,7 +19,6 @@ const getBizData = () => ({
 });
 
 const saveBiz = () => {
-    //TODO:: call api end point to save BIZ
     const confirmation = 'Biz updated!';
     const upsert = getBizData();
 

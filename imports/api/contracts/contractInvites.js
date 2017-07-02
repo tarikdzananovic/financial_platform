@@ -14,26 +14,37 @@ Meteor.methods({
     'contractInvites.upsert'(contractInvite) {
         check(contractInvite.bizId, String);
         check(contractInvite.template, String);
-        check(contractInvite.initiatorID, Number);
+        /*check(contractInvite.legalIDs, String);
         check(contractInvite.contractTerms, {
             agentServiceType: String,
             startDate: Date,
             endDate: Date,
             compensationAmount: Number
-        });
+        });*/
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
 
-        return ContractInvites.upsert({_id: contract._id}, { $set: contract});
-
+        return ContractInvites.update({ _id: contractInvite._id }, {
+            $set: {
+                bizId: contractInvite.bizId,
+                template: contractInvite.template,
+                legalIDs: contractInvite.legalIDs,
+                contractTerms: contractInvite.contractTerms
+            }
+        }, { upsert: true });
     },
-    'contractInvites.remove'(contractId) {
-        check(contractId, String);
+    'contractInvites.remove'(contractInviteId) {
+        check(contractInviteId, String);
 
-        ContractInvites.remove(contractId);
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        ContractInvites.remove(contractInviteId);
     },
     'contractInvites.get'() {
         return ContractInvites.find().fetch();
