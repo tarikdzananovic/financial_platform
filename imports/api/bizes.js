@@ -45,11 +45,11 @@ Meteor.methods({
     },
 
     'bizes.get'() {
-        return Bizes.find({}, {fields: {_id: 1, name: 1}});
+        return Bizes.find({}, {fields: {_id: 1, name: 1}}).fetch();
     },
 
     'bizes.getForUser'(userId) {
-        return Bizes.find({userId: userId}, {fields: {_id: 1, name: 1}});
+        return Bizes.find({userId: userId}, {fields: {_id: 1, name: 1}}).fetch();
     },
 
     'bizes.getInfoBasic'(bizId) {

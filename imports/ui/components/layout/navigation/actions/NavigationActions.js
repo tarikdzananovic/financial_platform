@@ -73,7 +73,7 @@ NavigationActions.getItems.listen(function () {
 
             NavigationActions.getItems.completed(items);     
 
-            console.log("Bizes: " + response);
+            //console.log("Bizes: " + response);
             //response.map((biz) => {
                 //console.log("Biz list: " + JSON.stringify(biz));
             //});
