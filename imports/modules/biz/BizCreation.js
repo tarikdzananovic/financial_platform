@@ -20,18 +20,14 @@ const getBizData = () => ({
 });
 
 const createBIZ = () => {
-    const { biz } = component.props;
-    const confirmation = biz && biz._id ? 'Biz updated!' : 'Biz added!';
+    const confirmation = 'Biz added!';
     const upsert = getBizData();
-
-    if (biz && biz._id) upsert._id = biz._id;
 
     Meteor.call('bizes.upsert', upsert, function(error, response) {
         if (error) {
             console.log("Error: " + JSON.stringify(error));
             Bert.alert(error.reason, 'danger');
         } else {
-            //component.documentEditorForm.reset();
             Bert.alert(confirmation, 'success');
             hashHistory.push('/');
             NavigationActions.getItems();
@@ -40,7 +36,6 @@ const createBIZ = () => {
 };
 
 const validate = () => {
-    console.log('validate-method');
     jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
         phone_number = phone_number.replace(/\s+/g, "");
         return this.optional(element) || phone_number.length > 9 &&

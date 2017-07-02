@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-import LoadHtml from '../../components/utils/LoadHtml'
 import handleSignup from '../../../modules/auth/signup';
 import MaskedInput from '../../components/forms/inputs/MaskedInput';
-import UiValidate from '../../components/forms/validation/UiValidate';
 
-const Recaptcha = require('react-recaptcha');
+//const Recaptcha = require('react-recaptcha');
 
 export default class Signup extends React.Component {
 

@@ -88,6 +88,7 @@ export default class ContractInvite extends Component {
     }
 
     _onWizardComplete(data){
+
     }
 
     _onStepChange(data){
