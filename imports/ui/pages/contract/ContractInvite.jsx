@@ -2,15 +2,51 @@ import React, { Component } from 'react';
 
 import { createContainer } from 'meteor/react-meteor-data';
 import Wizard from '../../components/forms/wizards/Wizard';
+import getContractInviteTemplate from '../../../contract/cti/ContractTemplate'
 
 class ContractTemplate extends Component {
+
+    constructor(props){
+        super(props);
+    }
+
+    getContractTerms() {
+        let object = this.props.template.contractTerms;
+        var contractTerms = Object.keys(object).map(function(key) {
+            return (
+                <li key={key}>
+                    <span className="text">{this.props.template.contractTerms[key]}</span>
+                </li>
+            );
+        }.bind(this));
+        return contractTerms;
+    }
+
+
     render() {
+
+        var getLegalIds = Object.keys(this.props.template.legalIds).map(function(key) {
+            return (
+                <li key={key}>
+                    <span className="text">{key}</span>
+                </li>
+            );
+        });
+
+        var contractTerms = Object.keys(this.props.template.contractTerms).map(function(key) {
+            return (
+                <li key={key}>
+                    <span className="text">{key}</span>
+                </li>
+            );
+        });
+
         return (
             <div>
 
                 <div className="row">
                     <section className="col-sm-6">
-                        Template Info:
+                        Template Info for {this.props.template.template} :
                     </section>
                 </div>
                 <br/>
@@ -18,39 +54,11 @@ class ContractTemplate extends Component {
                 <div className="row">
                     <section  className="col-sm-6">
                         <label> Legal IDs used in Contract: </label>
-                        <li>
-                                    <span className="text">
-                                        Donor ID
-                                    </span>
-                        </li>
-                        <li>
-                                    <span className="text">
-                                        Advertising Company ID
-                                    </span>
-                        </li>
+                        <ul>{getLegalIds}</ul>
                     </section>
                     <section  className="col-sm-6">
                         <label> Terms in Contract: </label>
-                        <li>
-                                    <span className="text">
-                                        Agent Service Type
-                                    </span>
-                        </li>
-                        <li>
-                                    <span className="text">
-                                        Start Date
-                                    </span>
-                        </li>
-                        <li>
-                                    <span className="text">
-                                        End Date
-                                    </span>
-                        </li>
-                        <li>
-                                    <span className="text">
-                                        Compensation Amount
-                                    </span>
-                        </li>
+                        <ul>{contractTerms}</ul>
                     </section>
                 </div>
             </div>
@@ -63,38 +71,223 @@ export default class ContractInvite extends Component {
     constructor(props) {
         super(props);
 
+        var template = {};
+        template.actors = [];
+
         this.state = {
-            templateVisible: false,
+            templateVisible : false,
+            template : template,
             currentStep : 1,
-            btnNextText : 'Next'
+            btnNextText : 'Next',
+            contractInvite: {}
         };
 
         this.handleNextClick = this.handleNextClick.bind(this);
         this.handlePreviousClick = this.handlePreviousClick.bind(this);
+        this._onWizardComplete = this._onWizardComplete.bind(this);
     }
 
     handleNextClick(){
-        //TODO:: validate current step (having step index = currentStep), then call this.linkNext.click() to go to the next step
-        this.linkNext.click();
+        switch (this.state.currentStep){
+            case 1:
+                this.validateStep1();
+                if($(this.step1Form).valid()){
+                    this.linkNext.click();
+                }
+                break;
+            case 2:
+                this.validateStep2();
+                if($(this.step2Form).valid()){
+                    this.linkNext.click();
+                }
+                break;
+        }
     }
     handlePreviousClick(){
         this.linkPrevious.click();
     }
 
-    onTemplateSelected() {
+    onTemplateSelected(e) {
+        var template = getContractInviteTemplate(e.target.value);
+        var templateVisible = template ? true : false;
         this.setState({
-            templateVisible: !this.state.templateVisible
+            template : template,
+            templateVisible : templateVisible
+        });
+    }
+    onRoleChange(e) {
+        let template = this.state.template;
+        template.role = e.target.value;
+        this.setState({
+            template : template,
+        });
+    }
+
+    onLegalIdChange(e, key) {
+        let template = this.state.template;
+        template.legalIds[key] = e.target.value;
+        this.setState({
+            template : template,
+        });
+    }
+
+    onContractTermChange(e, key) {
+        let template = this.state.template;
+        template.contractTerms[key].value = e.target.value;
+        this.setState({
+            template : template,
         });
     }
 
     _onWizardComplete(data){
+        console.log('Wizard completed with state ' + JSON.stringify(this.state.template));
     }
 
     _onStepChange(data){
-        this.setState({ currentStep: data.step, btnNextText: data.isLast ? 'Completed' : 'Next'});
+        this.setState({ currentStep: data.step, btnNextText: data.isLast ? 'Complete' : 'Next'});
+    }
+
+    validateStep1(){
+        $(this.step1Form).validate({
+            rules: {
+                template: {
+                    required: true
+                }
+            },
+
+            // Messages for form validation
+            messages: {
+                template: {
+                    required: 'Template selection is mandatory',
+                }
+            },
+            errorElement: 'em',
+            errorClass: 'invalid',
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass).removeClass(validClass);
+                $(element).parent().addClass('state-error').removeClass('state-success');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass).addClass(validClass);
+                $(element).parent().removeClass('state-error').addClass('state-success');
+            },
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    }
+
+    validateStep2(){
+        jQuery.validator.addMethod("greaterThan", function(value, element, params) {
+            if ($(params[0]).val() != '') {
+                if (!/Invalid|NaN/.test(new Date(value))) {
+                    return new Date(value) > new Date($(params[0]).val());
+                }
+                return isNaN(value) && isNaN($(params[0]).val()) || (Number(value) > Number($(params[0]).val()));
+            };
+            return true;
+        },'Must be greater than {1}.');
+        $(this.step2Form).validate({
+            rules: {
+                actor: {
+                    required: true
+                },
+                initiatorId: {
+                    required: true
+                },
+                endDate: {
+                    greaterThan: ["#startDate","Start Date"]
+                }
+
+            },
+
+            messages: {
+                actor: {
+                    required: 'Biz Role selection is mandatory',
+                }
+            },
+            errorElement: 'em',
+            errorClass: 'invalid',
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass).removeClass(validClass);
+                $(element).parent().addClass('state-error').removeClass('state-success');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass).addClass(validClass);
+                $(element).parent().removeClass('state-error').addClass('state-success');
+            },
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    }
+
+    getActorList() {
+        let object = this.state.template.actors;
+        var actorList = Object.keys(object).map(function(key) {
+            return (
+                <option key={key} value={key}>{object[key]}</option>
+            );
+        }.bind(this));
+        return actorList;
+    }
+
+    getLegalIdInput(){
+        if(this.state.template.legalIds){
+            var key = this.state.template.role;
+            if(key){
+                var value = this.state.template.legalIds[this.state.template.role];
+                return(
+                    <div className="row">
+                        <div className="col-sm-2">
+                            <label>{key}</label>
+                        </div>
+                        <div className="col-sm-6">
+                            <div className="form-group">
+                                <div className="input-group">
+                                    <input type="text" name='initiatorId' value={value} placeholder={key} onChange={(e) => this.onLegalIdChange(e, key)}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        }
+    }
+
+    getContractTermsInputs(){
+        if(this.state.template.contractTerms && this.state.template.role){
+            let object = this.state.template.contractTerms;
+            var contractTerms = Object.keys(object).map(function(key) {
+                return (
+                    <div className="row" key={key}>
+                        <div className="col-sm-2">
+                            <label>{key}</label>
+                        </div>
+                        <div className="col-sm-6">
+                            <div className="form-group">
+                                <div className="input-group">
+                                    <input id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }.bind(this));
+            return contractTerms;
+        }
     }
 
     render() {
+
         return (
 
             <div>
@@ -107,8 +300,6 @@ export default class ContractInvite extends Component {
 
 
                 <div className="widget-body">
-
-                    <form noValidate="novalidate">
                         <Wizard className="col-sm-12"
                                 onComplete={this._onWizardComplete}
                                 onStepChange={(e) => this._onStepChange(e)}
@@ -128,35 +319,59 @@ export default class ContractInvite extends Component {
                             </div>
                             <div className="tab-content">
                                 <div className="tab-pane" data-smart-wizard-pane="1">
-                                    <br/>
-                                    <br/>
+                                    <br/><br/>
 
                                     <h4><strong>Step 1 </strong> - Choose template</h4>
 
                                     <br/>
-                                    <div className="row">
-                                        <div className="col-sm-6">
-                                            <div className="form-group">
-                                                <div className="input-group">
-                                                    <select name="template" defaultValue={"0"} onChange={() => this.onTemplateSelected()}>
-                                                        <option value="0" disabled={true}>Contract Template</option>
-                                                        <option value="2">Advertising Template</option>
-                                                    </select>
+                                    <form noValidate="novalidate" ref={ form => (this.step1Form = form) }>
+                                        <div className="row">
+                                            <div className="col-sm-6">
+                                                <div className="form-group">
+                                                    <div className="input-group">
+                                                        <select name="template" defaultValue={"NONE"} onChange={(e) => this.onTemplateSelected(e)}>
+                                                            <option value="NONE" disabled={true}>Contract Template</option>
+                                                            <option value="ADVERTISING_TEMPLATE">Advertising Template</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </form>
                                     {
-                                        this.state.templateVisible ? <ContractTemplate /> : null
+                                        this.state.templateVisible ? <ContractTemplate template={this.state.template}/> : null
                                     }
                                 </div>
 
 
                                 <div className="tab-pane" data-smart-wizard-pane="2">
-                                    <br/>
+                                    <br/><br/>
 
                                     <h4><strong>Step 2 </strong> - Enter CTI Information</h4>
+                                    <br/>
+                                    <form noValidate="novalidate" ref={ form => (this.step2Form = form) }>
+                                        <div className="row">
+                                            <div className="col-sm-2">
+                                                <label>Select Biz Role</label>
+                                            </div>
+                                            <div className="col-sm-6">
+                                                <div className="form-group">
+                                                    <div className="input-group">
+                                                        <select name="actor" defaultValue={"NONE"} onChange={(e) => this.onRoleChange(e)}>
+                                                            <option value="NONE" disabled={true}>Select</option>
+                                                            {this.getActorList()}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
+
+                                        {this.getLegalIdInput()}
+
+                                        {this.getContractTermsInputs()}
+
+                                    </form>
                                 </div>
 
                                 <div className="form-actions hide">
@@ -196,8 +411,6 @@ export default class ContractInvite extends Component {
 
                             </div>
                         </Wizard>
-                    </form>
-
                 </div>
 
             </div>
