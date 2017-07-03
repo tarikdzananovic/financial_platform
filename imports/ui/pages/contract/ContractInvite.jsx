@@ -131,8 +131,6 @@ export default class ContractInvite extends Component {
     }
 
     _onWizardComplete(data){
-        console.log("ID: " + this.props.params.id);
-        console.log('Wizard completed with state ' + JSON.stringify(this.state.template));
 
         let contractInvite = {
             bizId: this.props.params.id,
@@ -419,50 +417,10 @@ export default class ContractInvite extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </Wizard>
                 </div>
-
             </div>
-
-
-            /*<form id="checkout-form" className="smart-form" noValidate="novalidate"
-                  onSubmit={this._onSubmit}
-                  ref={ form => (this.form = form) }
-            >
-
-                <header id="header" className="animated fadeInDown">
-                    <div id="logo-group"></div>
-                    <span id="extr-page-header-space">
-                        Contract invite creation
-                    </span>
-                </header>
-
-                <fieldset>
-                    <div className="row">
-                        <section className="col col-6">
-                            <label className="select">
-                                <select name="template" defaultValue={"0"} onChange={() => this.onTemplateSelected()}>
-                                    <option value="0" disabled={true}>Contract Template</option>
-                                    <option value="2">Advertising Template</option>
-                                </select> <i/> </label>
-                        </section>
-                    </div>
-
-                    {
-                        this.state.templateVisible ? <ContractTemplate /> : null
-                    }
-                </fieldset>
-
-                <footer>
-                    <button type="submit" className="btn btn-primary">
-                        Next
-                    </button>
-                </footer>
-
-            </form>*/
-
         );
     }
 
