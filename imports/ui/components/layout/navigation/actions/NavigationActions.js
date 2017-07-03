@@ -58,7 +58,7 @@ var getSettingsMenuItem = function (id) {
 NavigationActions.getItems.listen(function () {
     //TODO:: call end point to get user biz cabinets
 
-    Meteor.call('bizes.get', function(error, response) {
+    Meteor.call('bizes.getForUser', Meteor.userId(), function(error, response) {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {

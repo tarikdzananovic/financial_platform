@@ -61,7 +61,7 @@ Meteor.methods({
     },
 
     'bizes.getForOtherUsers'() {
-        return Bizes.find({userId: {$ne: Meteor.user()._id}}, { fields: { name: 1, email: 1} }).fetch();
+        return Bizes.find({userId: {$ne: Meteor.userId()}}, { fields: { name: 1, email: 1} }).fetch();
     }
 
 });
