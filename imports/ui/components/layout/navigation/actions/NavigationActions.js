@@ -43,7 +43,7 @@ var getOtherBizesMenuItem = function (id) {
     var otherBizes = {};
     otherBizes._id = id;
     otherBizes.title = "Other BIZs";
-    otherBizes.icon = "fa fa-lg fa-fw fa-suitcase";
+    otherBizes.icon = "fa fa-lg fa-fw fa-globe";
     otherBizes.route = "/biz/otherBizes";
     return otherBizes;
 };

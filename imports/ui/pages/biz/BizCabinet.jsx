@@ -5,10 +5,18 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Bizes } from '../../../api/bizes.js';
 import { ContractInvites } from '../../../api/contracts/contractInvites.js';
 
+import { Bert} from 'meteor/themeteorchef:bert';
+
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 
 class BSTable extends React.Component {
+
+
+    onClickHandled() {
+        Bert.alert("Contract talk to be implemented!", 'success');
+    }
+
     render() {
         if (this.props.data) {
 
@@ -42,6 +50,12 @@ class BSTable extends React.Component {
                         <TableHeaderColumn dataField='name' isKey={true}>Contract Term</TableHeaderColumn>
                         <TableHeaderColumn dataField='value'>Value</TableHeaderColumn>
                     </BootstrapTable>
+                    <br/>
+                    <div className="row">
+                        <section className="col col-md-4 col-md-offset-8">
+                            <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
+                        </section>
+                    </div>
                 </div>);
         } else {
             return (<p>?</p>);
