@@ -25,12 +25,13 @@ Meteor.methods({
         //check(biz.legalId, String);
 
         // Make sure the user is logged in before inserting a task
-        if (! Meteor.userId()) {
+        if (biz.userId != Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
         }
 
         return Bizes.update({ _id: biz._id }, {
             $set: {
+                userId:biz.userId,
                 name: biz.name,
                 email: biz.email,
                 phone: biz.phone,
@@ -40,6 +41,11 @@ Meteor.methods({
     },
     'bizes.remove'(bizId) {
         check(bizId, String);
+
+        // Make sure the user is logged in before inserting a task
+        if (biz.userId != Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
 
         Bizes.remove(bizId);
     },

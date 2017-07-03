@@ -11,7 +11,7 @@ import NavigationActions from '../../ui/components/layout/navigation/actions/Nav
 let component;
 
 const getBizData = () => ({
-    userId: Meteor.user()._id,
+    userId: Meteor.userId(),
     name: document.querySelector('[name="name"]').value,
     email: document.querySelector('[name="email"]').value,
     phone: document.querySelector('[name="phone"]').value,

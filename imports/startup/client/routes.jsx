@@ -14,6 +14,7 @@ import Profile from '../../ui/pages/Profile';
 import BizCreation from '../../ui/pages/biz/BizCreation'
 import BizCabinet from '../../ui/pages/biz/BizCabinet'
 import BizEdit from '../../ui/pages/biz/BizEdit'
+import OtherBizes from '../../ui/pages/biz/OtherBizes.jsx';
 import ContractInvite from '../../ui/pages/contract/ContractInvite.jsx';
 
 const authenticate = (nextState, replace) => {
@@ -39,6 +40,7 @@ Meteor.startup(() => {
 
                 <Route path="biz">
                     <Route path="new" component={BizCreation}/>
+                    <Route path="otherBizes" component={OtherBizes}/>
                     <Redirect from=":id" to=":id/cabinet"/>
                     <Route path=":id">
                         <Route path="edit" component={BizEdit}/>
