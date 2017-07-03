@@ -25,9 +25,14 @@ class BizEdit extends Component {
 
     componentDidMount() {
         handleBizEdit({component: this});
+
+        this.setState({
+            biz: this.props.biz
+        });
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
+
         this.setState({
             biz: nextProps.biz
         });
@@ -125,7 +130,7 @@ export default createContainer(({params}) => {
     const subscription = Meteor.subscribe('bizes');
     const loading =  !subscription.ready();
     const biz = Bizes.findOne({_id : params.id}, { fields: { name: 1, email: 1, address:1, phone: 1} });
-    const bizExists = !loading && !!biz;
+    const bizExists = !loading && biz;
     return {
         biz: bizExists ? biz : {},
     };

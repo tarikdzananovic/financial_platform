@@ -39,6 +39,15 @@ var getBizMenuItem = function (biz, id) {
     return bizItem;
 };
 
+var getOtherBizesMenuItem = function (id) {
+    var otherBizes = {};
+    otherBizes._id = id;
+    otherBizes.title = "Other BIZs";
+    otherBizes.icon = "fa fa-lg fa-fw fa-suitcase";
+    otherBizes.route = "/biz/otherBizes";
+    return otherBizes;
+};
+
 var getSettingsMenuItem = function (id) {
     var settings = {};
     settings._id = id;
@@ -69,12 +78,13 @@ NavigationActions.getItems.listen(function () {
                 bizMenu.items.push(getBizMenuItem(biz, items.length));
             });
             items.push(bizMenu);
+            items.push(getOtherBizesMenuItem(items.length));
             items.push(getSettingsMenuItem(items.length));
 
             NavigationActions.getItems.completed(items);     
 
             //console.log("Bizes: " + response);
-            //response.map((biz) => {
+            //esponse.map((biz) => {
                 //console.log("Biz list: " + JSON.stringify(biz));
             //});
             //browserHistory.push(`/documents/${response.insertedId || biz._id}`);
