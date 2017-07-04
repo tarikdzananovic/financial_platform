@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-
 import { createContainer } from 'meteor/react-meteor-data';
-import Wizard from '../../components/forms/wizards/Wizard';
-import getContractInviteTemplate from '../../../contract/cti/ContractTemplate'
-
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { hashHistory} from 'react-router';
+
+import Wizard from '../../components/forms/wizards/Wizard';
+import getContractInviteTemplate from '../../../contract/cti/ContractTemplate'
+import { Bizes } from '../../../api/bizes.js';
+
+import Iframe from 'react-iframe'
 
 class ContractTemplate extends Component {
 
@@ -52,12 +54,15 @@ class ContractTemplate extends Component {
                         <ul>{contractTerms}</ul>
                     </section>
                 </div>
+
+
+
             </div>
         );
     }
 }
 
-export default class ContractInvite extends Component {
+class ContractInvite extends Component {
 
     constructor(props) {
         super(props);
@@ -68,14 +73,30 @@ export default class ContractInvite extends Component {
         this.state = {
             templateVisible : false,
             template : template,
+            templateText: [],
             currentStep : 1,
             btnNextText : 'Next',
-            contractInvite: {}
+            contractInvite: {},
+            biz: {},
         };
 
         this.handleNextClick = this.handleNextClick.bind(this);
         this.handlePreviousClick = this.handlePreviousClick.bind(this);
         this._onWizardComplete = this._onWizardComplete.bind(this);
+    }
+
+    componentDidMount() {
+
+        this.setState({
+            biz: this.props.biz
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        this.setState({
+            biz: nextProps.biz
+        });
     }
 
     handleNextClick(){
@@ -99,11 +120,12 @@ export default class ContractInvite extends Component {
     }
 
     onTemplateSelected(e) {
-        var template = getContractInviteTemplate(e.target.value);
-        var templateVisible = template ? true : false;
+        var objectTemplate = getContractInviteTemplate(e.target.value);
+        var templateVisible = objectTemplate.template ? true : false;
         this.setState({
-            template : template,
-            templateVisible : templateVisible
+            template : objectTemplate.template,
+            templateVisible : templateVisible,
+            templateText : objectTemplate.text
         });
     }
     onRoleChange(e) {
@@ -262,7 +284,7 @@ export default class ContractInvite extends Component {
                         <div className="col-sm-6">
                             <div className="form-group">
                                 <div className="input-group">
-                                    <input type="text" name='initiatorId' value={value} placeholder={key} onChange={(e) => this.onLegalIdChange(e, key)}/>
+                                    <input type="text" name='initiatorId' value={this.state.biz.legalId} placeholder={key} disabled /*onChange={(e) => this.onLegalIdChange(e, key)}*//>
                                 </div>
                             </div>
                         </div>
@@ -291,6 +313,22 @@ export default class ContractInvite extends Component {
                     </div>
                 );
             }.bind(this));
+            return contractTerms;
+        }
+    }
+
+    getTemplateText(){
+        if(this.state.templateText){
+            let object = this.state.templateText;
+            var contractTerms = object.map((item) => {
+                return (
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <p>{item}</p>
+                        </div>
+                    </div>
+                );
+            });
             return contractTerms;
         }
     }
@@ -348,8 +386,10 @@ export default class ContractInvite extends Component {
                                         </div>
                                     </form>
                                     {
-                                        this.state.templateVisible ? <ContractTemplate template={this.state.template}/> : null
+                                        this.state.templateVisible ? <div><ContractTemplate template={this.state.template}/><br/></div> : null
                                     }
+                                    {this.getTemplateText()}
+
                                 </div>
 
 
@@ -423,7 +463,18 @@ export default class ContractInvite extends Component {
             </div>
         );
     }
-
 }
+
+export default createContainer(({params}) => {
+
+    const subscription = Meteor.subscribe('bizes');
+    const loading =  !subscription.ready();
+    const biz = Bizes.findOne({_id : params.id}, { fields: { legalId: 1} });
+    const bizExists = !loading && biz;
+    return {
+        biz: bizExists ? biz : {},
+    };
+
+}, ContractInvite);
 
 

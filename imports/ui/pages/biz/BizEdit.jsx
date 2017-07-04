@@ -20,6 +20,7 @@ class BizEdit extends Component {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleAddressChange = this.handleAddressChange.bind(this);
+        this.handleLegalIdChange = this.handleLegalIdChange.bind(this);
         this._onSubmit = this._onSubmit.bind(this);
     }
 
@@ -58,9 +59,14 @@ class BizEdit extends Component {
         this.setState({ biz: bizObj});
     }
     handleAddressChange(e) {
-            let bizObj = this.state.biz;
-            bizObj.address= e.target.value;
-            this.setState({ biz: bizObj});
+        let bizObj = this.state.biz;
+        bizObj.address= e.target.value;
+        this.setState({ biz: bizObj});
+    }
+    handleLegalIdChange(e) {
+        let bizObj = this.state.biz;
+        bizObj.legalId = e.target.value;
+        this.setState({biz: bizObj});
     }
 
     render() {
@@ -104,6 +110,16 @@ class BizEdit extends Component {
                             </label>
                         </section>
                     </div>
+
+                    <div className="row">
+                        <section className="col col-6">
+                            <label className="input"> <i className="icon-prepend fa fa-legal"/>
+                                <input type="text" name="legalId" placeholder="Legal ID" value = { this.state.biz.legalId } onChange={ this.handleLegalIdChange}/>
+
+                            </label>
+                        </section>
+                    </div>
+
                 </fieldset>
 
                 <footer>
@@ -129,7 +145,7 @@ export default createContainer(({params}) => {
 
     const subscription = Meteor.subscribe('bizes');
     const loading =  !subscription.ready();
-    const biz = Bizes.findOne({_id : params.id}, { fields: { name: 1, email: 1, address:1, phone: 1} });
+    const biz = Bizes.findOne({_id : params.id}, { fields: { name: 1, email: 1, address:1, phone: 1, legalId: 1} });
     const bizExists = !loading && biz;
     return {
         biz: bizExists ? biz : {},

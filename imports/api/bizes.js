@@ -22,7 +22,7 @@ Meteor.methods({
         check(biz.email, String);
         check(biz.phone, String);
         check(biz.address, String);
-        //check(biz.legalId, String);
+        check(biz.legalId, String);
 
         // Make sure the user is logged in before inserting a task
         if (biz.userId != Meteor.userId()) {
@@ -35,7 +35,8 @@ Meteor.methods({
                 name: biz.name,
                 email: biz.email,
                 phone: biz.phone,
-                address: biz.address
+                address: biz.address,
+                legalId: biz.legalId
             }
         }, { upsert: true });
     },
@@ -63,7 +64,7 @@ Meteor.methods({
     },
 
     'bizes.getInfoForEdit'(bizId) {
-        return Bizes.findOne({_id : bizId}, { fields: { name: 1, email: 1, address:1, phone: 1} });
+        return Bizes.findOne({_id : bizId}, { fields: { name: 1, email: 1, address:1, phone: 1, legalId: 1} });
     },
 
     'bizes.getForOtherUsers'() {
