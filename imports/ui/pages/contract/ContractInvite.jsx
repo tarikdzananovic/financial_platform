@@ -131,14 +131,7 @@ class ContractInvite extends Component {
     onRoleChange(e) {
         let template = this.state.template;
         template.role = e.target.value;
-        this.setState({
-            template : template,
-        });
-    }
-
-    onLegalIdChange(e, key) {
-        let template = this.state.template;
-        template.legalIds[key] = e.target.value;
+        template.legalIds[template.role] = this.state.biz.legalId;
         this.setState({
             template : template,
         });
@@ -284,7 +277,7 @@ class ContractInvite extends Component {
                         <div className="col-sm-6">
                             <div className="form-group">
                                 <div className="input-group">
-                                    <input type="text" name='initiatorId' value={this.state.biz.legalId} placeholder={key} disabled /*onChange={(e) => this.onLegalIdChange(e, key)}*//>
+                                    <input type="text" name='initiatorId' value={this.state.biz.legalId} placeholder={key} disabled onChange={(e) => this.onLegalIdChange(e, key)}/>
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,8 @@ const getBizData = () => ({
     name: document.querySelector('[name="name"]').value,
     email: document.querySelector('[name="email"]').value,
     phone: document.querySelector('[name="phone"]').value,
-    address: document.querySelector('[name="address"]').value
+    address: document.querySelector('[name="address"]').value,
+    legalId: document.querySelector('[name = "legalId"]').value,
 });
 
 const saveBiz = () => {
