@@ -47,14 +47,14 @@ Biz cabinet should have:
 in future to restrict CTI list using some criterias.
 
 Contract Talk Creation
-~~~~~~~~~~~~~~~~~~~~~~
+______________________
 
 Example: BizB selects CTI which was created by BizA. Suppose CTI object has BizA role 'Company' (selected when CTI was created).
 BizB should agree to assume remaining role - 'Agent' - to proceed. Once it is done CTI will have all IDs assigned and CT object
 is registered in the system. CT objects should be visible in biz cabinets of talking parties.
 
 Negotiations via message exchange
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+_________________________________
 
 Given certain *Contract Talk* object we have all IDs already assigned. The rest of contract talk is to come
 to common term values.
