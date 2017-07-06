@@ -40,14 +40,33 @@ the *Contract Talk* object is created.
 Contract Talk
 -------------
 
-*Contract Talk* is the established communication channel between two *Biz* parties.
-*Contract Talk* keeps three version of contractTerms, one per Biz party and *AcceptedTerms*. 
-Each party can either show it's own term value or accept counterparty variant.
-Once term is accepted it is stored in *AcceptedTerms*.
+Biz cabinet should have:
 
-Once all terms are ok then both parties need to accept contract terms from *AcceptedTerms* dict.
-Acceptence by all parties creates *Contract*.
+- list of Biz own CTI objects
+- list of all CTI objects created by other bizes. This is temporary feature. We will need to revise this trivial approach
+in future to restrict CTI list using some criterias.
 
-Contract
---------
+Contract Talk Creation
+~~~~~~~~~~~~~~~~~~~~~~
 
+Example: BizB selects CTI which was created by BizA. Suppose CTI object has BizA role 'Company' (selected when CTI was created).
+BizB should agree to assume remaining role - 'Agent' - to proceed. Once it is done CTI will have all IDs assigned and CT object
+is registered in the system. CT objects should be visible in biz cabinets of talking parties.
+
+Negotiations via message exchange
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Given certain *Contract Talk* object we have all IDs already assigned. The rest of contract talk is to come
+to common term values.
+
+We need to build CT messages sequence (part of CT object). Each CT message has ref to CT object, sender biz, recepient biz,
+term values and comment.
+First message is generated upon CT object creation. Example: sender will be BizB (who has selected CTI),
+recepient BizA (creator os selected CTI), term values are coming from original CTI object. Both BizA and BizB should be able
+either to accept current terms or continue negotiation by modifying term values and sending new message to counterparty to
+consider new term values.
+
+Each new message should be added to CT message sequence. Whole sequence should be managed like private chat.
+
+Once both parties have accepted term values - new Contract object is created and registered into the system.
+Contract object has template text, term keys and finalized term values.
