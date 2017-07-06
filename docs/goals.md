@@ -45,22 +45,23 @@ Biz cabinet should have:
 - list of Biz own CTI objects
 - list of all CTI objects created by other bizes. NOTE: this is temporary feature. We will need to revise this trivial approach
 in future to restrict CTI list using some criterias.
+- list of ContractTalk objects where Biz is participant
 
 Contract Talk Creation
 ______________________
 
 Example: BizB selects CTI which was created by BizA. Suppose CTI object has BizA ID as 'Company' (selected when CTI was created).
 BizB should agree to have its ID stored as 'Agent' to proceed. Once it is done CTI will have all IDs assigned.
-CT object can be created and registered in the system at this point. CT objects should be visible in biz cabinets of talking parties.
+CT object can be created and registered in the system at this point.
 
 CT object
 _________
 
-CT.contract_template = selected_CTI.contract_template
-CT.legalIDs = <see example above>
-CT.contractTerms = selected_CTI.contractTerms
-CT.ref_to_original_CTI = selected_CTI
-CT.message_seq = <list of messages>
+- CT.contract_template = selected_CTI.contract_template
+- CT.legalIDs = <see example above>
+- CT.contractTerms = selected_CTI.contractTerms
+- CT.ref_to_original_CTI = selected_CTI
+- CT.message_seq = <list of messages>
 
 Negotiations via message exchange
 _________________________________
