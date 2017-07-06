@@ -1,6 +1,18 @@
 Contract Negotiations
 =====================
 
+Biz cabinet
+-----------
+
+Biz cabinet should have:
+
+- list of Biz own CTI objects with option to create new CTI
+- list of all CTI objects created by other bizes. NOTE: this is temporary feature. We will need to revise this trivial approach
+in future to restrict CTI list using some criterias.
+- list of ContractTalk objects where Biz is participant
+- list of Contract objects where Biz is participant
+
+
 Contract Template (CTmpl)
 -------------------------
 
@@ -40,13 +52,6 @@ the *Contract Talk* object is created.
 Contract Talk
 -------------
 
-Biz cabinet should have:
-
-- list of Biz own CTI objects
-- list of all CTI objects created by other bizes. NOTE: this is temporary feature. We will need to revise this trivial approach
-in future to restrict CTI list using some criterias.
-- list of ContractTalk objects where Biz is participant
-
 Contract Talk Creation
 ______________________
 
@@ -58,10 +63,10 @@ CT object
 _________
 
 - CT.contract_template = selected_CTI.contract_template
-- CT.legalIDs = <see example above>
+- CT.legalIDs = ...
 - CT.contractTerms = selected_CTI.contractTerms
 - CT.ref_to_original_CTI = selected_CTI
-- CT.message_seq = <list of messages>
+- CT.message_seq = ..list of messages..
 
 Negotiations via message exchange
 _________________________________
@@ -69,16 +74,24 @@ _________________________________
 Given certain *Contract Talk* object we have all IDs already assigned. The rest of contract talk is to come
 to common term values.
 
-We need to build CT messages sequence (part of CT object). Each CT message has ref to CT object, sender biz, recepient biz,
+We need to build CT messages sequence (CT.message_seq). Each CT message has ref to CT object, sender biz, recepient biz,
 term values and comment.
 
 First message is generated upon CT object creation. Example: sender will be BizB (who has selected CTI),
-recepient BizA (creator os selected CTI), term values are coming from original CTI object. Both BizA and BizB should be able
-either to accept current terms or continue negotiation by modifying term values and sending new message to counterparty to
-consider new term values.
+recepient BizA (creator os selected CTI), term values are coming from original CTI object.
 
-New term values are saved into CT.contractTerms upon message sending to maintain latest version of contract terms.
-Each new message should be added to CT.message_seq. Whole sequence should be managed like private chat.
+New messages should attract attention by hilighting corresponding entry in Biz cabinent's CT list.
+
+CT message viewer
+_________________
+
+CT message viewer should be build based on idea of chat. It should show CT.message_seq and CT message editor screen.
+
+For latest message CT message editor screen should show editable contract terms, buttons 'Accept Terms', 'Submit New Terms', 'Cancel'.
+For all other messages CT message editor is read-only.
+
+'Submit New Terms' button should save edited term values into CT.contractTerms and send notice to counterparty.
+Each new message should be added to CT.message_seq
 
 Contract terms acceptance
 _________________________
@@ -86,16 +99,16 @@ _________________________
 Each talking party can initiate acceptance of current contract terms using button 'Accept Terms'.
 E.g. BizB may accept contract terms first.
 BizA should get message with notice that counterparty have accepted terms. Then BizA should be given choice:
-either to 'Accept Terms' or 'Continue Negotiations'.
+either to 'Accept Terms and Create Contract' or 'Continue Negotiations'.
 
 If 'Continue Negotiations' is choosen than BizB should have notice that acceptance offer was
 declined and negotiations continue like nothing happen.
 
-If 'Accept Terms' is chosen THEN new Contract object is created and registered into the system.
+If 'Accept Terms and Create Contract' is chosen THEN new Contract object is created and registered into the system.
 
 Contract object
-===============
+---------------
 
-C.contract_template = CT.contract_template
-C.legalIDs = CT.legalIDs
-C.contractTerm = CT.contractTerm # this is latest version after both parties accepted
+- C.contract_template = CT.contract_template
+- C.legalIDs = CT.legalIDs
+- C.contractTerm = CT.contractTerm # this is latest version after both parties accepted
