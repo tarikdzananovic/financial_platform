@@ -43,15 +43,24 @@ Contract Talk
 Biz cabinet should have:
 
 - list of Biz own CTI objects
-- list of all CTI objects created by other bizes. This is temporary feature. We will need to revise this trivial approach
+- list of all CTI objects created by other bizes. NOTE: this is temporary feature. We will need to revise this trivial approach
 in future to restrict CTI list using some criterias.
 
 Contract Talk Creation
 ______________________
 
-Example: BizB selects CTI which was created by BizA. Suppose CTI object has BizA role 'Company' (selected when CTI was created).
-BizB should agree to assume remaining role - 'Agent' - to proceed. Once it is done CTI will have all IDs assigned and CT object
-is registered in the system. CT objects should be visible in biz cabinets of talking parties.
+Example: BizB selects CTI which was created by BizA. Suppose CTI object has BizA ID as 'Company' (selected when CTI was created).
+BizB should agree to have its ID stored as 'Agent' to proceed. Once it is done CTI will have all IDs assigned.
+CT object can be created and registered in the system at this point. CT objects should be visible in biz cabinets of talking parties.
+
+CT object
+_________
+
+CT.contract_template = selected_CTI.contract_template
+CT.legalIDs = <see example above>
+CT.contractTerms = selected_CTI.contractTerms
+CT.ref_to_original_CTI = selected_CTI
+CT.message_seq = <list of messages>
 
 Negotiations via message exchange
 _________________________________
@@ -61,12 +70,31 @@ to common term values.
 
 We need to build CT messages sequence (part of CT object). Each CT message has ref to CT object, sender biz, recepient biz,
 term values and comment.
+
 First message is generated upon CT object creation. Example: sender will be BizB (who has selected CTI),
 recepient BizA (creator os selected CTI), term values are coming from original CTI object. Both BizA and BizB should be able
 either to accept current terms or continue negotiation by modifying term values and sending new message to counterparty to
 consider new term values.
 
-Each new message should be added to CT message sequence. Whole sequence should be managed like private chat.
+New term values are saved into CT.contractTerms upon message sending to maintain latest version of contract terms.
+Each new message should be added to CT.message_seq. Whole sequence should be managed like private chat.
 
-Once both parties have accepted term values - new Contract object is created and registered into the system.
-Contract object has template text, term keys and finalized term values.
+Contract terms acceptance
+_________________________
+
+Each talking party can initiate acceptance of current contract terms using button 'Accept Terms'.
+E.g. BizB may accept contract terms first.
+BizA should get message with notice that counterparty have accepted terms. Then BizA should be given choice:
+either to 'Accept Terms' or 'Continue Negotiations'.
+
+If 'Continue Negotiations' is choosen than BizB should have notice that acceptance offer was
+declined and negotiations continue like nothing happen.
+
+If 'Accept Terms' is chosen THEN new Contract object is created and registered into the system.
+
+Contract object
+===============
+
+C.contract_template = CT.contract_template
+C.legalIDs = CT.legalIDs
+C.contractTerm = CT.contractTerm # this is latest version after both parties accepted
