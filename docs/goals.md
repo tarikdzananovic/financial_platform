@@ -77,6 +77,7 @@ First message in CT.message_seq is generated upon CT object creation. The term v
 
 If user selects latest message then CT message editor screen should show:
 - editable contract terms
+- editable comments text input
 - buttons 'Accept Terms', 'Submit New Terms', 'Cancel'.
 
 For all other messages CT message editor is read-only.
