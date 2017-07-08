@@ -64,6 +64,15 @@ var getSettingsMenuItem = function (id) {
     return settings;
 };
 
+var getCtTest = function (id) {
+    var createNewBiz = {};
+    createNewBiz._id = id;
+    createNewBiz.title = "Test Message";
+    createNewBiz.icon = "fa fa-lg fa-fw fa-plus-circle";
+    createNewBiz.route = "/biz/PDJK9tHQ4mfj8FBmb/contractTalkMsg";
+    return createNewBiz;
+};
+
 NavigationActions.getItems.listen(function () {
     //TODO:: call end point to get user biz cabinets
 
@@ -80,6 +89,7 @@ NavigationActions.getItems.listen(function () {
             items.push(bizMenu);
             items.push(getOtherBizesMenuItem(items.length));
             items.push(getSettingsMenuItem(items.length));
+            items.push(getCtTest(items.length));
 
             NavigationActions.getItems.completed(items);     
 
