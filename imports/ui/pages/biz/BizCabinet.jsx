@@ -52,10 +52,15 @@ class BSTable extends React.Component {
                     </BootstrapTable>
                     <br/>
                     <div className="row">
-                        <section className="col col-md-4 col-md-offset-8">
-                            <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
-                        </section>
+                    {
+                        (this.props.canStartContractTalk)
+                            ? <section className="col col-md-4 col-md-offset-8">
+                                <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
+                              </section>
+                            : <p></p>
+                    }
                     </div>
+
                 </div>);
         } else {
             return (<p>?</p>);
@@ -74,7 +79,8 @@ class BizCabinet extends Component {
             editLocation : window.location.hash.replace('cabinet', 'edit'),
             ctiLocation: window.location.hash.replace('cabinet', 'contractInvite'),
             publicCabinet : false,
-            contractInvites : []
+            contractInvites : [],
+            contractInvitesOtherBizes: []
         };
     }
 
@@ -83,7 +89,8 @@ class BizCabinet extends Component {
         this.setState({
             biz: nextProps.biz,
             publicCabinet : nextProps.biz.userId !== Meteor.user()._id,
-            contractInvites: nextProps.contractInvites
+            contractInvites: nextProps.contractInvites,
+            contractInvitesOtherBizes: nextProps.contractInvitesOtherBizes
         });
     }
 
@@ -93,53 +100,59 @@ class BizCabinet extends Component {
         else return false;
     }
 
-    expandComponent(row) {
+    expandComponent(row, canStartContractTalk) {
+
         var data = {};
         data.contractTerms = row.contractTerms;
         data.legalIds = row.legalIds;
+
         return (
-            <BSTable data={ data} />
+            <BSTable data={ data} canStartContractTalk= { canStartContractTalk}/>
         );
     }
 
     render() {
 
-        const options = {
-            page: 1,
-            sizePerPageList: [ {
-                text: '5', value: 5
-            }, {
-                text: '10', value: 10
-            }, {
-                text: 'All', value: this.state.contractInvites.length
-            } ], // you can change the dropdown list for size per page
-            sizePerPage: 5,
-            pageStartIndex: 1, // where to start counting the pages
-            paginationSize: 3,  // the pagination bar size.
-            prePage: 'Prev', // Previous page button text
-            nextPage: 'Next', // Next page button text
-            firstPage: 'First', // First page button text
-            lastPage: 'Last', // Last page button text
-            prePageTitle: 'Go to previous', // Previous page button title
-            nextPageTitle: 'Go to next', // Next page button title
-            firstPageTitle: 'Go to first', // First page button title
-            lastPageTitle: 'Go to Last', // Last page button title
-            paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
-            paginationPosition: 'top',  // default is bottom, top and both is all available
-            onlyOneExpanding: true,
-            expandBodyClass: function(row, rowIndex, isExpanding) {
-                if (!isExpanding) {
-                    return 'current-is-hidden';
-                } else {
-                    if (rowIndex > 1) {
-                        return 'custom-expand-body-1';
+        var getOptions = function (data) {
+            const options = {
+                page: 1,
+                sizePerPageList: [ {
+                    text: '5', value: 5
+                }, {
+                    text: '10', value: 10
+                }, {
+                    text: 'All', value: data
+                } ], // you can change the dropdown list for size per page
+                sizePerPage: 5,
+                pageStartIndex: 1, // where to start counting the pages
+                paginationSize: 3,  // the pagination bar size.
+                prePage: 'Prev', // Previous page button text
+                nextPage: 'Next', // Next page button text
+                firstPage: 'First', // First page button text
+                lastPage: 'Last', // Last page button text
+                prePageTitle: 'Go to previous', // Previous page button title
+                nextPageTitle: 'Go to next', // Next page button title
+                firstPageTitle: 'Go to first', // First page button title
+                lastPageTitle: 'Go to Last', // Last page button title
+                paginationShowsTotal: this.renderShowsTotal,  // Accept bool or function
+                paginationPosition: 'top',  // default is bottom, top and both is all available
+                onlyOneExpanding: true,
+                expandBodyClass: function(row, rowIndex, isExpanding) {
+                    if (!isExpanding) {
+                        return 'current-is-hidden';
                     } else {
-                        return 'custom-expand-body-0';
+                        if (rowIndex > 1) {
+                            return 'custom-expand-body-1';
+                        } else {
+                            return 'custom-expand-body-0';
+                        }
                     }
-                }
-            },
-            expandParentClass: 'custom-expand-parent'  // expandParentClass also accept callback function
+                },
+                expandParentClass: 'custom-expand-parent'  // expandParentClass also accept callback function
+            };
+            return options;
         };
+
 
         if(!this.state.publicCabinet){
 
@@ -165,15 +178,30 @@ class BizCabinet extends Component {
                         </ul>
                     </div>
                     <div className="well">
+                        <p>My CTIs</p>
                         <BootstrapTable data={ this.state.contractInvites }
                                         pagination={ true }
-                                        options={ options }
+                                        options={ getOptions(this.state.contractInvites.length) }
                                         expandableRow={ this.isExpandableRow }
-                                        expandComponent={ this.expandComponent }
+                                        expandComponent={ (e) => this.expandComponent(e, false)}
                         >
                             <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
                             <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                         </BootstrapTable>
+
+                        <br />
+                        <br />
+                        <p>Other CTIs</p>
+                        <BootstrapTable data={ this.state.contractInvitesOtherBizes }
+                                        pagination={ true }
+                                        options={ getOptions(this.state.contractInvitesOtherBizes.length) }
+                                        expandableRow={ this.isExpandableRow }
+                                        expandComponent={(e) => this.expandComponent(e, true) }
+                        >
+                            <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                            <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                        </BootstrapTable>
+
                     </div>
                 </div>
             )
@@ -190,9 +218,9 @@ class BizCabinet extends Component {
                     <div className="well">
                         <BootstrapTable data={ this.state.contractInvites }
                                         pagination={ true }
-                                        options={ options }
+                                        options={ getOptions(this.state.contractInvites.length) }
                                         expandableRow={ this.isExpandableRow }
-                                        expandComponent={ this.expandComponent }
+                                        expandComponent={ (e) => this.expandComponent(e, false) }
                         >
                             <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
                             <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
@@ -208,6 +236,7 @@ class BizCabinet extends Component {
 BizCabinet.propTypes = {
     biz: PropTypes.object,
     contractInvites: PropTypes.array,
+    contractInvitesOtherBizes: PropTypes.array,
 };
 
 export default createContainer(({params}) => {
@@ -217,15 +246,18 @@ export default createContainer(({params}) => {
     const biz = Bizes.findOne({_id: params.id}, {fields: { name: 1, userId: 1 }});
     const bizExists = !loadingBizes && !!biz;
 
-
     const subscriptionContractInvites = Meteor.subscribe('contractInvites');
     const loadingContractInvites =  !subscriptionContractInvites.ready();
     const contractInvites = ContractInvites.find({bizId: params.id}).fetch();
     const contractInvitesExist = !loadingContractInvites && !!contractInvites;
 
+    const contractInvitesOtherBizes = ContractInvites.find({bizId: {$ne: params.id}}).fetch();
+    const contractInvitesOtherBizesExist = !loadingContractInvites && !!contractInvitesOtherBizes;
+
     return {
         biz: bizExists ? biz : {},
         contractInvites: contractInvitesExist ? contractInvites : [],
+        contractInvitesOtherBizes: contractInvitesOtherBizesExist ? contractInvitesOtherBizes : [],
     };
 
 }, BizCabinet);
