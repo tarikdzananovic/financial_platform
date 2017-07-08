@@ -1,0 +1,59 @@
+<xml>
+  <Class ID="Date"/>
+  <Class ID="CurrencyAmount"/>
+  <Class ID="Biz">
+    <ClassAttr attr-name="hasBizSpecialization" attr-value-type="BizSpecializationType"/>
+  </Class>
+
+  <BizSpecializationType>
+    <Class ID="InternetAdvertizingBroker"/>
+  </BizSpecializationType>
+
+  <ContractServiceType>
+    <Class ID="InternetPlatformAdvertising">
+      <enumeration>
+	<ev value="youtube-gl-banners">YouTube geolocalized video banners</ev>
+	<ev value="google-keywords">Google keywords</ev>
+	<ev value="facebook-gl-sidebar">Facebook Sidebar ads, localized</ev>
+      </enumeration>
+    </Class>
+  </ContractServiceType>
+
+  
+  <ContractTemplate name="test">
+    <Text>
+Agreement
+=========
+
+This is an agreement between {Company} and {Agent} named in the text below as Company and Agent.
+
+Company is hiring Agent to run advertising campaing of Company's businesses.
+Exact advertising service type is {AgentServiceType}.
+
+Agent will run advertising campaing between start and end dates.
+Start date: {StartDate} 
+End date: (EndDate) 
+
+Agent compensation will be ${CompensationAmount} paid by Company to Agent at Start date.
+
+Terms are accepted by Company: {CompanyLegalSignature}
+Terms are accepted by Agent: {AgentLegalSignature}
+Date: {ContractAcceptanceDate}
+    </Text>
+    <LegalIDs>
+      <Company type="Biz"/>
+      <Agent type="Biz"
+	     hasBizSpecialization="InternetAdvertizingBroker">
+      </Agent>
+    </LegalIDs>
+    <ContractTerms>
+      <AgentServiceType type="InternetPlatformAdvertizing"/>
+      <StartDate type="Date"/>
+      <EndDate type="Date"/>
+      <CompensationAmount type="CurrencyAmount"/>
+      <CompanyLegalSignature/>
+      <AgentLegalSignature/>
+      <ContractAcceptanceDate type="Date"/>
+    </ContractTerms>
+  </ContractTemplate>
+</xml>
