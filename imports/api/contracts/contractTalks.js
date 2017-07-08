@@ -12,9 +12,6 @@ if(Meteor.isServer) {
 
 Meteor.methods({
     'contractTalks.upsert'(contractTalk) {
-        check(contractTalk.contractInviteId, String);
-        check(contractTalk.initiatorAcceptedTerms, Boolean);
-        check(contractTalk.receiverAcceptedTerms, Boolean);
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -23,12 +20,11 @@ Meteor.methods({
 
         return ContractTalks.update({ _id: contractTalk._id }, {
             $set: {
-                contractInviteId: contractTalk.contractInviteId,
-                initiatorAcceptedTerms: contractTalk.initiatorAcceptedTerms,
-                receiverAcceptedTerms: contractTalk.receiverAcceptedTerms,
-                contractTermsInitiator: contractTalk.contractTermsInitiator,
-                contractTermsReceiver: contractTalk.contractTermsReceiver,
-                contractTermsAccepted: contractTalk.contractTermsAccepted
+                contractInvite: contractTalk.contractInvite,
+                legalIds: contractTalk.legalIds,
+                currentContractTerms: contractTalk.currentContractTerms,
+                messages: contractTalk.messages,
+                contractAcceptance: contractTalk.contractAcceptance,
             }
         }, { upsert: true });
     },
