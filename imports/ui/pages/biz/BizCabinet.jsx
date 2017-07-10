@@ -9,12 +9,110 @@ import { Bert} from 'meteor/themeteorchef:bert';
 
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
+import getTemplateText from '../../../contract/cti/TemplateText'
+
 
 class BSTable extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            ctConfirmShown: false,
+            agreedTermsChecked: false,
+            interestedBizRoleName: undefined
+        };
+
+        this.onClickHandled = this.onClickHandled.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps, nextState) {
+
+        if(nextProps.data) {
+            for (var type in nextProps.data.legalIds) {
+
+                if(!nextProps.data.legalIds[type].value) {
+                    this.setState({
+                        interestedBizRoleName: type
+                    });
+                }
+            }
+        }
+
+
+    }
 
     onClickHandled() {
-        Bert.alert("Contract talk to be implemented!", 'success');
+
+        if(!this.state.ctConfirmShown) {
+            this.setState({
+                ctConfirmShown: true
+            });
+        }
+        else {
+            if(this.state.agreedTermsChecked) {
+
+                var legalIdsOutput = [], item;
+
+                for (var type in this.props.data.legalIds) {
+                    item = {};
+                    if(!this.props.data.legalIds[type].value) {
+                        item.value = this.props.interestedBizLegalId;
+                    } else {
+                        item.value = this.props.data.legalIds[type].value;
+                    }
+                    item.name = type;
+                    legalIdsOutput.push(item);
+                }
+
+                let contractTalk = {
+                    contractInviteId: this.props.data.contractInviteId,
+                    legalIds: legalIdsOutput
+                };
+
+                const confirmation = 'Contract talk added';
+
+                Meteor.call('contractTalks.upsert', contractTalk, function(error, response) {
+                    if (error) {
+                        console.log("Error: " + JSON.stringify(error));
+                        Bert.alert(error.reason, 'danger');
+                    } else {
+                        //TODO:: Route to proper contract talk window, and delete Bert alert below if redundant
+                        Bert.alert(confirmation, 'success');
+                    }
+                });
+
+                Bert.alert("Contract talk to be implemented!", 'success');
+            }
+            else {
+                Bert.alert("You have to agree on storing your ID so we can proceed!", 'danger');
+            }
+
+        }
+    }
+
+    onAgreedTermsChanged(e) {
+        this.setState({
+            agreedTermsChecked: e.target.checked
+        })
+    }
+
+    getTemplateText(templateId, legalIds, contractTerms){
+
+        var objectTemplate = getTemplateText(templateId, legalIds, contractTerms);
+
+        if(objectTemplate) {
+            var contractTerms = objectTemplate.map((item) => {
+                return (
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <p>{item}</p>
+                        </div>
+                    </div>
+                );
+            });
+            return contractTerms;
+        }
     }
 
     render() {
@@ -33,7 +131,7 @@ class BSTable extends React.Component {
 
             for (var type in this.props.data.legalIds) {
                 item = {};
-                item.value = this.props.data.legalIds[type];
+                item.value = this.props.data.legalIds[type].value;
                 item.name = type;
                 legalIdsOutput.push(item);
             }
@@ -51,13 +149,21 @@ class BSTable extends React.Component {
                         <TableHeaderColumn dataField='value'>Value</TableHeaderColumn>
                     </BootstrapTable>
                     <br/>
+                    {this.getTemplateText(this.props.data.templateId, this.props.data.legalIds, this.props.data.contractTerms)}
+                    <br/>
                     <div className="row">
                     {
                         (this.props.canStartContractTalk)
-                            ? <section className="col col-md-4 col-md-offset-8">
+                            ? <section className="col col-md-4 col-md-offset-7">
                                 <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
-                              </section>
-                            : <p></p>
+                            {
+                                (this.state.ctConfirmShown)
+                                ? <label className="checkbox">
+                                    <input type="checkbox" name="contractTalkConfirmation" id="contractTalkConfirmation" onChange={(e) => this.onAgreedTermsChanged(e)}/>
+                                    <i/>I agree to have my legal ID stored as '{this.state.interestedBizRoleName}'
+                                </label> : <p></p>
+                            }
+                              </section> : <p></p>
                     }
                     </div>
 
@@ -100,14 +206,16 @@ class BizCabinet extends Component {
         else return false;
     }
 
-    expandComponent(row, canStartContractTalk) {
+    expandComponent(row, canStartContractTalk, interestedBizLegalId) {
 
         var data = {};
+        data.templateId = row.templateId;
         data.contractTerms = row.contractTerms;
         data.legalIds = row.legalIds;
+        data.contractInviteId = row._id;
 
         return (
-            <BSTable data={ data} canStartContractTalk= { canStartContractTalk}/>
+            <BSTable data={ data} canStartContractTalk= { canStartContractTalk} interestedBizLegalId = {interestedBizLegalId}/>
         );
     }
 
@@ -196,7 +304,7 @@ class BizCabinet extends Component {
                                         pagination={ true }
                                         options={ getOptions(this.state.contractInvitesOtherBizes.length) }
                                         expandableRow={ this.isExpandableRow }
-                                        expandComponent={(e) => this.expandComponent(e, true) }
+                                        expandComponent={(e) => this.expandComponent(e, true, this.state.biz.legalId) }
                         >
                             <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
                             <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
@@ -243,7 +351,7 @@ export default createContainer(({params}) => {
 
     const subscriptionBizes = Meteor.subscribe('bizes');
     const loadingBizes =  !subscriptionBizes.ready();
-    const biz = Bizes.findOne({_id: params.id}, {fields: { name: 1, userId: 1 }});
+    const biz = Bizes.findOne({_id: params.id}, {fields: { name: 1, userId: 1, legalId: 1 }});
     const bizExists = !loadingBizes && !!biz;
 
     const subscriptionContractInvites = Meteor.subscribe('contractInvites');

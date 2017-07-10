@@ -31,6 +31,7 @@ Meteor.methods({
             $set: {
                 bizId: contractInvite.bizId,
                 template: contractInvite.template,
+                templateId: contractInvite.templateId,
                 legalIds: contractInvite.legalIds,
                 contractTerms: contractInvite.contractTerms
             }

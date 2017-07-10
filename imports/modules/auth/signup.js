@@ -16,7 +16,6 @@ const getUserData = () => ({
             first: document.querySelector('[name="firstName"]').value,
             last: document.querySelector('[name="lastName"]').value,
         },
-        gender: document.querySelector('[name="gender"]').value,
         phone: document.querySelector('[name="phone"]').value,
         address: document.querySelector('[name="address"]').value,
     },
@@ -59,9 +58,6 @@ const validate = () => {
             lastname: {
                 required: true
             },
-            gender: {
-                required: true
-            },
             terms: {
                 required: true
             }
@@ -88,9 +84,6 @@ const validate = () => {
             },
             lastname: {
                 required: 'Please select your last name'
-            },
-            gender: {
-                required: 'Please select your gender'
             },
             terms: {
                 required: 'You must agree with Terms and Conditions'

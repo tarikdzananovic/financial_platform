@@ -2,36 +2,16 @@
  * Created by lejlatarik on 7/2/17.
  */
 
+import getTemplateText from './TemplateText'
+
 let templateIndex;
 
-
-var getTemplateInfo = () => {
-    var object = [];
-    object.push("Agreement");
-    object.push("=========");
-    object.push("");
-    object.push("This is an agreement between {CompanyLegalID} and {AgentLegalID} named in the text below as Company and Agent.");
-    object.push("");
-    object.push("    Company is hiring Agent to run advertising campaing of Company's businesses.");
-    object.push("Exact advertising service type is {AgentServiceType}.");
-    object.push("");
-    object.push("Agent will run advertising campaing between start and end dates.");
-    object.push("    Start date: {StartDate}");
-    object.push("End date: (EndDate)");
-    object.push("");
-    object.push("Agent compensation will be ${CompensationAmount} paid by Company to Agent at Start date.");
-    object.push("");
-    object.push("    Terms are accepted by Company: {CompanyLegalSignature}");
-    object.push("Terms are accepted by Agent: {AgentLegalSignature}");
-    object.push("Date: {ContractAcceptanceDate}");
-    return object;
-}
-
-var getObjectType = (type, inputName) => {
+var getObjectType = (type, inputName, parameter) => {
     var object = {};
     object.type= type;
     object.inputName = inputName;
     object.value = undefined;
+    object.parameter = parameter;
     return object;
 }
 
@@ -43,20 +23,20 @@ var getAdvertisingTemplate = () =>
     actors["Company Legal ID"] = "Company";
     actors["Agent Legal ID"] = "Agent";
     var legalIds = {};
-    legalIds["Company Legal ID"] = undefined;
-    legalIds["Agent Legal ID"] = undefined;
+    legalIds["Company Legal ID"] = getObjectType("text", "companyLegalId", "{CompanyLegalID}");
+    legalIds["Agent Legal ID"] = getObjectType("text", "agentLegalId", "{AgentLegalID}");
     var contractTerms = {};
-    contractTerms["Agent Service Type"] = getObjectType("text", "agentServiceType");
-    contractTerms["Start Date"] = getObjectType("date", "startDate");
-    contractTerms["End Date"] = getObjectType("date", "endDate");
-    contractTerms["Compensation Amount"] = getObjectType("number", "amount");
+    contractTerms["Agent Service Type"] = getObjectType("text", "agentServiceType", "{AgentServiceType}");
+    contractTerms["Start Date"] = getObjectType("date", "startDate", "{StartDate}");
+    contractTerms["End Date"] = getObjectType("date", "endDate", "{EndDate}");
+    contractTerms["Compensation Amount"] = getObjectType("number", "amount", "{CompensationAmount}");
     template.actors = actors;
     template.legalIds = legalIds;
     template.contractTerms = contractTerms;
 
     var objectTemplate = {};
     objectTemplate.template = template;
-    objectTemplate.text = getTemplateInfo();
+    objectTemplate.text = getTemplateText(templateIndex);
     return objectTemplate;
 }
 
@@ -68,7 +48,7 @@ var getTemplate = () => {
     }
 };
 
-export default function getContractInviteTemplate(value) {
-    templateIndex = value;
+export default function getContractInviteTemplate(templateId) {
+    templateIndex = templateId;
     return getTemplate()
 }

@@ -100,17 +100,6 @@ export default class Signup extends React.Component {
                                                     </section>
                                                 </div>
 
-                                                <div className="row">
-                                                    <section className="col col-6">
-                                                        <label className="select">
-                                                            <select name="gender" defaultValue={"0"}>
-                                                                <option value="0" disabled={true}>Gender</option>
-                                                                <option value="1">Male</option>
-                                                                <option value="2">Female</option>
-                                                            </select> <i/> </label>
-                                                    </section>
-                                                </div>
-
                                                 <section>
                                                     <label className="checkbox">
                                                         <input type="checkbox" name="subscription" id="subscription"/>

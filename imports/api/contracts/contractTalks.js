@@ -20,7 +20,7 @@ Meteor.methods({
 
         return ContractTalks.update({ _id: contractTalk._id }, {
             $set: {
-                contractInvite: contractTalk.contractInvite,
+                contractInviteId: contractTalk.contractInviteId,
                 legalIds: contractTalk.legalIds,
                 currentContractTerms: contractTalk.currentContractTerms,
                 messages: contractTalk.messages,

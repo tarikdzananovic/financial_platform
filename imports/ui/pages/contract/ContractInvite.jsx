@@ -73,6 +73,7 @@ class ContractInvite extends Component {
         this.state = {
             templateVisible : false,
             template : template,
+            templateId: "",
             templateText: [],
             currentStep : 1,
             btnNextText : 'Next',
@@ -124,6 +125,7 @@ class ContractInvite extends Component {
         var templateVisible = objectTemplate.template ? true : false;
         this.setState({
             template : objectTemplate.template,
+            templateId: e.target.value,
             templateVisible : templateVisible,
             templateText : objectTemplate.text
         });
@@ -131,7 +133,7 @@ class ContractInvite extends Component {
     onRoleChange(e) {
         let template = this.state.template;
         template.role = e.target.value;
-        template.legalIds[template.role] = this.state.biz.legalId;
+        template.legalIds[template.role].value = this.state.biz.legalId;
         this.setState({
             template : template,
         });
@@ -150,6 +152,7 @@ class ContractInvite extends Component {
         let contractInvite = {
             bizId: this.props.params.id,
             template: this.state.template.template,
+            templateId: this.state.templateId,
             legalIds: this.state.template.legalIds,
             contractTerms: this.state.template.contractTerms
         };
