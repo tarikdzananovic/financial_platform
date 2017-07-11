@@ -3,3 +3,5 @@ import './accounts/profile';
 import './browser-policy';
 import './fixtures';
 import './api';
+
+//process.env.MAIL_URL = ""
