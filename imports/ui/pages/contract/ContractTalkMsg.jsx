@@ -109,6 +109,8 @@ export default class ContractTalkMsg extends Component {
         };
 
         this.handleNewTermsClick = this.handleNewTermsClick.bind(this);
+        this.handleAcceptTermsClick = this.handleAcceptTermsClick.bind(this);
+        this.handleDeclineTermsClick = this.handleDeclineTermsClick.bind(this);
     }
 
     handleNewTermsClick(){
@@ -127,7 +129,47 @@ export default class ContractTalkMsg extends Component {
         messages.push(message);
         this.setState({
             messages : messages,
-            newContractTermsRequest : {} //TODO:: get Contract Terms for last approved one
+            newContractTermsRequest : {} //TODO:: Call API to save message and get Contract Terms for last approved one
+        });
+    }
+
+    handleAcceptTermsClick(){
+        //TODO: update the message with my User Id and Name
+        var myUser = {};
+        myUser.name = 'Tarik';
+        myUser.id = undefined;
+
+        let message = this.state.newContractTermsRequest;
+        message.accepted = true;
+        message.sender = myUser;
+        message.date = Date.now();
+        message.type = 'ACCEPTANCE';
+
+        let messages = this.state.messages;
+        messages.push(message);
+        this.setState({
+            messages : messages,
+            newContractTermsRequest : {} //TODO:: Call API to save message and get Contract Terms for last approved one
+        });
+    }
+
+    handleDeclineTermsClick(){
+        //TODO: update the message with my User Id and Name
+        var myUser = {};
+        myUser.name = 'Tarik';
+        myUser.id = undefined;
+
+        let message = this.state.newContractTermsRequest;
+        message.accepted = false;
+        message.sender = myUser;
+        message.date = Date.now();
+        message.type = 'ACCEPTANCE';
+
+        let messages = this.state.messages;
+        messages.push(message);
+        this.setState({
+            messages : messages,
+            newContractTermsRequest : {} //TODO:: Call APi to save message and get Contract Terms for last approved one
         });
     }
 
@@ -286,13 +328,13 @@ export default class ContractTalkMsg extends Component {
                 <div className="chat-footer">
                     <div className="textarea-div">
                         <div className="typearea">
-                            <textarea placeholder="Write message content..." className="custom-scroll"></textarea>
+                            <textarea placeholder="Write message content..." className="custom-scroll" onChange={(e) => this.onCommentRequestUpdate(e)}></textarea>
                         </div>
                     </div>
                     <div className="textarea-controls">
                         <div className="textarea-controls">
-                            <button className="btn btn-sm btn-primary pull-right button-group">Accept</button>
-                            <button className="btn btn-sm btn-primary pull-right button-group">Decline</button>
+                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleAcceptTermsClick()}>Accept</button>
+                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleDeclineTermsClick()}>Decline</button>
                         </div>
                     </div>
 
