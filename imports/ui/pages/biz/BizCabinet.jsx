@@ -225,13 +225,13 @@ class BizCabinet extends Component {
             const options = {
                 page: 1,
                 sizePerPageList: [ {
-                    text: '5', value: 5
-                }, {
                     text: '10', value: 10
+                }, {
+                    text: '20', value: 20
                 }, {
                     text: 'All', value: data
                 } ], // you can change the dropdown list for size per page
-                sizePerPage: 5,
+                sizePerPage: 10,
                 pageStartIndex: 1, // where to start counting the pages
                 paginationSize: 3,  // the pagination bar size.
                 prePage: 'Prev', // Previous page button text

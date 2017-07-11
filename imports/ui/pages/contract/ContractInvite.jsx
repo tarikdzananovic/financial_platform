@@ -273,16 +273,10 @@ class ContractInvite extends Component {
             if(key){
                 var value = this.state.template.legalIds[this.state.template.role];
                 return(
-                    <div className="row">
-                        <div className="col-sm-2">
-                            <label>{key}</label>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="form-group">
-                                <div className="input-group">
-                                    <input type="text" name='initiatorId' value={this.state.biz.legalId} placeholder={key} disabled onChange={(e) => this.onLegalIdChange(e, key)}/>
-                                </div>
-                            </div>
+                    <div className="form-group col-md-12">
+                        <label className="col-md-3 control-label">{key}</label>
+                        <div className="col-md-5">
+                            <input className="form-control" type="text" name='initiatorId' value={this.state.biz.legalId} placeholder={key} disabled onChange={(e) => this.onLegalIdChange(e, key)}/>
                         </div>
                     </div>
                 );
@@ -295,16 +289,10 @@ class ContractInvite extends Component {
             let object = this.state.template.contractTerms;
             var contractTerms = Object.keys(object).map(function(key) {
                 return (
-                    <div className="row" key={key}>
-                        <div className="col-sm-2">
-                            <label>{key}</label>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="form-group">
-                                <div className="input-group">
-                                    <input id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
-                                </div>
-                            </div>
+                    <div className="form-group col-md-12">
+                        <label className="col-md-3 control-label">{key}</label>
+                        <div className="col-md-5">
+                            <input className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
                         </div>
                     </div>
                 );
@@ -368,18 +356,16 @@ class ContractInvite extends Component {
 
                                     <br/>
                                     <form noValidate="novalidate" ref={ form => (this.step1Form = form) }>
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group">
-                                                    <div className="input-group">
-                                                        <select name="template" defaultValue={"NONE"} onChange={(e) => this.onTemplateSelected(e)}>
-                                                            <option value="NONE" disabled={true}>Contract Template</option>
-                                                            <option value="ADVERTISING_TEMPLATE">Advertising Template</option>
-                                                        </select>
-                                                    </div>
+                                        <fieldset>
+                                            <div className="form-group col-md-12">
+                                                <div className="col-md-6">
+                                                    <select className="form-control" name="template" defaultValue={"NONE"} onChange={(e) => this.onTemplateSelected(e)}>
+                                                        <option value="NONE" disabled={true}>Contract Template</option>
+                                                        <option value="ADVERTISING_TEMPLATE">Advertising Template</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </fieldset>
                                     </form>
                                     {
                                         this.state.templateVisible ? <div><ContractTemplate template={this.state.template}/><br/></div> : null
@@ -395,27 +381,22 @@ class ContractInvite extends Component {
                                     <h4><strong>Step 2 </strong> - Enter CTI Information</h4>
                                     <br/>
                                     <form noValidate="novalidate" ref={ form => (this.step2Form = form) }>
-                                        <div className="row">
-                                            <div className="col-sm-2">
-                                                <label>Select Biz Role</label>
-                                            </div>
-                                            <div className="col-sm-6">
-                                                <div className="form-group">
-                                                    <div className="input-group">
-                                                        <select name="actor" defaultValue={"NONE"} onChange={(e) => this.onRoleChange(e)}>
-                                                            <option value="NONE" disabled={true}>Select</option>
-                                                            {this.getActorList()}
-                                                        </select>
-                                                    </div>
+                                        <fieldset>
+                                            <div className="form-group col-md-12">
+                                                <label className="col-md-3 control-label">Select Biz Role</label>
+                                                <div className="col-md-5">
+                                                    <select className="form-control" name="actor" defaultValue={"NONE"} onChange={(e) => this.onRoleChange(e)}>
+                                                        <option value="NONE" disabled={true}>Select</option>
+                                                        {this.getActorList()}
+                                                    </select>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                            {this.getLegalIdInput()}
 
-                                        {this.getLegalIdInput()}
+                                            {this.getContractTermsInputs()}
 
-                                        {this.getContractTermsInputs()}
-
+                                        </fieldset>
                                     </form>
                                 </div>
 
