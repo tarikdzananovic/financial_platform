@@ -191,25 +191,39 @@ class BizCabinet extends Component {
             contractInvitesOtherBizes: [],
             contractTalks: []
         };
+
+        this.LinkFormatter = this.LinkFormatter.bind(this);
+        this.setStateForProps = this.setStateForProps.bind(this);
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
-
+    setStateForProps(props){
         let contractTalksShortened = [];
 
-        nextProps.contractTalks.map((contractTalk) => {
-            let counterBizName = nextProps.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
+        props.contractTalks.map((contractTalk) => {
+            let counterBizName = props.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
             contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName});
         });
 
         this.setState({
-            biz: nextProps.biz,
-            publicCabinet : nextProps.biz.userId !== Meteor.user()._id,
-            contractInvites: nextProps.contractInvites,
-            contractInvitesOtherBizes: nextProps.contractInvitesOtherBizes,
+            biz: props.biz,
+            publicCabinet : props.biz.userId !== Meteor.user()._id,
+            contractInvites: props.contractInvites,
+            contractInvitesOtherBizes: props.contractInvitesOtherBizes,
             contractTalks: contractTalksShortened
         });
     }
+
+    componentDidMount() {
+
+        this.setStateForProps(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        this.setStateForProps(nextProps);
+    }
+
+
 
     isExpandableRow(row) {
         if(row._id)
@@ -224,6 +238,15 @@ class BizCabinet extends Component {
 
         return (
             <BSTable data={ data} canStartContractTalk= { canStartContractTalk}/>
+        );
+    }
+
+    LinkFormatter(value, row, index){
+
+        let path = "/#/biz/" + this.state.biz._id + "/contractTalk/" + row._id + "/";
+
+        return (
+            <a href={path}>{value}</a>
         );
     }
 
@@ -342,7 +365,7 @@ class BizCabinet extends Component {
                                                 pagination={ true }
                                                 options={ getOptions(this.state.contractTalks.length) }
                                 >
-                                    <TableHeaderColumn dataField='_id' isKey={ true }>CT ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatter} isKey={ true }>CT ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
                                 </BootstrapTable>

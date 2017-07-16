@@ -129,21 +129,31 @@ class ContractTalk extends Component {
         this.handleShowAcceptance = this.handleShowAcceptance.bind(this);
         this.handleShowNegotiate = this.handleShowNegotiate.bind(this);
         this.handleBackToDefaultClick = this.handleBackToDefaultClick.bind(this);
+        this.setStateForProps = this.setStateForProps.bind(this);
+    }
+
+    componentDidMount() {
+
+        this.setStateForProps(this.props);
+    }
+
+    setStateForProps(props) {
+        if (props.contractTalk && props.contractTermsOriginal) {
+            this.setState({
+                messages: props.contractTalk.messages ? props.contractTalk.messages : [],
+                originalContractTerms : props.contractTermsOriginal,
+                updatedContractTerms : props.contractTalk.contractTerms ? props.contractTalk.contractTerms : CloneObject(props.contractTermsOriginal),
+                templateId: props.ctiTemplateId,
+                legalIds: props.contractTalk.legalIds,
+                myBiz: props.myBiz,
+                ctiOwnersBiz: props.ctiOwnersBiz,
+                talkId: props.contractTalk._id
+            });
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.contractTalk && nextProps.contractTermsOriginal) {
-            this.setState({
-                messages: nextProps.contractTalk.messages ? nextProps.contractTalk.messages : [],
-                originalContractTerms : nextProps.contractTermsOriginal,
-                updatedContractTerms : nextProps.contractTalk.contractTerms ? nextProps.contractTalk.contractTerms : CloneObject(nextProps.contractTermsOriginal),
-                templateId: nextProps.ctiTemplateId,
-                legalIds: nextProps.contractTalk.legalIds,
-                myBiz: nextProps.myBiz,
-                ctiOwnersBiz: nextProps.ctiOwnersBiz,
-                talkId: nextProps.contractTalk._id
-            });
-        }
+        this.setStateForProps(nextProps);
     }
 
     handleNewTermsClick(){
