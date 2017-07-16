@@ -8,28 +8,40 @@ import { hashHistory} from 'react-router';
 
 export default class BizCabinetApi {
 
-    static insertContractTalk(ctiData, myBizId, myBizLegalId) {
+    static insertContractTalk(ctiData, myBiz) {
 
         let legalIds = ctiData.legalIds;
 
         for (var type in ctiData.legalIds) {
             if(!ctiData.legalIds[type].value) {
-                legalIds[type].value = myBizLegalId;
+                legalIds[type].value = myBiz.legalId;
             } else {
                 legalIds[type].value = ctiData.legalIds[type].value;
             }
         }
 
+        let contractInvite = {
+            _id: ctiData._id,
+            biz: ctiData.biz,
+            bizId: ctiData.bizId,
+            template: ctiData.template,
+            templateId: ctiData.templateId,
+            legalIds: ctiData.legalIds,
+            contractTerms: ctiData.contractTerms
+        };
+
         let contractTalk = {
             ctiOwnerBizId: ctiData.bizId,
-            ctNegotiatorBizId: myBizId,
-            contractInviteId: ctiData.contractInviteId,
+            ctNegotiatorBizId: myBiz._id,
+            ctNegotiatorBiz: myBiz,
+            contractInvite: contractInvite,
+            contractInviteId: ctiData._id,
             legalIds: legalIds,
             currentContractTerms: ctiData.contractTerms
         };
 
         const confirmation = 'Contract talk added';
-        let bizId = myBizId;
+        let bizId = myBiz._id;
 
         Meteor.call('contractTalks.insert', contractTalk, function(error, response) {
             if (error) {

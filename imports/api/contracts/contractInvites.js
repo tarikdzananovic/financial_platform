@@ -12,15 +12,6 @@ if(Meteor.isServer) {
 
 Meteor.methods({
     'contractInvites.upsert'(contractInvite) {
-        check(contractInvite.bizId, String);
-        check(contractInvite.template, String);
-        /*check(contractInvite.legalIDs, String);
-        check(contractInvite.contractTerms, {
-            agentServiceType: String,
-            startDate: Date,
-            endDate: Date,
-            compensationAmount: Number
-        });*/
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -29,7 +20,8 @@ Meteor.methods({
 
         return ContractInvites.update({ _id: contractInvite._id }, {
             $set: {
-                bizId: contractInvite.bizId,
+                bizId: contractInvite.biz._id,
+                biz: contractInvite.biz,
                 template: contractInvite.template,
                 templateId: contractInvite.templateId,
                 legalIds: contractInvite.legalIds,

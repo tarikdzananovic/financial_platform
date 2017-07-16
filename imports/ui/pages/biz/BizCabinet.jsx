@@ -26,6 +26,7 @@ class BSTable extends React.Component {
 
         this.onClickHandled = this.onClickHandled.bind(this);
         this.onGoToContractTalk = this.onGoToContractTalk.bind(this);
+
     }
 
     componentWillReceiveProps(nextProps, nextState) {
@@ -44,7 +45,7 @@ class BSTable extends React.Component {
     }
 
     onGoToContractTalk() {
-        hashHistory.push('/biz/' + this.props.data.myBizId + '/contractTalk/' + this.props.data.contractTalk._id);
+        hashHistory.push('/biz/' + this.props.data.interestedBiz._id + '/contractTalk/' + this.props.data.contractTalk._id);
     }
 
     onClickHandled() {
@@ -56,7 +57,7 @@ class BSTable extends React.Component {
         }
         else {
             if(this.state.agreedTermsChecked) {
-                BizCabinetApi.insertContractTalk(this.props.data, this.props.bizId, this.props.interestedBizLegalId);
+                BizCabinetApi.insertContractTalk(this.props.data, this.props.data.interestedBiz);
             }
             else {
                 Bert.alert("You have to agree on storing your ID so we can proceed!", 'danger');
@@ -188,16 +189,25 @@ class BizCabinet extends Component {
             publicCabinet : false,
             contractInvites : [],
             contractInvitesOtherBizes: [],
+            contractTalks: []
         };
     }
 
     componentWillReceiveProps(nextProps, nextState) {
+
+        let contractTalksShortened = [];
+
+        nextProps.contractTalks.map((contractTalk) => {
+            let counterBizName = nextProps.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
+            contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName});
+        });
 
         this.setState({
             biz: nextProps.biz,
             publicCabinet : nextProps.biz.userId !== Meteor.user()._id,
             contractInvites: nextProps.contractInvites,
             contractInvitesOtherBizes: nextProps.contractInvitesOtherBizes,
+            contractTalks: contractTalksShortened
         });
     }
 
@@ -207,19 +217,13 @@ class BizCabinet extends Component {
         else return false;
     }
 
-    expandComponent(row, canStartContractTalk, interestedBizLegalId, bizId) {
+    expandComponent(row, canStartContractTalk, interestedBiz) {
 
-        var data = {};
-        data.templateId = row.templateId;
-        data.contractTerms = row.contractTerms;
-        data.legalIds = row.legalIds;
-        data.contractInviteId = row._id;
-        data.bizId = row.bizId;
-        data.contractTalk = row.contractTalk;
-        data.myBizId = bizId;
+        var data = row;
+        data.interestedBiz = interestedBiz;
 
         return (
-            <BSTable data={ data} canStartContractTalk= { canStartContractTalk} interestedBizLegalId = {interestedBizLegalId} bizId = {bizId}/>
+            <BSTable data={ data} canStartContractTalk= { canStartContractTalk}/>
         );
     }
 
@@ -324,7 +328,7 @@ class BizCabinet extends Component {
                                                 pagination={ true }
                                                 options={ getOptions(this.state.contractInvitesOtherBizes.length) }
                                                 expandableRow={ this.isExpandableRow }
-                                                expandComponent={(e) => this.expandComponent(e, true, this.state.biz.legalId) }
+                                                expandComponent={(e) => this.expandComponent(e, true, this.state.biz) }
                                 >
                                     <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
@@ -333,6 +337,16 @@ class BizCabinet extends Component {
 
                         </div>
                         <div className="tab-pane fade" id="s3">
+                            <div>
+                                <BootstrapTable data={ this.state.contractTalks }
+                                                pagination={ true }
+                                                options={ getOptions(this.state.contractTalks.length) }
+                                >
+                                    <TableHeaderColumn dataField='_id' isKey={ true }>CT ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
+                                </BootstrapTable>
+                            </div>
 
                         </div>
                     </div>
@@ -370,6 +384,7 @@ BizCabinet.propTypes = {
     biz: PropTypes.object,
     contractInvites: PropTypes.array,
     contractInvitesOtherBizes: PropTypes.array,
+    contractTalks: PropTypes.array
 };
 
 export default createContainer(({params}) => {
@@ -387,10 +402,12 @@ export default createContainer(({params}) => {
     const contractInvitesOtherBizes = ContractInvites.find({bizId: {$ne: params.id}}).fetch();
     const contractInvitesOtherBizesExist = !loadingContractInvites && !!contractInvitesOtherBizes;
 
-    if(contractInvitesOtherBizes && contractInvitesOtherBizes.length > 0) {
+    const subscriptionContractTalks = Meteor.subscribe('contractTalks');
+    const loadingContractTalks =  !subscriptionContractTalks.ready();
+    const contractTalks = ContractTalks.find({ $or: [{ctNegotiatorBizId: params.id}, {ctiOwnerBizId: params.id}]}, { fields: { messages: 0} }).fetch();
+    const contractTalksExist = !loadingContractTalks && !!contractTalks;
 
-        const subscriptionContractTalks = Meteor.subscribe('contractTalks');
-        const loadingContractTalks =  !subscriptionContractTalks.ready();
+    if(contractInvitesOtherBizes && contractInvitesOtherBizes.length > 0) {
 
         for(var i = 0; i < contractInvitesOtherBizes.length; i++){
             let ctiId = contractInvitesOtherBizes[i]._id;
@@ -404,6 +421,7 @@ export default createContainer(({params}) => {
         biz: bizExists ? biz : {},
         contractInvites: contractInvitesExist ? contractInvites : [],
         contractInvitesOtherBizes: contractInvitesOtherBizesExist ? contractInvitesOtherBizes : [],
+        contractTalks: contractTalksExist ? contractTalks : [],
     };
 
 }, BizCabinet);

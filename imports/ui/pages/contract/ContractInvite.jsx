@@ -150,7 +150,7 @@ class ContractInvite extends Component {
     _onWizardComplete(data){
 
         let contractInvite = {
-            bizId: this.props.params.id,
+            biz: this.state.biz,
             template: this.state.template.template,
             templateId: this.state.templateId,
             legalIds: this.state.template.legalIds,
@@ -165,7 +165,7 @@ class ContractInvite extends Component {
                 Bert.alert(error.reason, 'danger');
             } else {
                 Bert.alert(confirmation, 'success');
-                hashHistory.push('/biz/' + contractInvite.bizId + '/cabinet');
+                hashHistory.push('/biz/' + contractInvite.biz._id + '/cabinet');
             }
         });
     }
@@ -446,7 +446,7 @@ export default createContainer(({params}) => {
 
     const subscription = Meteor.subscribe('bizes');
     const loading =  !subscription.ready();
-    const biz = Bizes.findOne({_id : params.id}, { fields: { legalId: 1} });
+    const biz = Bizes.findOne({_id : params.id});
     const bizExists = !loading && biz;
     return {
         biz: bizExists ? biz : {},
