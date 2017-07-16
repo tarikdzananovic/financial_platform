@@ -5,7 +5,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { hashHistory} from 'react-router';
 
 import Wizard from '../../components/forms/wizards/Wizard';
-import getContractInviteTemplate from '../../../contract/cti/ContractTemplate'
+import getContractInviteTemplate from '../../../modules/contract/cti/ContractTemplate'
 import { Bizes } from '../../../api/bizes.js';
 
 import Iframe from 'react-iframe'

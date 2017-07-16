@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'
 import { Meteor} from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Bert} from 'meteor/themeteorchef:bert';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { hashHistory} from 'react-router';
+
 import { Bizes } from '../../../api/bizes.js';
 import { ContractInvites } from '../../../api/contracts/contractInvites.js';
-
-import { Bert} from 'meteor/themeteorchef:bert';
-
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
-import getTemplateText from '../../../contract/cti/TemplateText'
+import { ContractTalks } from '../../../api/contracts/contractTalks.js';
+import getTemplateText from '../../../modules/contract/cti/TemplateText'
+import BizCabinetApi from '../../../modules/biz/BizCabinetApi';
 
 
 class BSTable extends React.Component {
@@ -20,15 +21,17 @@ class BSTable extends React.Component {
         this.state = {
             ctConfirmShown: false,
             agreedTermsChecked: false,
-            interestedBizRoleName: undefined
+            interestedBizRoleName: undefined,
         };
 
         this.onClickHandled = this.onClickHandled.bind(this);
+        this.onGoToContractTalk = this.onGoToContractTalk.bind(this);
     }
 
     componentWillReceiveProps(nextProps, nextState) {
 
         if(nextProps.data) {
+
             for (var type in nextProps.data.legalIds) {
 
                 if(!nextProps.data.legalIds[type].value) {
@@ -38,8 +41,10 @@ class BSTable extends React.Component {
                 }
             }
         }
+    }
 
-
+    onGoToContractTalk() {
+        hashHistory.push('/biz/' + this.props.data.myBizId + '/contractTalk/' + this.props.data.contractTalk._id);
     }
 
     onClickHandled() {
@@ -51,38 +56,7 @@ class BSTable extends React.Component {
         }
         else {
             if(this.state.agreedTermsChecked) {
-
-                var legalIdsOutput = [], item;
-
-                for (var type in this.props.data.legalIds) {
-                    item = {};
-                    if(!this.props.data.legalIds[type].value) {
-                        item.value = this.props.interestedBizLegalId;
-                    } else {
-                        item.value = this.props.data.legalIds[type].value;
-                    }
-                    item.name = type;
-                    legalIdsOutput.push(item);
-                }
-
-                let contractTalk = {
-                    contractInviteId: this.props.data.contractInviteId,
-                    legalIds: legalIdsOutput
-                };
-
-                const confirmation = 'Contract talk added';
-
-                Meteor.call('contractTalks.upsert', contractTalk, function(error, response) {
-                    if (error) {
-                        console.log("Error: " + JSON.stringify(error));
-                        Bert.alert(error.reason, 'danger');
-                    } else {
-                        //TODO:: Route to proper contract talk window, and delete Bert alert below if redundant
-                        Bert.alert(confirmation, 'success');
-                    }
-                });
-
-                Bert.alert("Contract talk to be implemented!", 'success');
+                BizCabinetApi.insertContractTalk(this.props.data, this.props.bizId, this.props.interestedBizLegalId);
             }
             else {
                 Bert.alert("You have to agree on storing your ID so we can proceed!", 'danger');
@@ -112,6 +86,43 @@ class BSTable extends React.Component {
                 );
             });
             return contractTerms;
+        }
+    }
+
+    getContractInviteFooter(){
+
+        if(this.props.canStartContractTalk) {
+            if(this.props.data.contractTalk) {
+                return (
+                    <div>
+                        <section className="col col-md-4 col-md-offset-7">
+                            <button className="btn btn-block btn-primary" onClick={this.onGoToContractTalk}>Go to Contract Talk</button>
+                        </section>
+                    </div>
+                );
+            }
+            else {
+                return (
+                  <div>
+                      <section className="col col-md-4 col-md-offset-7">
+                          <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
+                          {
+                              (this.state.ctConfirmShown)
+                                  ? <label className="checkbox">
+                                  <input type="checkbox" name="contractTalkConfirmation" id="contractTalkConfirmation" onChange={(e) => this.onAgreedTermsChanged(e)}/>
+                                  <i/>I agree to have my legal ID stored as '{this.state.interestedBizRoleName}'
+                              </label> : <p></p>
+                          }
+                      </section>
+
+                  </div>
+                );
+            }
+        }
+        else {
+            return(
+              <p></p>
+            );
         }
     }
 
@@ -153,17 +164,7 @@ class BSTable extends React.Component {
                     <br/>
                     <div className="row">
                     {
-                        (this.props.canStartContractTalk)
-                            ? <section className="col col-md-4 col-md-offset-7">
-                                <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
-                            {
-                                (this.state.ctConfirmShown)
-                                ? <label className="checkbox">
-                                    <input type="checkbox" name="contractTalkConfirmation" id="contractTalkConfirmation" onChange={(e) => this.onAgreedTermsChanged(e)}/>
-                                    <i/>I agree to have my legal ID stored as '{this.state.interestedBizRoleName}'
-                                </label> : <p></p>
-                            }
-                              </section> : <p></p>
+                        this.getContractInviteFooter()
                     }
                     </div>
 
@@ -186,7 +187,7 @@ class BizCabinet extends Component {
             ctiLocation: window.location.hash.replace('cabinet', 'contractInvite'),
             publicCabinet : false,
             contractInvites : [],
-            contractInvitesOtherBizes: []
+            contractInvitesOtherBizes: [],
         };
     }
 
@@ -196,7 +197,7 @@ class BizCabinet extends Component {
             biz: nextProps.biz,
             publicCabinet : nextProps.biz.userId !== Meteor.user()._id,
             contractInvites: nextProps.contractInvites,
-            contractInvitesOtherBizes: nextProps.contractInvitesOtherBizes
+            contractInvitesOtherBizes: nextProps.contractInvitesOtherBizes,
         });
     }
 
@@ -206,16 +207,19 @@ class BizCabinet extends Component {
         else return false;
     }
 
-    expandComponent(row, canStartContractTalk, interestedBizLegalId) {
+    expandComponent(row, canStartContractTalk, interestedBizLegalId, bizId) {
 
         var data = {};
         data.templateId = row.templateId;
         data.contractTerms = row.contractTerms;
         data.legalIds = row.legalIds;
         data.contractInviteId = row._id;
+        data.bizId = row.bizId;
+        data.contractTalk = row.contractTalk;
+        data.myBizId = bizId;
 
         return (
-            <BSTable data={ data} canStartContractTalk= { canStartContractTalk} interestedBizLegalId = {interestedBizLegalId}/>
+            <BSTable data={ data} canStartContractTalk= { canStartContractTalk} interestedBizLegalId = {interestedBizLegalId} bizId = {bizId}/>
         );
     }
 
@@ -272,6 +276,8 @@ class BizCabinet extends Component {
                             BIZ {this.state.biz.name} Cabinet
                         </span>
                     </header>
+
+
 
                     <div className="well">
                         <ul className="demo-btns">
@@ -380,6 +386,19 @@ export default createContainer(({params}) => {
 
     const contractInvitesOtherBizes = ContractInvites.find({bizId: {$ne: params.id}}).fetch();
     const contractInvitesOtherBizesExist = !loadingContractInvites && !!contractInvitesOtherBizes;
+
+    if(contractInvitesOtherBizes && contractInvitesOtherBizes.length > 0) {
+
+        const subscriptionContractTalks = Meteor.subscribe('contractTalks');
+        const loadingContractTalks =  !subscriptionContractTalks.ready();
+
+        for(var i = 0; i < contractInvitesOtherBizes.length; i++){
+            let ctiId = contractInvitesOtherBizes[i]._id;
+
+            const contractTalk = ContractTalks.findOne({ctNegotiatorBizId: params.id, contractInviteId: ctiId}, { fields: { _id: 1} });
+            contractInvitesOtherBizes[i].contractTalk = contractTalk;
+        }
+    }
 
     return {
         biz: bizExists ? biz : {},
