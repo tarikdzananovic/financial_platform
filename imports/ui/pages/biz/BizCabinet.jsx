@@ -285,31 +285,50 @@ class BizCabinet extends Component {
                             </li>
                         </ul>
                     </div>
-                    <div className="well">
-                        <p>My CTIs</p>
-                        <BootstrapTable data={ this.state.contractInvites }
-                                        pagination={ true }
-                                        options={ getOptions(this.state.contractInvites.length) }
-                                        expandableRow={ this.isExpandableRow }
-                                        expandComponent={ (e) => this.expandComponent(e, false)}
-                        >
-                            <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
-                            <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
-                        </BootstrapTable>
 
-                        <br />
-                        <br />
-                        <p>Other CTIs</p>
-                        <BootstrapTable data={ this.state.contractInvitesOtherBizes }
-                                        pagination={ true }
-                                        options={ getOptions(this.state.contractInvitesOtherBizes.length) }
-                                        expandableRow={ this.isExpandableRow }
-                                        expandComponent={(e) => this.expandComponent(e, true, this.state.biz.legalId) }
-                        >
-                            <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
-                            <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
-                        </BootstrapTable>
+                    <ul id="myTab1" className="nav nav-tabs bordered">
+                        <li className="active">
+                            <a href="#s1" data-toggle="tab">My Contract Invites</a>
+                        </li>
+                        <li>
+                            <a href="#s2" data-toggle="tab">Other Contract Invites</a>
+                        </li>
+                        <li>
+                            <a href="#s3" data-toggle="tab">My Contract Talks</a>
+                        </li>
+                    </ul>
 
+                    <div id="myTabContent1" className="tab-content padding-10">
+                        <div className="tab-pane fade in active" id="s1">
+                            <div>
+                                <BootstrapTable data={ this.state.contractInvites }
+                                                pagination={ true }
+                                                options={ getOptions(this.state.contractInvites.length) }
+                                                expandableRow={ this.isExpandableRow }
+                                                expandComponent={ (e) => this.expandComponent(e, false)}
+                                >
+                                    <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                </BootstrapTable>
+                            </div>
+                        </div>
+                        <div className="tab-pane fade" id="s2">
+                            <div>
+                                <BootstrapTable data={ this.state.contractInvitesOtherBizes }
+                                                pagination={ true }
+                                                options={ getOptions(this.state.contractInvitesOtherBizes.length) }
+                                                expandableRow={ this.isExpandableRow }
+                                                expandComponent={(e) => this.expandComponent(e, true, this.state.biz.legalId) }
+                                >
+                                    <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                </BootstrapTable>
+                            </div>
+
+                        </div>
+                        <div className="tab-pane fade" id="s3">
+
+                        </div>
                     </div>
                 </div>
             )
