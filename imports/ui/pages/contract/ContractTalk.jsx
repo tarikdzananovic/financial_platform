@@ -5,8 +5,10 @@ import { PropTypes } from 'prop-types'
 
 import { ContractTalks } from '../../../api/contracts/contractTalks.js';
 import { ContractInvites } from '../../../api/contracts/contractInvites.js';
-import getTemplateText from '../../../contract/cti/TemplateText'
+import { Bizes } from '../../../api/bizes.js'
+import getTemplateText from '../../../modules/contract/cti/TemplateText'
 import CloneObject from  '../../../utils/object/CloneObj'
+import ContractTalkApi from '../../../modules/contract/ContractTalkApi';
 
 class Message extends Component{
     constructor(props){
@@ -115,7 +117,10 @@ class ContractTalk extends Component {
             updatedContractTerms : this.props.contractTalk.contractTerms ? this.props.contractTalk.contractTerms : CloneObject(this.props.contractTermsOriginal),
             templateId : "",
             legalIds: [],
-            firstMessageMode : undefined
+            firstMessageMode : undefined,
+            myBiz: {},
+            ctiOwnersBiz: {},
+            talkId: undefined
         };
 
         this.handleNewTermsClick = this.handleNewTermsClick.bind(this);
@@ -134,15 +139,17 @@ class ContractTalk extends Component {
                 updatedContractTerms : nextProps.contractTalk.contractTerms ? nextProps.contractTalk.contractTerms : CloneObject(nextProps.contractTermsOriginal),
                 templateId: nextProps.ctiTemplateId,
                 legalIds: nextProps.contractTalk.legalIds,
+                myBiz: nextProps.myBiz,
+                ctiOwnersBiz: nextProps.ctiOwnersBiz,
+                talkId: nextProps.contractTalk._id
             });
         }
     }
 
     handleNewTermsClick(){
-        //TODO: update the message with my User Id and Name
         var myUser = {};
-        myUser.name = 'Tarik';
-        myUser.id = undefined;
+        myUser.name = this.state.myBiz.name;
+        myUser.id = this.state.myBiz._id;
 
         let message = this.state.newContractTermsRequest;
         message.accepted = undefined;
@@ -154,15 +161,15 @@ class ContractTalk extends Component {
         messages.push(message);
         this.setState({
             messages : messages,
-            newContractTermsRequest : {} //TODO:: Call API to save message and get Contract Terms for last approved one
+            newContractTermsRequest : {}
         });
+        ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
     }
 
     handleAcceptTermsClick(){
-        //TODO: update the message with my User Id and Name
         var myUser = {};
-        myUser.name = 'Tarik';
-        myUser.id = undefined;
+        myUser.name = this.state.myBiz.name;
+        myUser.id = this.state.myBiz._id;
 
         let message = this.state.newContractTermsRequest;
         message.accepted = true;
@@ -171,18 +178,20 @@ class ContractTalk extends Component {
         message.type = 'ACCEPTANCE';
 
         let messages = this.state.messages;
+        let lastContractTerms = messages[messages.length-1].contractTerms;
         messages.push(message);
         this.setState({
             messages : messages,
-            newContractTermsRequest : {} //TODO:: Call API to save message and get Contract Terms for last approved one
+            newContractTermsRequest : {}
         });
+
+        ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, lastContractTerms);
     }
 
     handleDeclineTermsClick(){
-        //TODO: update the message with my User Id and Name
         var myUser = {};
-        myUser.name = 'Tarik';
-        myUser.id = undefined;
+        myUser.name = this.state.myBiz.name;
+        myUser.id = this.state.myBiz._id;
 
         let message = this.state.newContractTermsRequest;
         message.accepted = false;
@@ -194,8 +203,9 @@ class ContractTalk extends Component {
         messages.push(message);
         this.setState({
             messages : messages,
-            newContractTermsRequest : {} //TODO:: Call APi to save message and get Contract Terms for last approved one
+            newContractTermsRequest : {}
         });
+        ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
     }
 
     handleShowAcceptance(){
@@ -240,6 +250,9 @@ class ContractTalk extends Component {
 
     getContractTermsInputs(){
         let object = this.state.updatedContractTerms;
+        if(this.state.newContractTermsRequest && this.state.newContractTermsRequest.contractTerms){
+            object = this.state.newContractTermsRequest.contractTerms;
+        }
         if(object){
             var contractTerms = Object.keys(object).map(function(key) {
                 return (
@@ -261,8 +274,7 @@ class ContractTalk extends Component {
         }
         var messageType = undefined;
         for(var i = this.state.messages.length - 1; i > 0; i--){
-            //TODO get my user ID
-            if(this.state.messages[i].sender.id != 0){
+            if(this.state.messages[i].sender.id != this.state.myBiz._id){
                 messageType = this.state.messages[i].type;
                 break;
             }
@@ -493,6 +505,8 @@ ContractTalk.propTypes = {
     contractTalk: PropTypes.object,
     contractTermsOriginal: PropTypes.object,
     ctiTemplateId: PropTypes.string,
+    myBiz: PropTypes.object,
+    ctiOwnersBiz: PropTypes.object
 };
 
 export default createContainer(({params}) => {
@@ -509,15 +523,32 @@ export default createContainer(({params}) => {
     let contractInviteExist = false;
 
     if(contractTalk) {
-        contractInvite = ContractInvites.findOne({_id: contractTalk.contractInviteId}, { fields: {contractTerms: 1, templateId: 1}});
+        contractInvite = ContractInvites.findOne({_id: contractTalk.contractInviteId}, { fields: {contractTerms: 1, templateId: 1, bizId: 1}});
         contractInviteExist = !loadingContractInvites && !!contractInvite;
+    }
+
+    const subscriptionBizes = Meteor.subscribe('bizes');
+    const loadingBizes = !subscriptionBizes.ready();
+    const talkBizes = Bizes.find({$or: [{_id: params.id}, {_id: contractInvite.bizId}]}, {fields: {name:1}}).fetch();
+    const bizesExist = !loadingBizes && !!talkBizes;
+    let myBiz = {};
+    let ctiOwnersBiz = {};
+
+    if(bizesExist) {
+        talkBizes.map((biz) => {
+            if(biz._id === params.id)
+                myBiz = biz;
+            else
+                ctiOwnersBiz = biz;
+        });
     }
 
     return {
         contractTalk: contractTalkExist ? contractTalk : {},
         contractTermsOriginal: contractInviteExist ? contractInvite.contractTerms : {},
         ctiTemplateId: contractInviteExist ? contractInvite.templateId : "",
-
+        myBiz: myBiz,
+        ctiOwnersBiz: ctiOwnersBiz
     };
 
 }, ContractTalk);

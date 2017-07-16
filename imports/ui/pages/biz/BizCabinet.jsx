@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types'
 import { Meteor} from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Bert} from 'meteor/themeteorchef:bert';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { hashHistory} from 'react-router';
+
 import { Bizes } from '../../../api/bizes.js';
 import { ContractInvites } from '../../../api/contracts/contractInvites.js';
 import { ContractTalks } from '../../../api/contracts/contractTalks.js';
-
-import { Bert} from 'meteor/themeteorchef:bert';
-
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
-import getTemplateText from '../../../contract/cti/TemplateText'
-
-import { hashHistory} from 'react-router';
+import getTemplateText from '../../../modules/contract/cti/TemplateText'
+import BizCabinetApi from '../../../modules/biz/BizCabinetApi';
 
 
 class BSTable extends React.Component {
@@ -58,36 +56,7 @@ class BSTable extends React.Component {
         }
         else {
             if(this.state.agreedTermsChecked) {
-
-                let legalIds = this.props.data.legalIds;
-
-                for (var type in this.props.data.legalIds) {
-                    if(!this.props.data.legalIds[type].value) {
-                        legalIds[type].value = this.props.interestedBizLegalId;
-                    } else {
-                        legalIds[type].value = this.props.data.legalIds[type].value;
-                    }
-                }
-
-                let contractTalk = {
-                    ctiOwnerBizId: this.props.data.bizId,
-                    ctNegotiatorBizId: this.props.bizId,
-                    contractInviteId: this.props.data.contractInviteId,
-                    legalIds: legalIds
-                };
-
-                const confirmation = 'Contract talk added';
-                let bizId = this.props.bizId;
-
-                Meteor.call('contractTalks.insert', contractTalk, function(error, response) {
-                    if (error) {
-                        console.log("Error: " + JSON.stringify(error));
-                        Bert.alert(error.reason, 'danger');
-                    } else {
-                        Bert.alert(confirmation, 'success');
-                        hashHistory.push('/biz/' + bizId + '/contractTalk/' + response);
-                    }
-                });
+                BizCabinetApi.insertContractTalk(this.props.data, this.props.bizId, this.props.interestedBizLegalId);
             }
             else {
                 Bert.alert("You have to agree on storing your ID so we can proceed!", 'danger');
@@ -137,14 +106,14 @@ class BSTable extends React.Component {
                   <div>
                       <section className="col col-md-4 col-md-offset-7">
                           <button className="btn btn-block btn-primary" onClick={this.onClickHandled}>Start Contract Talk</button>
+                          {
+                              (this.state.ctConfirmShown)
+                                  ? <label className="checkbox">
+                                  <input type="checkbox" name="contractTalkConfirmation" id="contractTalkConfirmation" onChange={(e) => this.onAgreedTermsChanged(e)}/>
+                                  <i/>I agree to have my legal ID stored as '{this.state.interestedBizRoleName}'
+                              </label> : <p></p>
+                          }
                       </section>
-                      {
-                          (this.state.ctConfirmShown)
-                              ? <label className="checkbox">
-                              <input type="checkbox" name="contractTalkConfirmation" id="contractTalkConfirmation" onChange={(e) => this.onAgreedTermsChanged(e)}/>
-                              <i/>I agree to have my legal ID stored as '{this.state.interestedBizRoleName}'
-                          </label> : <p></p>
-                      }
 
                   </div>
                 );
@@ -308,6 +277,8 @@ class BizCabinet extends Component {
                         </span>
                     </header>
 
+
+
                     <div className="well">
                         <ul className="demo-btns">
                             <li>
@@ -403,9 +374,9 @@ export default createContainer(({params}) => {
         const loadingContractTalks =  !subscriptionContractTalks.ready();
 
         for(var i = 0; i < contractInvitesOtherBizes.length; i++){
-            let bizOwnerId = contractInvitesOtherBizes[i].bizId;
+            let ctiId = contractInvitesOtherBizes[i]._id;
 
-            const contractTalk = ContractTalks.findOne({ctNegotiatorBizId: params.id, ctiOwnerBizId: bizOwnerId}, { fields: { _id: 1} });
+            const contractTalk = ContractTalks.findOne({ctNegotiatorBizId: params.id, contractInviteId: ctiId}, { fields: { _id: 1} });
             contractInvitesOtherBizes[i].contractTalk = contractTalk;
         }
     }
