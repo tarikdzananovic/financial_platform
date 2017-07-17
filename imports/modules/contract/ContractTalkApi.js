@@ -30,7 +30,20 @@ export default class ContractTalkApi {
                 Bert.alert(error.reason, 'danger');
             } else {
                 Bert.alert(confirmation, 'success');
-                Session.set("currentContractTerms", response);
+                return response;
+            }
+        });
+    }
+
+    static saveMessageNewTermsReplaceLastAccepted(message, contractTalkId, lastContractTerms) {
+        const confirmation = 'Message saved!';
+        let saveMessageType = 'contractTalks.saveMessageUpdateTerms';
+
+        Meteor.call(saveMessageType, message, contractTalkId, lastContractTerms, function(error, response) {
+            if (error) {
+                Bert.alert(error.reason, 'danger');
+            } else {
+                Bert.alert(confirmation, 'success');
                 return response;
             }
         });

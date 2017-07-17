@@ -157,7 +157,7 @@ class ContractTalk extends Component {
         this.setStateForProps(nextProps);
     }
 
-    handleNewTermsClick(){
+    handleNewTermsClick(removeLastAccepted){
         var myUser = {};
         myUser.name = this.state.myBiz.name;
         myUser.id = this.state.myBiz._id;
@@ -169,12 +169,36 @@ class ContractTalk extends Component {
         message.type = 'NEW_TERMS';
 
         let messages = this.state.messages;
+
+        let lastContractTerms = this.state.originalContractTerms;
+        if(removeLastAccepted) {
+            let counter = 0;
+            for(var i = messages.length-1; i >= 0; i--){
+                if(messages[i].type == "NEW_TERMS"){
+                    if (counter === 1) {
+                        lastContractTerms = messages[i].contractTerms;
+                    }
+                    counter++;
+                }
+            }
+        }
+
         messages.push(message);
+
         this.setState({
             messages : messages,
             newContractTermsRequest : {}
         });
-        ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
+
+        if(removeLastAccepted) {
+            ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
+            this.setState({
+                updatedContractTerms: lastContractTerms
+            });
+        }
+
+        else
+            ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
     }
 
     handleAcceptTermsClick(){
@@ -620,9 +644,8 @@ class ContractTalk extends Component {
                     </div>
 
                     <div className="textarea-controls">
-                        {//TODO:: add information that last accepted will be declined, + add onClick
-                        }
-                        <button className="btn btn-sm btn-primary pull-right button-group">Request Contact Terms Update</button>
+                        <span>Last accepted terms will be declined</span>
+                        <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick(true)}>Request Contact Terms Update</button>
                     </div>
 
                 </div>
