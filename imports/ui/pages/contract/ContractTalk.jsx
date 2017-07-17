@@ -69,7 +69,7 @@ class Message extends Component{
                     <time>
                         <Moment date={this.props.msg.date} />
                     </time>
-                    <p className="username">{this.props.msg.sender.name} posted:</p>
+                    <p className="username"><strong>{this.props.msg.sender.name} posted:</strong></p>
                     {this.props.msg.comment}
 
                     {this.getContractTerms()}
@@ -114,13 +114,14 @@ class ContractTalk extends Component {
             messages : this.props.contractTalk.messages ? this.props.contractTalk.messages : [],
             newContractTermsRequest : {},
             originalContractTerms : this.props.contractTermsOriginal,
-            updatedContractTerms : this.props.contractTalk.contractTerms ? this.props.contractTalk.contractTerms : CloneObject(this.props.contractTermsOriginal),
+            updatedContractTerms : this.props.contractTalk.currentContractTerms ? this.props.contractTalk.currentContractTerms : CloneObject(this.props.contractTermsOriginal),
             templateId : "",
             legalIds: [],
             firstMessageMode : undefined,
+            lastMessageMode : undefined,
             myBiz: {},
-            ctiOwnersBiz: {},
-            talkId: undefined
+            talkId: undefined,
+            ctiOwnerBizId: undefined
         };
 
         this.handleNewTermsClick = this.handleNewTermsClick.bind(this);
@@ -130,10 +131,10 @@ class ContractTalk extends Component {
         this.handleShowNegotiate = this.handleShowNegotiate.bind(this);
         this.handleBackToDefaultClick = this.handleBackToDefaultClick.bind(this);
         this.setStateForProps = this.setStateForProps.bind(this);
+        this.handleCreateContract = this.handleCreateContract.bind(this);
     }
 
     componentDidMount() {
-
         this.setStateForProps(this.props);
     }
 
@@ -142,12 +143,12 @@ class ContractTalk extends Component {
             this.setState({
                 messages: props.contractTalk.messages ? props.contractTalk.messages : [],
                 originalContractTerms : props.contractTermsOriginal,
-                updatedContractTerms : props.contractTalk.contractTerms ? props.contractTalk.contractTerms : CloneObject(props.contractTermsOriginal),
+                updatedContractTerms : props.contractTalk.currentContractTerms ? props.contractTalk.currentContractTerms : CloneObject(props.contractTermsOriginal),
                 templateId: props.ctiTemplateId,
                 legalIds: props.contractTalk.legalIds,
                 myBiz: props.myBiz,
-                ctiOwnersBiz: props.ctiOwnersBiz,
-                talkId: props.contractTalk._id
+                talkId: props.contractTalk._id,
+                ctiOwnerBizId: props.contractTalk.ctiOwnerBizId
             });
         }
     }
@@ -188,7 +189,7 @@ class ContractTalk extends Component {
         message.type = 'ACCEPTANCE';
 
         let messages = this.state.messages;
-        let lastContractTerms = messages[messages.length-1].contractTerms;
+        let lastContractTerms = messages.length > 0 ? messages[messages.length-1].contractTerms : this.state.originalContractTerms;
         messages.push(message);
         this.setState({
             messages : messages,
@@ -196,6 +197,10 @@ class ContractTalk extends Component {
         });
 
         ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, lastContractTerms);
+        this.setState({
+            updatedContractTerms: lastContractTerms
+        });
+
     }
 
     handleDeclineTermsClick(){
@@ -218,25 +223,53 @@ class ContractTalk extends Component {
         ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
     }
 
-    handleShowAcceptance(){
-        this.setState({
-            firstMessageMode: 'NEW_TERMS'
-            }
-        )
+    handleShowAcceptance(last){
+        if(last === true){
+            this.setState({
+                    lastMessageMode: 'NEW_TERMS'
+                }
+            )
+        }
+        else{
+            this.setState({
+                    firstMessageMode: 'NEW_TERMS'
+                }
+            )
+        }
     }
 
-    handleShowNegotiate(){
-        this.setState({
-                firstMessageMode: 'ACCEPTANCE'
-            }
-        )
+    handleShowNegotiate(last){
+        if(last === true){
+            this.setState({
+                    lastMessageMode: 'ACCEPTANCE'
+                }
+            )
+        }
+        else{
+            this.setState({
+                    firstMessageMode: 'ACCEPTANCE'
+                }
+            )
+        }
     }
 
-    handleBackToDefaultClick(){
-        this.setState({
-                firstMessageMode: undefined
-            }
-        )
+    handleCreateContract() {
+        ContractTalkApi.saveContract(this.props.contractTalk);
+    }
+
+    handleBackToDefaultClick(last){
+        if(last === true){
+            this.setState({
+                    lastMessageMode: undefined
+                }
+            )
+        }
+        else{
+            this.setState({
+                    firstMessageMode: undefined
+                }
+            )
+        }
     }
 
     onContractTermChange(e, key) {
@@ -280,10 +313,19 @@ class ContractTalk extends Component {
 
     getLastReceivedMessageType(){
         if(!this.state.messages || this.state.messages.length===0){
-            return 'UNDEFINED';
+            return 'POST_FIRST_MESSAGE';
         }
         var messageType = undefined;
-        for(var i = this.state.messages.length - 1; i > 0; i--){
+
+        var lastMessage = this.state.messages[this.state.messages.length-1];
+        if(lastMessage.type === 'ACCEPTANCE' && lastMessage.accepted === true && lastMessage.sender.id === this.state.myBiz._id){
+            return 'NO_ACTION';
+        }
+        if(lastMessage.type === 'ACCEPTANCE' && lastMessage.accepted === true && lastMessage.sender.id !== this.state.myBiz._id){
+            return 'CONTINUE_NEGOTIATE';
+        }
+
+        for(var i = this.state.messages.length - 1; i >= 0; i--){
             if(this.state.messages[i].sender.id != this.state.myBiz._id){
                 messageType = this.state.messages[i].type;
                 break;
@@ -296,7 +338,9 @@ class ContractTalk extends Component {
     }
 
     getTemplateText(templateId, legalIds, contractTerms){
-
+        if(!templateId){
+            return;
+        }
         var objectTemplate = getTemplateText(templateId, legalIds, contractTerms);
 
         if(objectTemplate) {
@@ -397,7 +441,7 @@ class ContractTalk extends Component {
                 </div>
             )
         }
-        else if (messageType && messageType === 'UNDEFINED') {
+        else if (messageType && messageType === 'POST_FIRST_MESSAGE') {
             return (
                 <div className="form-group cursor-all-scroll">
                     { this.renderFirstDefaultBox(this.state.firstMessageMode)}
@@ -412,10 +456,55 @@ class ContractTalk extends Component {
                     </div>
 
                 </div>
-
-
-
             );
+        }
+        else if(messageType && messageType === 'CONTINUE_NEGOTIATE'){
+            return (
+                <div className="form-group cursor-all-scroll">
+
+                    <div className="form-group">
+                        { this.renderLastDefaultBox(this.state.lastMessageMode)}
+                        { this.renderLastMessageBox(this.state.lastMessageMode)}
+                    </div>
+
+                    <div className="col-md-6">
+                        Original Template
+                        <br/>
+                        <div className="well">
+                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        Updated Template
+                        <br/>
+                        <div className="well">
+                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.updatedContractTerms)}
+                        </div>
+                    </div>
+
+                </div>
+            )
+        }
+        else{
+            return(
+                <div>
+                    <div className="col-md-6">
+                        Original Template
+                        <br/>
+                        <div className="well">
+                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        Updated Template
+                        <br/>
+                        <div className="well">
+                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.updatedContractTerms)}
+                        </div>
+                    </div>
+
+                </div>
+            )
         }
     }
 
@@ -424,13 +513,13 @@ class ContractTalk extends Component {
             return(
                 <div>
                     <div className="col-md-5">
-                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowAcceptance()}>Accept Terms</button>
+                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowAcceptance(false)}>Accept Terms</button>
                     </div>
                     <div className="col-md-2">
                         <label className="text-align-center"></label>
                     </div>
                     <div className="col-md-5">
-                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowNegotiate()}>Negotiate</button>
+                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowNegotiate(false)}>Negotiate</button>
                     </div>
                 </div>
             );
@@ -475,8 +564,65 @@ class ContractTalk extends Component {
                     <div className="textarea-controls">
                         <div className="textarea-controls">
                             <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleAcceptTermsClick()}>Accept</button>
-                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleDeclineTermsClick()}>Decline</button>
                         </div>
+                    </div>
+
+                </div>
+            )
+        }
+
+    }
+
+    renderLastDefaultBox(messageType){
+        if(!messageType){
+            return(
+                <div>
+                    <div className="col-md-5">
+                        {
+                            (this.state.myBiz._id === this.state.ctiOwnerBizId) ?
+                                <button className="btn btn-sm btn-primary pull-right button-group btn-block"
+                                        onClick={() => this.handleCreateContract()}>
+                                    Accept Terms and Create Contract
+                                </button> :
+                                <button className="btn btn-sm btn-primary pull-right button-group btn-block">
+                                    Accept Terms
+                                </button>
+                        }
+                    </div>
+                    <div className="col-md-2">
+                        <label className="text-align-center"></label>
+                    </div>
+                    <div className="col-md-5">
+                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowNegotiate(true)}>Continue Negotiations</button>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    renderLastMessageBox(messageType){
+        if(messageType && messageType === 'ACCEPTANCE')
+        {
+            return(
+                <div className="chat-footer">
+                    <div className="textarea-div">
+                        <div className="typeareaL">
+                            <a className="pull-right" onClick={this.handleBackToDefaultClick}><i className="icon-prepend fa fa-times"/></a>
+                            <fieldset>
+                                <br/>
+                                {this.getContractTermsInputs()}
+                            </fieldset>
+                        </div>
+                        <div className="typearea">
+                            <textarea placeholder="Add message content..." className="custom-scroll" onChange={(e) => this.onCommentRequestUpdate(e)}></textarea>
+                        </div>
+
+                    </div>
+
+                    <div className="textarea-controls">
+                        {//TODO:: add information that last accepted will be declined, + add onClick
+                        }
+                        <button className="btn btn-sm btn-primary pull-right button-group">Request Contact Terms Update</button>
                     </div>
 
                 </div>
@@ -516,7 +662,6 @@ ContractTalk.propTypes = {
     contractTermsOriginal: PropTypes.object,
     ctiTemplateId: PropTypes.string,
     myBiz: PropTypes.object,
-    ctiOwnersBiz: PropTypes.object
 };
 
 export default createContainer(({params}) => {
@@ -542,14 +687,11 @@ export default createContainer(({params}) => {
     const talkBizes = Bizes.find({$or: [{_id: params.id}, {_id: contractInvite.bizId}]}, {fields: {name:1}}).fetch();
     const bizesExist = !loadingBizes && !!talkBizes;
     let myBiz = {};
-    let ctiOwnersBiz = {};
 
     if(bizesExist) {
         talkBizes.map((biz) => {
             if(biz._id === params.id)
                 myBiz = biz;
-            else
-                ctiOwnersBiz = biz;
         });
     }
 
@@ -558,7 +700,6 @@ export default createContainer(({params}) => {
         contractTermsOriginal: contractInviteExist ? contractInvite.contractTerms : {},
         ctiTemplateId: contractInviteExist ? contractInvite.templateId : "",
         myBiz: myBiz,
-        ctiOwnersBiz: ctiOwnersBiz
     };
 
 }, ContractTalk);

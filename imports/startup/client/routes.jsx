@@ -17,6 +17,7 @@ import BizEdit from '../../ui/pages/biz/BizEdit'
 import OtherBizes from '../../ui/pages/biz/OtherBizes.jsx';
 import ContractInvite from '../../ui/pages/contract/ContractInvite.jsx';
 import ContractTalk from '../../ui/pages/contract/ContractTalk.jsx';
+import Contract from '../../ui/pages/contract/Contract.jsx';
 
 const authenticate = (nextState, replace) => {
     if (!Meteor.loggingIn() && !Meteor.userId()) {
@@ -48,6 +49,7 @@ Meteor.startup(() => {
                         <Route path="contractInvite" component={ContractInvite}/>
                         <Route path="cabinet" component={BizCabinet}/>
                         <Route path="contractTalk/:talkId" component={ContractTalk}/>
+                        <Route path="contract/:contractId" component={Contract}/>
                     </Route>
                 </Route>
             </Route>

@@ -9,6 +9,7 @@ import { hashHistory} from 'react-router';
 import { Bizes } from '../../../api/bizes.js';
 import { ContractInvites } from '../../../api/contracts/contractInvites.js';
 import { ContractTalks } from '../../../api/contracts/contractTalks.js';
+import { Contracts } from '../../../api/contracts/contracts.js'
 import getTemplateText from '../../../modules/contract/cti/TemplateText'
 import BizCabinetApi from '../../../modules/biz/BizCabinetApi';
 
@@ -189,19 +190,27 @@ class BizCabinet extends Component {
             publicCabinet : false,
             contractInvites : [],
             contractInvitesOtherBizes: [],
-            contractTalks: []
+            contractTalks: [],
+            contracts: []
         };
 
         this.LinkFormatter = this.LinkFormatter.bind(this);
+        this.LinkFormatterContract = this.LinkFormatterContract.bind(this);
         this.setStateForProps = this.setStateForProps.bind(this);
     }
 
     setStateForProps(props){
         let contractTalksShortened = [];
+        let contractsShortened = [];
 
         props.contractTalks.map((contractTalk) => {
             let counterBizName = props.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
             contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName});
+        });
+
+        props.contracts.map((contract) => {
+            let counterBizName = props.biz._id != contract.contractNegotiatorId ? contract.negotiatorBiz.name : contract.contractInvite.biz.name;
+            contractsShortened.push({_id: contract._id, template: contract.contractInvite.template, counterBizName: counterBizName});
         });
 
         this.setState({
@@ -209,7 +218,8 @@ class BizCabinet extends Component {
             publicCabinet : props.biz.userId !== Meteor.user()._id,
             contractInvites: props.contractInvites,
             contractInvitesOtherBizes: props.contractInvitesOtherBizes,
-            contractTalks: contractTalksShortened
+            contractTalks: contractTalksShortened,
+            contracts: contractsShortened
         });
     }
 
@@ -244,6 +254,14 @@ class BizCabinet extends Component {
     LinkFormatter(value, row, index){
 
         let path = "/#/biz/" + this.state.biz._id + "/contractTalk/" + row._id + "/";
+
+        return (
+            <a href={path}>{value}</a>
+        );
+    }
+    LinkFormatterContract(value, row, index){
+
+        let path = "/#/biz/" + this.state.biz._id + "/contract/" + row._id + "/";
 
         return (
             <a href={path}>{value}</a>
@@ -329,6 +347,9 @@ class BizCabinet extends Component {
                         <li>
                             <a href="#s3" data-toggle="tab">My Contract Talks</a>
                         </li>
+                        <li>
+                            <a href="#s4" data-toggle="tab">My Contracts</a>
+                        </li>
                     </ul>
 
                     <div id="myTabContent1" className="tab-content padding-10">
@@ -372,6 +393,19 @@ class BizCabinet extends Component {
                             </div>
 
                         </div>
+                        <div className="tab-pane fade" id="s4">
+                            <div>
+                                <BootstrapTable data={ this.state.contracts }
+                                                pagination={ true }
+                                                options={ getOptions(this.state.contracts.length) }
+                                >
+                                    <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatterContract} isKey={ true }>Contract ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
+                                </BootstrapTable>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             )
@@ -407,7 +441,8 @@ BizCabinet.propTypes = {
     biz: PropTypes.object,
     contractInvites: PropTypes.array,
     contractInvitesOtherBizes: PropTypes.array,
-    contractTalks: PropTypes.array
+    contractTalks: PropTypes.array,
+    contracts: PropTypes.array,
 };
 
 export default createContainer(({params}) => {
@@ -440,11 +475,17 @@ export default createContainer(({params}) => {
         }
     }
 
+    const subscriptionContracts = Meteor.subscribe('contracts');
+    const loadingContracts =  !subscriptionContracts.ready();
+    const contracts = Contracts.find({ $or: [{contractOwnerId: params.id}, {contractNegotiatorId: params.id}]}).fetch();
+    const contractsExist = !loadingContracts && !!contracts;
+
     return {
         biz: bizExists ? biz : {},
         contractInvites: contractInvitesExist ? contractInvites : [],
         contractInvitesOtherBizes: contractInvitesOtherBizesExist ? contractInvitesOtherBizes : [],
         contractTalks: contractTalksExist ? contractTalks : [],
+        contracts: contractsExist ? contracts : [],
     };
 
 }, BizCabinet);

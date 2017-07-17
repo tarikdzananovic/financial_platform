@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
-
+import { hashHistory} from 'react-router';
 
 export default class ContractTalkApi {
 
@@ -22,7 +22,6 @@ export default class ContractTalkApi {
     }
 
     static saveMessageAcceptTerms(message, contractTalkId, lastContractTerms) {
-
         const confirmation = 'Message saved!';
         let saveMessageType = 'contractTalks.saveMessageUpdateTerms';
 
@@ -35,6 +34,30 @@ export default class ContractTalkApi {
                 return response;
             }
         });
+    }
+
+    static saveContract(contractTalk) {
+
+        const confirmation = 'Contract saved!';
+
+        let contract = {
+            contractOwnerId: contractTalk.ctiOwnerBizId,
+            contractNegotiatorId: contractTalk.ctNegotiatorBizId,
+            negotiatorBiz: contractTalk.ctNegotiatorBiz,
+            legalIds: contractTalk.legalIds,
+            contractTerms: contractTalk.currentContractTerms,
+            contractInvite: contractTalk.contractInvite
+        };
+
+        Meteor.call('contracts.insert', contract, function(error, response) {
+            if(error){
+                Bert.alert(error.reason,'danger');
+            } else {
+                Bert.alert(confirmation, 'success');
+                hashHistory.push('/biz/' + contractTalk.ctiOwnerBizId + '/contract/' + response);
+            }
+        })
+
     }
 
 }

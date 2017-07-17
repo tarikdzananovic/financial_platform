@@ -15,6 +15,18 @@ if(Meteor.isServer) {
 }
 
 Meteor.methods({
+
+    'contracts.insert'(contract) {
+
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        return Contracts.insert(contract);
+
+    },
+
     'contracts.upsert'(contract) {
         check(contract.bizId, String);
         check(contract.role, String);
