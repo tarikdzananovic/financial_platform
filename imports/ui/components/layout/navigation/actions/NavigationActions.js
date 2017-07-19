@@ -88,7 +88,7 @@ NavigationActions.getItems.listen(function () {
             items.push(bizMenu);
             items.push(getOtherBizesMenuItem(items.length));
             items.push(getSettingsMenuItem(items.length));
-            items.push(getCtTest(items.length));
+            //items.push(getCtTest(items.length));
 
             NavigationActions.getItems.completed(items);     
 

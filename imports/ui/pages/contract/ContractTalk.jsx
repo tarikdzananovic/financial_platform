@@ -121,7 +121,8 @@ class ContractTalk extends Component {
             lastMessageMode : undefined,
             myBiz: {},
             talkId: undefined,
-            ctiOwnerBizId: undefined
+            ctiOwnerBizId: undefined,
+            status: undefined
         };
 
         this.handleNewTermsClick = this.handleNewTermsClick.bind(this);
@@ -148,7 +149,8 @@ class ContractTalk extends Component {
                 legalIds: props.contractTalk.legalIds,
                 myBiz: props.myBiz,
                 talkId: props.contractTalk._id,
-                ctiOwnerBizId: props.contractTalk.ctiOwnerBizId
+                ctiOwnerBizId: props.contractTalk.ctiOwnerBizId,
+                status: props.contractTalk.status
             });
         }
     }
@@ -663,18 +665,24 @@ class ContractTalk extends Component {
         if(!messageType){
             return(
                 <div>
-                    <div className="col-md-5">
-                        <button className="btn btn-sm btn-primary pull-right button-group btn-block"
-                                onClick={() => this.handleCreateContract()}>
-                            Accept Terms and Create Contract
-                        </button>
-                    </div>
-                    <div className="col-md-2">
-                        <label className="text-align-center"></label>
-                    </div>
-                    <div className="col-md-5">
-                        <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowNegotiate(true)}>Continue Negotiations</button>
-                    </div>
+                    {
+                        (this.state.status != 'Contract concluded') ?
+                            <div>
+                                <div className="col-md-5">
+                                    <button className="btn btn-sm btn-primary pull-right button-group btn-block"
+                                            onClick={() => this.handleCreateContract()}>
+                                        Accept Terms and Create Contract
+                                    </button>
+                                </div>
+                                <div className="col-md-2">
+                                    <label className="text-align-center"></label>
+                                </div>
+                                <div className="col-md-5">
+                                    <button className="btn btn-sm btn-primary pull-right button-group btn-block" onClick={() => this.handleShowNegotiate(true)}>Continue Negotiations</button>
+                                </div>
+                            </div> :
+                            <div></div>
+                    }
                 </div>
             );
         }
