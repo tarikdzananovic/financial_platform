@@ -42,9 +42,9 @@ var getTemplateInfo = () => {
     object.push("End date: " + endDateParam);
     object.push("");
     object.push("Agent compensation will be $" + compensationAmountParam + " paid by Company to Agent at Start date.");
-    object.push("");
-    object.push("    Terms are accepted by Company: {CompanyLegalSignature}");
-    object.push("Terms are accepted by Agent: {AgentLegalSignature}");
+    //object.push("");
+    //object.push("    Terms are accepted by Company: {CompanyLegalSignature}");
+    //object.push("Terms are accepted by Agent: {AgentLegalSignature}");
     return object;
 }
 

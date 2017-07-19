@@ -157,48 +157,121 @@ class ContractTalk extends Component {
         this.setStateForProps(nextProps);
     }
 
-    handleNewTermsClick(removeLastAccepted){
-        var myUser = {};
-        myUser.name = this.state.myBiz.name;
-        myUser.id = this.state.myBiz._id;
+    validateContractTerms(){
+        jQuery.validator.addMethod("greaterThan", function(value, element, params) {
+            if ($(params[0]).val() != '') {
+                if (!/Invalid|NaN/.test(new Date(value))) {
+                    return new Date(value) > new Date($(params[0]).val());
+                }
+                return isNaN(value) && isNaN($(params[0]).val()) || (Number(value) > Number($(params[0]).val()));
+            };
+            return true;
+        },'Must be greater than {1}.');
+        $(this.contractTermsForm).validate({
+            rules: {
+                agentServiceType: {
+                    required: true
+                },
+                startDate: {
+                    required: true
+                },
+                endDate: {
+                    required: true,
+                    greaterThan: ["#startDate","Start Date"]
+                },
+                amount: {
+                    require: true,
+                    number: true,
+                }
 
-        let message = this.state.newContractTermsRequest;
-        message.accepted = undefined;
-        message.sender = myUser;
-        message.date = Date.now();
-        message.type = 'NEW_TERMS';
+            },
 
-        let messages = this.state.messages;
-
-        let lastContractTerms = this.state.originalContractTerms;
-        if(removeLastAccepted) {
-            let counter = 0;
-            for(var i = messages.length-1; i >= 0; i--){
-                if(messages[i].type == "NEW_TERMS"){
-                    if (counter === 1) {
-                        lastContractTerms = messages[i].contractTerms;
-                    }
-                    counter++;
+            messages: {
+                agentServiceType: {
+                    required: 'You must enter type of service so new terms can be accepted',
+                },
+                startDate: {
+                    required: 'You must enter start date so new terms can be accepted',
+                },
+                endDate: {
+                    required: 'You must enter end date so new terms can be accepted',
+                    greaterThan: 'End date must be greater than start date'
+                },
+                amount: {
+                    required: 'You must enter amount so new terms can be accepted',
+                    amount: 'Amount must be a number',
+                },
+            },
+            errorElement: 'em',
+            errorClass: 'invalid',
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass(errorClass).removeClass(validClass);
+                $(element).parent().addClass('state-error').removeClass('state-success');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass(errorClass).addClass(validClass);
+                $(element).parent().removeClass('state-error').addClass('state-success');
+            },
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
                 }
             }
-        }
-
-        messages.push(message);
-
-        this.setState({
-            messages : messages,
-            newContractTermsRequest : {}
         });
+    }
 
-        if(removeLastAccepted) {
-            ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
+    handleNewTermsClick(removeLastAccepted){
+
+        this.validateContractTerms();
+        if($(this.contractTermsForm).valid()){
+            var myUser = {};
+            myUser.name = this.state.myBiz.name;
+            myUser.id = this.state.myBiz._id;
+
+            let message = this.state.newContractTermsRequest;
+            message.accepted = undefined;
+            message.sender = myUser;
+            message.date = Date.now();
+            message.type = 'NEW_TERMS';
+
+            let messages = this.state.messages;
+
+            let lastContractTerms = this.state.originalContractTerms;
+            if(removeLastAccepted) {
+                let counter = 0;
+                for(var i = messages.length-1; i >= 0; i--){
+                    if(messages[i].type == "NEW_TERMS"){
+                        if (counter === 1) {
+                            lastContractTerms = messages[i].contractTerms;
+                        }
+                        counter++;
+                    }
+                }
+            }
+
+            messages.push(message);
+
             this.setState({
-                updatedContractTerms: lastContractTerms
+                messages : messages,
+                newContractTermsRequest : {}
+            });
+
+            /*if(removeLastAccepted) {
+             ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
+             this.setState({
+             updatedContractTerms: lastContractTerms
+             });
+             }
+             else
+             ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
+             */
+            ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, message.contractTerms);
+            this.setState({
+                updatedContractTerms: message.contractTerms
             });
         }
-
-        else
-            ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
     }
 
     handleAcceptTermsClick(){
@@ -394,10 +467,12 @@ class ContractTalk extends Component {
                     <div className="chat-footer">
                         <div className="textarea-div">
                             <div className="typeareaL">
-                                <fieldset>
-                                    <br/>
-                                    {this.getContractTermsInputs()}
-                                </fieldset>
+                                <form noValidate="novalidate" ref={ form => (this.contractTermsForm = form) }>
+                                    <fieldset>
+                                        <br/>
+                                        {this.getContractTermsInputs()}
+                                    </fieldset>
+                                </form>
                             </div>
                             <div className="typearea">
                                 <textarea placeholder="Add message content..." className="custom-scroll" onChange={(e) => this.onCommentRequestUpdate(e)}></textarea>
@@ -406,19 +481,12 @@ class ContractTalk extends Component {
                         </div>
 
                         <div className="textarea-controls">
-                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick()}>Request Contact Terms Update</button>
+                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick()}>Request Contract Terms Update</button>
                         </div>
 
                     </div>
 
-                    <div className="col-md-6">
-                        Original Template
-                        <br/>
-                        <div className="well">
-                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
-                        </div>
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         Updated Template
                         <br/>
                         <div className="well">
@@ -447,14 +515,7 @@ class ContractTalk extends Component {
 
                     </div>
 
-                    <div className="col-md-6">
-                        Original Template
-                        <br/>
-                        <div className="well">
-                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
-                        </div>
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         Updated Template
                         <br/>
                         <div className="well">
@@ -471,8 +532,8 @@ class ContractTalk extends Component {
                     { this.renderFirstDefaultBox(this.state.firstMessageMode)}
                     { this.renderFirstMessageBox(this.state.firstMessageMode)}
 
-                    <div className="col-md-6">
-                        Original Template
+                    <div className="col-md-12">
+                        Updated Template
                         <br/>
                         <div className="well">
                             {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
@@ -491,14 +552,7 @@ class ContractTalk extends Component {
                         { this.renderLastMessageBox(this.state.lastMessageMode)}
                     </div>
 
-                    <div className="col-md-6">
-                        Original Template
-                        <br/>
-                        <div className="well">
-                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
-                        </div>
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         Updated Template
                         <br/>
                         <div className="well">
@@ -512,14 +566,7 @@ class ContractTalk extends Component {
         else{
             return(
                 <div>
-                    <div className="col-md-6">
-                        Original Template
-                        <br/>
-                        <div className="well">
-                            {this.getTemplateText(this.state.templateId, this.state.legalIds, this.state.originalContractTerms)}
-                        </div>
-                    </div>
-                    <div className="col-md-6">
+                    <div className="col-md-12">
                         Updated Template
                         <br/>
                         <div className="well">
@@ -602,16 +649,10 @@ class ContractTalk extends Component {
             return(
                 <div>
                     <div className="col-md-5">
-                        {
-                            (this.state.myBiz._id === this.state.ctiOwnerBizId) ?
-                                <button className="btn btn-sm btn-primary pull-right button-group btn-block"
-                                        onClick={() => this.handleCreateContract()}>
-                                    Accept Terms and Create Contract
-                                </button> :
-                                <button className="btn btn-sm btn-primary pull-right button-group btn-block">
-                                    Accept Terms
-                                </button>
-                        }
+                        <button className="btn btn-sm btn-primary pull-right button-group btn-block"
+                                onClick={() => this.handleCreateContract()}>
+                            Accept Terms and Create Contract
+                        </button>
                     </div>
                     <div className="col-md-2">
                         <label className="text-align-center"></label>
@@ -632,10 +673,12 @@ class ContractTalk extends Component {
                     <div className="textarea-div">
                         <div className="typeareaL">
                             <a className="pull-right" onClick={this.handleBackToDefaultClick}><i className="icon-prepend fa fa-times"/></a>
-                            <fieldset>
-                                <br/>
-                                {this.getContractTermsInputs()}
-                            </fieldset>
+                            <form noValidate="novalidate" ref={ form => (this.contractTermsForm = form) }>
+                                <fieldset>
+                                    <br/>
+                                    {this.getContractTermsInputs()}
+                                </fieldset>
+                            </form>
                         </div>
                         <div className="typearea">
                             <textarea placeholder="Add message content..." className="custom-scroll" onChange={(e) => this.onCommentRequestUpdate(e)}></textarea>

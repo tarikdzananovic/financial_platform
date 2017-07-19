@@ -389,6 +389,7 @@ class BizCabinet extends Component {
                                     <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatter} isKey={ true }>CT ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='status'>Status</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
 

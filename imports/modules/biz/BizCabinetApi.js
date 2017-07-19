@@ -37,7 +37,8 @@ export default class BizCabinetApi {
             contractInvite: contractInvite,
             contractInviteId: ctiData._id,
             legalIds: legalIds,
-            currentContractTerms: ctiData.contractTerms
+            currentContractTerms: ctiData.contractTerms,
+            status: 'CONTRACT TALK CREATED'
         };
 
         const confirmation = 'Contract talk added';
