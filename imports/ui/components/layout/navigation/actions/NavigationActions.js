@@ -85,7 +85,10 @@ NavigationActions.getItems.listen(function () {
             response.map((biz) => {
                 bizMenu.items.push(getBizMenuItem(biz, items.length));
             });
-            items.push(bizMenu);
+            if (response.length > 0) {
+                items.push(bizMenu);
+            }
+
             items.push(getOtherBizesMenuItem(items.length));
             items.push(getSettingsMenuItem(items.length));
             //items.push(getCtTest(items.length));

@@ -159,7 +159,7 @@ class ContractTalk extends Component {
         this.setStateForProps(nextProps);
     }
 
-    validateContractTerms(){
+    validateContractTerms(contractTermsForm){
         jQuery.validator.addMethod("greaterThan", function(value, element, params) {
             if ($(params[0]).val() != '') {
                 if (!/Invalid|NaN/.test(new Date(value))) {
@@ -169,40 +169,17 @@ class ContractTalk extends Component {
             };
             return true;
         },'Must be greater than {1}.');
-        $(this.contractTermsForm).validate({
+        $(contractTermsForm).validate({
             rules: {
-                agentServiceType: {
-                    required: true
-                },
-                startDate: {
-                    required: true
-                },
                 endDate: {
-                    required: true,
                     greaterThan: ["#startDate","Start Date"]
-                },
-                amount: {
-                    require: true,
-                    number: true,
                 }
-
             },
 
             messages: {
-                agentServiceType: {
-                    required: 'You must enter type of service so new terms can be accepted',
-                },
-                startDate: {
-                    required: 'You must enter start date so new terms can be accepted',
-                },
                 endDate: {
-                    required: 'You must enter end date so new terms can be accepted',
                     greaterThan: 'End date must be greater than start date'
-                },
-                amount: {
-                    required: 'You must enter amount so new terms can be accepted',
-                    amount: 'Amount must be a number',
-                },
+                }
             },
             errorElement: 'em',
             errorClass: 'invalid',
@@ -224,57 +201,61 @@ class ContractTalk extends Component {
         });
     }
 
-    handleNewTermsClick(removeLastAccepted){
+    handleNewTermsClick(contractTermsForm){
 
-        var myUser = {};
-        myUser.name = this.state.myBiz.name;
-        myUser.id = this.state.myBiz._id;
+        this.validateContractTerms(contractTermsForm);
+        if($(contractTermsForm).valid()){
 
-        let message = this.state.newContractTermsRequest;
-        if(!message.contractTerms){
-            message.contractTerms = CloneObject(this.state.updatedContractTerms);
-        }
-        message.accepted = undefined;
-        message.sender = myUser;
-        message.date = Date.now();
-        message.type = 'NEW_TERMS';
+            var myUser = {};
+            myUser.name = this.state.myBiz.name;
+            myUser.id = this.state.myBiz._id;
 
-        let messages = this.state.messages;
-
-        let lastContractTerms = this.state.originalContractTerms;
-        if(removeLastAccepted) {
-            let counter = 0;
-            for(var i = messages.length-1; i >= 0; i--){
-                if(messages[i].type == "NEW_TERMS"){
-                    if (counter === 1) {
-                        lastContractTerms = messages[i].contractTerms;
-                    }
-                    counter++;
-                }
+            let message = this.state.newContractTermsRequest;
+            if(!message.contractTerms){
+                message.contractTerms = CloneObject(this.state.updatedContractTerms);
             }
+            message.accepted = undefined;
+            message.sender = myUser;
+            message.date = Date.now();
+            message.type = 'NEW_TERMS';
+
+            let messages = this.state.messages;
+
+            /*let lastContractTerms = this.state.originalContractTerms;
+            if(removeLastAccepted) {
+                let counter = 0;
+                for(var i = messages.length-1; i >= 0; i--){
+                    if(messages[i].type == "NEW_TERMS"){
+                        if (counter === 1) {
+                            lastContractTerms = messages[i].contractTerms;
+                        }
+                        counter++;
+                    }
+                }
+            }*/
+
+            messages.push(message);
+
+            this.setState({
+                messages : messages,
+                newContractTermsRequest : {}
+            });
+
+            /*if(removeLastAccepted) {
+             ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
+             this.setState({
+             updatedContractTerms: lastContractTerms
+             });
+             }
+             else
+             ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
+             */
+            ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, message.contractTerms, myUser.name + ' proposed new terms');
+            this.setState({
+                updatedContractTerms: message.contractTerms
+            });
+
         }
-
-        messages.push(message);
-
-        this.setState({
-            messages : messages,
-            newContractTermsRequest : {}
-        });
-
-        /*if(removeLastAccepted) {
-         ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
-         this.setState({
-         updatedContractTerms: lastContractTerms
-         });
-         }
-         else
-         ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
-         */
-        ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, message.contractTerms, myUser.name + ' proposed new terms');
-        this.setState({
-            updatedContractTerms: message.contractTerms
-        });
-
     }
 
     handleAcceptTermsClick(){
@@ -413,7 +394,16 @@ class ContractTalk extends Component {
 
     getLastReceivedMessageType(){
         if(!this.state.messages || this.state.messages.length===0){
-            return 'POST_FIRST_MESSAGE';
+            var type = 'POST_FIRST_MESSAGE';
+            let messageTerms = this.state.originalContractTerms;
+            if(messageTerms){
+                Object.keys(messageTerms).forEach(function(key) {
+                    if(!messageTerms[key].value){
+                        type = 'ACCEPTANCE';
+                    }
+                });
+            }
+            return type;
         }
         var messageType = undefined;
 
@@ -484,7 +474,7 @@ class ContractTalk extends Component {
                     <div className="chat-footer">
                         <div className="textarea-div">
                             <div className="typeareaL">
-                                <form noValidate="novalidate" ref={ form => (this.contractTermsForm = form) }>
+                                <form noValidate="novalidate" ref={ form => (this.commentBoxForm = form) }>
                                     <fieldset>
                                         <br/>
                                         {this.getContractTermsInputs()}
@@ -498,7 +488,7 @@ class ContractTalk extends Component {
                         </div>
 
                         <div className="textarea-controls">
-                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick()}>Request Contract Terms Update</button>
+                            <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick(this.commentBoxForm)}>Request Contract Terms Update</button>
                         </div>
 
                     </div>
@@ -622,10 +612,12 @@ class ContractTalk extends Component {
                     <div className="textarea-div">
                         <div className="typeareaL">
                             <a className="pull-right" onClick={this.handleBackToDefaultClick}><i className="icon-prepend fa fa-times"/></a>
-                            <fieldset>
-                                <br/>
-                                {this.getContractTermsInputs()}
-                            </fieldset>
+                            <form noValidate="novalidate" ref={ form => (this.firstMessageBoxForm = form) }>
+                                <fieldset>
+                                    <br/>
+                                    {this.getContractTermsInputs()}
+                                </fieldset>
+                            </form>
                         </div>
                         <div className="typearea">
                             <textarea placeholder="Add message content..." className="custom-scroll" onChange={(e) => this.onCommentRequestUpdate(e)}></textarea>
@@ -634,7 +626,7 @@ class ContractTalk extends Component {
                     </div>
 
                     <div className="textarea-controls">
-                        <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick()}>Request Contact Terms Update</button>
+                        <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick(this.firstMessageBoxForm)}>Request Contact Terms Update</button>
                     </div>
 
                 </div>
@@ -696,7 +688,7 @@ class ContractTalk extends Component {
                     <div className="textarea-div">
                         <div className="typeareaL">
                             <a className="pull-right" onClick={this.handleBackToDefaultClick}><i className="icon-prepend fa fa-times"/></a>
-                            <form noValidate="novalidate" ref={ form => (this.contractTermsForm = form) }>
+                            <form noValidate="novalidate" ref={ form => (this.lastMessageBoxForm = form) }>
                                 <fieldset>
                                     <br/>
                                     {this.getContractTermsInputs()}
@@ -711,7 +703,7 @@ class ContractTalk extends Component {
 
                     <div className="textarea-controls">
                         <span>Last accepted terms will be declined</span>
-                        <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick(true)}>Request Contact Terms Update</button>
+                        <button className="btn btn-sm btn-primary pull-right button-group" onClick={() => this.handleNewTermsClick(this.lastMessageBoxForm)}>Request Contact Terms Update</button>
                     </div>
 
                 </div>
