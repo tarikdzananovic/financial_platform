@@ -195,6 +195,7 @@ class BizCabinet extends Component {
         };
 
         this.LinkFormatter = this.LinkFormatter.bind(this);
+        this.statusFormatter = this.statusFormatter.bind(this);
         this.LinkFormatterContract = this.LinkFormatterContract.bind(this);
         this.setStateForProps = this.setStateForProps.bind(this);
     }
@@ -259,6 +260,16 @@ class BizCabinet extends Component {
             <a href={path}>{value}</a>
         );
     }
+
+    statusFormatter(value, row, index) {
+
+        let divStyle = value == 'Contract concluded' ? { color: 'gray'} : { color: 'red'};
+
+        return (
+            <div style={divStyle}>{value}</div>
+        );
+    }
+
     LinkFormatterContract(value, row, index){
 
         let path = "/#/biz/" + this.state.biz._id + "/contract/" + row._id + "/";
@@ -389,7 +400,7 @@ class BizCabinet extends Component {
                                     <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatter} isKey={ true }>CT ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
-                                    <TableHeaderColumn dataField='status'>Status</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='status' dataFormat={this.statusFormatter}>Status</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
 
