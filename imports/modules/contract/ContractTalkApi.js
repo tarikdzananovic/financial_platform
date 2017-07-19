@@ -4,13 +4,13 @@ import { hashHistory} from 'react-router';
 
 export default class ContractTalkApi {
 
-    static saveMessageNewTerms(message, contractTalkId) {
+    static saveMessageNewTerms(message, contractTalkId, status) {
 
         const confirmation = 'Message saved!';
 
         let saveMessageType = 'contractTalks.saveMessage';
 
-        Meteor.call(saveMessageType, message, contractTalkId, function(error, response) {
+        Meteor.call(saveMessageType, message, contractTalkId, status, function(error, response) {
             if (error) {
                 Bert.alert(error.reason, 'danger');
             } else {
@@ -21,11 +21,11 @@ export default class ContractTalkApi {
         });
     }
 
-    static saveMessageAcceptTerms(message, contractTalkId, lastContractTerms) {
+    static saveMessageAcceptTerms(message, contractTalkId, lastContractTerms, status) {
         const confirmation = 'Message saved!';
         let saveMessageType = 'contractTalks.saveMessageUpdateTerms';
 
-        Meteor.call(saveMessageType, message, contractTalkId, lastContractTerms, function(error, response) {
+        Meteor.call(saveMessageType, message, contractTalkId, lastContractTerms, status, function(error, response) {
             if (error) {
                 Bert.alert(error.reason, 'danger');
             } else {
@@ -49,28 +49,33 @@ export default class ContractTalkApi {
         });
     }
 
-    static saveContract(contractTalk) {
+    static saveContract(contractTalk, status) {
 
-        const confirmation = 'Contract saved!';
-
-        let contract = {
-            contractOwnerId: contractTalk.ctiOwnerBizId,
-            contractNegotiatorId: contractTalk.ctNegotiatorBizId,
-            negotiatorBiz: contractTalk.ctNegotiatorBiz,
-            legalIds: contractTalk.legalIds,
-            contractTerms: contractTalk.currentContractTerms,
-            contractInvite: contractTalk.contractInvite
-        };
-
-        Meteor.call('contracts.insert', contract, function(error, response) {
-            if(error){
-                Bert.alert(error.reason,'danger');
+        Meteor.call('contractTalks.updateStatus', contractTalk._id, status, function(error, response) {
+            if (error) {
+                Bert.alert(error.reason, 'danger');
             } else {
-                Bert.alert(confirmation, 'success');
-                hashHistory.push('/biz/' + contractTalk.ctiOwnerBizId + '/contract/' + response);
-            }
-        })
+                const confirmation = 'Contract saved!';
 
+                let contract = {
+                    contractOwnerId: contractTalk.ctiOwnerBizId,
+                    contractNegotiatorId: contractTalk.ctNegotiatorBizId,
+                    negotiatorBiz: contractTalk.ctNegotiatorBiz,
+                    legalIds: contractTalk.legalIds,
+                    contractTerms: contractTalk.currentContractTerms,
+                    contractInvite: contractTalk.contractInvite
+                };
+
+                Meteor.call('contracts.insert', contract, function(error, response) {
+                    if(error){
+                        Bert.alert(error.reason,'danger');
+                    } else {
+                        Bert.alert(confirmation, 'success');
+                        hashHistory.push('/biz/' + contractTalk.ctiOwnerBizId + '/contract/' + response);
+                    }
+                });
+            }
+        });
     }
 
 }

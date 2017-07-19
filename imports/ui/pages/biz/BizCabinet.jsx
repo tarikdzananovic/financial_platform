@@ -205,7 +205,7 @@ class BizCabinet extends Component {
 
         props.contractTalks.map((contractTalk) => {
             let counterBizName = props.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
-            contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName});
+            contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName, status: contractTalk.status});
         });
 
         props.contracts.map((contract) => {

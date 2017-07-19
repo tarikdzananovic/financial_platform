@@ -23,7 +23,7 @@ Meteor.methods({
 
     },
 
-    'contractTalks.saveMessage'(message, contractTalkId) {
+    'contractTalks.saveMessage'(message, contractTalkId, status) {
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -31,14 +31,15 @@ Meteor.methods({
         }
 
         ContractTalks.update({_id: contractTalkId}, {
-            $push: { messages: message }
+            $push: { messages: message },
+            $set: {status: status }
         });
 
         return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});
 
     },
 
-    'contractTalks.saveMessageUpdateTerms'(message, contractTalkId, lastContractTerms) {
+    'contractTalks.saveMessageUpdateTerms'(message, contractTalkId, lastContractTerms, status) {
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
@@ -48,11 +49,25 @@ Meteor.methods({
         ContractTalks.update({_id: contractTalkId},
             {
                 $push: {messages: message},
-                $set: {currentContractTerms: lastContractTerms}
+                $set: {currentContractTerms: lastContractTerms, status: status }
             });
 
         return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});
 
+    },
+
+    'contractTalks.updateStatus'(contractTalkId, status) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        ContractTalks.update({_id: contractTalkId},
+            {
+                $set: { status: status }
+            });
+
+        return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});
     },
 
     'contractTalks.upsert'(contractTalk) {

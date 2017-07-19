@@ -224,54 +224,52 @@ class ContractTalk extends Component {
 
     handleNewTermsClick(removeLastAccepted){
 
-        this.validateContractTerms();
-        if($(this.contractTermsForm).valid()){
-            var myUser = {};
-            myUser.name = this.state.myBiz.name;
-            myUser.id = this.state.myBiz._id;
+        var myUser = {};
+        myUser.name = this.state.myBiz.name;
+        myUser.id = this.state.myBiz._id;
 
-            let message = this.state.newContractTermsRequest;
-            message.accepted = undefined;
-            message.sender = myUser;
-            message.date = Date.now();
-            message.type = 'NEW_TERMS';
+        let message = this.state.newContractTermsRequest;
+        message.accepted = undefined;
+        message.sender = myUser;
+        message.date = Date.now();
+        message.type = 'NEW_TERMS';
 
-            let messages = this.state.messages;
+        let messages = this.state.messages;
 
-            let lastContractTerms = this.state.originalContractTerms;
-            if(removeLastAccepted) {
-                let counter = 0;
-                for(var i = messages.length-1; i >= 0; i--){
-                    if(messages[i].type == "NEW_TERMS"){
-                        if (counter === 1) {
-                            lastContractTerms = messages[i].contractTerms;
-                        }
-                        counter++;
+        let lastContractTerms = this.state.originalContractTerms;
+        if(removeLastAccepted) {
+            let counter = 0;
+            for(var i = messages.length-1; i >= 0; i--){
+                if(messages[i].type == "NEW_TERMS"){
+                    if (counter === 1) {
+                        lastContractTerms = messages[i].contractTerms;
                     }
+                    counter++;
                 }
             }
-
-            messages.push(message);
-
-            this.setState({
-                messages : messages,
-                newContractTermsRequest : {}
-            });
-
-            /*if(removeLastAccepted) {
-             ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
-             this.setState({
-             updatedContractTerms: lastContractTerms
-             });
-             }
-             else
-             ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
-             */
-            ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, message.contractTerms);
-            this.setState({
-                updatedContractTerms: message.contractTerms
-            });
         }
+
+        messages.push(message);
+
+        this.setState({
+            messages : messages,
+            newContractTermsRequest : {}
+        });
+
+        /*if(removeLastAccepted) {
+         ContractTalkApi.saveMessageNewTermsReplaceLastAccepted(message, this.state.talkId, lastContractTerms);
+         this.setState({
+         updatedContractTerms: lastContractTerms
+         });
+         }
+         else
+         ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
+         */
+        ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, message.contractTerms, myUser.name + ' proposed new terms');
+        this.setState({
+            updatedContractTerms: message.contractTerms
+        });
+
     }
 
     handleAcceptTermsClick(){
@@ -293,7 +291,7 @@ class ContractTalk extends Component {
             newContractTermsRequest : {}
         });
 
-        ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, lastContractTerms);
+        ContractTalkApi.saveMessageAcceptTerms(message, this.state.talkId, lastContractTerms, myUser.name + ' accepted proposed terms');
         this.setState({
             updatedContractTerms: lastContractTerms
         });
@@ -317,7 +315,7 @@ class ContractTalk extends Component {
             messages : messages,
             newContractTermsRequest : {}
         });
-        ContractTalkApi.saveMessageNewTerms(message, this.state.talkId);
+        ContractTalkApi.saveMessageNewTerms(message, this.state.talkId, myUser.name + ' declined proposed terms');
     }
 
     handleShowAcceptance(last){
@@ -351,7 +349,7 @@ class ContractTalk extends Component {
     }
 
     handleCreateContract() {
-        ContractTalkApi.saveContract(this.props.contractTalk);
+        ContractTalkApi.saveContract(this.props.contractTalk, 'Contract concluded');
     }
 
     handleBackToDefaultClick(last){
