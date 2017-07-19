@@ -229,6 +229,9 @@ class ContractTalk extends Component {
         myUser.id = this.state.myBiz._id;
 
         let message = this.state.newContractTermsRequest;
+        if(!message.contractTerms){
+            message.contractTerms = CloneObject(this.state.updatedContractTerms);
+        }
         message.accepted = undefined;
         message.sender = myUser;
         message.date = Date.now();
@@ -419,10 +422,24 @@ class ContractTalk extends Component {
         if(lastMessage.type === 'ACCEPTANCE' && lastMessage.accepted === true && lastMessage.sender.id !== this.state.myBiz._id){
             return 'CONTINUE_NEGOTIATE';
         }
+        if(lastMessage.type === 'ACCEPTANCE' && lastMessage.accepted === false && lastMessage.sender.id === this.state.myBiz._id){
+            return 'ACCEPTANCE';
+        }
+
 
         for(var i = this.state.messages.length - 1; i >= 0; i--){
             if(this.state.messages[i].sender.id != this.state.myBiz._id){
                 messageType = this.state.messages[i].type;
+                if(messageType === 'NEW_TERMS'){
+                    let messageTerms = this.state.messages[i].contractTerms;
+                    if(messageTerms){
+                        Object.keys(messageTerms).forEach(function(key) {
+                            if(!messageTerms[key].value){
+                                messageType = 'ACCEPTANCE';
+                            }
+                        });
+                    }
+                }
                 break;
             }
         }
