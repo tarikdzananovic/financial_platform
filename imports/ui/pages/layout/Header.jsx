@@ -51,10 +51,10 @@ export default class Header extends Component {
                 {/* Note: The activity badge color changes when clicked and resets the number to 0
                  Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications */}
 
-                <ActivitiesDropdown url={'api/activities/activities.json'} />
+                {/*<ActivitiesDropdown url={'api/activities/activities.json'} />*/}
             </div>
 
-            <RecentProjects />
+            {/*<RecentProjects />*/}
             <div className="pull-right"  /*pulled right: nav area*/ >
 
                 <ToggleMenu className="btn-header pull-right"  /* collapse menu button */ />
@@ -98,11 +98,11 @@ export default class Header extends Component {
                 </div>
 
                 {/* search mobile button (this is hidden till mobile view port) */}
-                <SearchMobile className="btn-header transparent pull-right"/>
+                {/*<SearchMobile className="btn-header transparent pull-right"/>*/}
 
 
                 {/* input: search field */}
-                <form action="#/misc/search.html" className="header-search pull-right">
+                {/*<form action="#/misc/search.html" className="header-search pull-right">
                     <input id="search-fld" type="text" name="param" placeholder="Find reports and more"
                            data-autocomplete='[
 					"ActionScript",
@@ -131,7 +131,7 @@ export default class Header extends Component {
                         <i className="fa fa-search"/>
                     </button>
                     <a href="$" id="cancel-search-js" title="Cancel Search"><i className="fa fa-times"/></a>
-                </form>
+                </form>*/}
 
 
             </div>
