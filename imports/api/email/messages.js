@@ -10,7 +10,7 @@ Meteor.methods({
     sendMessage(message) {
         check(message, Object);
 
-        Meteor.defer(() => {
+        //Meteor.defer(() => {
             /*Email.send({
                 to: 'tareeus@gmail.com',
                 from: `${message.name} ${message.email}`,
@@ -18,11 +18,11 @@ Meteor.methods({
                 text: message.message,
             });*/
             Email.send({
-                from: "tareeus@gmail.com",
+                from: "postmaster@sandboxfa149cf06b2140deba2d4ea5903efb90.mailgun.org",
                 to: "tareeus@gmail.com",
                 subject: "Meteor Can Send Emails via Gmail",
                 text: "Its pretty easy to send emails via gmail."
             });
-        });
+        //});
     },
 });
