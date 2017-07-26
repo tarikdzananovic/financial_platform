@@ -19,6 +19,8 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
+        contractTalk.lastUpdate = moment().format('MMMM Do YYYY, h:mm:ss a');
+
         return ContractTalks.insert(contractTalk);
 
     },
@@ -32,7 +34,7 @@ Meteor.methods({
 
         ContractTalks.update({_id: contractTalkId}, {
             $push: { messages: message },
-            $set: {status: status }
+            $set: {status: status, lastUpdate: moment().format('MMMM Do YYYY, h:mm:ss a')}
         });
 
         return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});
@@ -49,7 +51,7 @@ Meteor.methods({
         ContractTalks.update({_id: contractTalkId},
             {
                 $push: {messages: message},
-                $set: {currentContractTerms: lastContractTerms, status: status }
+                $set: {currentContractTerms: lastContractTerms, status: status, lastUpdate: moment().format('MMMM Do YYYY, h:mm:ss a')}
             });
 
         return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});
@@ -64,7 +66,7 @@ Meteor.methods({
 
         ContractTalks.update({_id: contractTalkId},
             {
-                $set: { status: status }
+                $set: { status: status, lastUpdate: moment().format('MMMM Do YYYY, h:mm:ss a')}
             });
 
         return ContractTalks.findOne({_id: contractTalkId}, {fields: {currentContractTerms: 1}});

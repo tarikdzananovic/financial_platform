@@ -154,7 +154,8 @@ class ContractInvite extends Component {
             template: this.state.template.template,
             templateId: this.state.templateId,
             legalIds: this.state.template.legalIds,
-            contractTerms: this.state.template.contractTerms
+            contractTerms: this.state.template.contractTerms,
+            indexer: this.state.template.indexer
         };
 
         const confirmation = 'Contract invite added';

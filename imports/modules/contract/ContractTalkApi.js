@@ -63,7 +63,8 @@ export default class ContractTalkApi {
                     negotiatorBiz: contractTalk.ctNegotiatorBiz,
                     legalIds: contractTalk.legalIds,
                     contractTerms: contractTalk.currentContractTerms,
-                    contractInvite: contractTalk.contractInvite
+                    contractInvite: contractTalk.contractInvite,
+                    indexer: contractTalk.indexer
                 };
 
                 Meteor.call('contracts.insert', contract, function(error, response) {

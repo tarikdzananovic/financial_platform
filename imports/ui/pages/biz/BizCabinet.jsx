@@ -203,22 +203,32 @@ class BizCabinet extends Component {
     setStateForProps(props){
         let contractTalksShortened = [];
         let contractsShortened = [];
+        let contractInvitesOtherBizes=[];
+
+        props.contractInvitesOtherBizes.map((contractInvite) => {
+            let contractInviteOtherBiz = contractInvite;
+            contractInviteOtherBiz.creator = contractInvite.biz.name;
+            contractInviteOtherBiz.role = contractInvite.legalIds["Company Legal ID"].value ? "Company" : "Agent";
+            contractInvitesOtherBizes.push(contractInviteOtherBiz);
+        });
 
         props.contractTalks.map((contractTalk) => {
             let counterBizName = props.biz._id != contractTalk.ctNegotiatorBizId ? contractTalk.ctNegotiatorBiz.name : contractTalk.contractInvite.biz.name;
-            contractTalksShortened.push({_id: contractTalk._id, template: contractTalk.contractInvite.template, counterBizName: counterBizName, status: contractTalk.status});
+            contractTalksShortened.push({_id: contractTalk._id, indexer: contractTalk.indexer, template: contractTalk.contractInvite.template,
+                counterBizName: counterBizName, status: contractTalk.status, lastUpdate: contractTalk.lastUpdate});
         });
 
         props.contracts.map((contract) => {
             let counterBizName = props.biz._id != contract.contractNegotiatorId ? contract.negotiatorBiz.name : contract.contractInvite.biz.name;
-            contractsShortened.push({_id: contract._id, template: contract.contractInvite.template, counterBizName: counterBizName});
+            contractsShortened.push({_id: contract._id, indexer: contract.indexer, template: contract.contractInvite.template,
+                counterBizName: counterBizName, lastUpdate: contract.lastUpdate});
         });
 
         this.setState({
             biz: props.biz,
             publicCabinet : props.biz.userId !== Meteor.user()._id,
             contractInvites: props.contractInvites,
-            contractInvitesOtherBizes: props.contractInvitesOtherBizes,
+            contractInvitesOtherBizes: contractInvitesOtherBizes,
             contractTalks: contractTalksShortened,
             contracts: contractsShortened
         });
@@ -372,8 +382,9 @@ class BizCabinet extends Component {
                                                 expandableRow={ this.isExpandableRow }
                                                 expandComponent={ (e) => this.expandComponent(e, false)}
                                 >
-                                    <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='indexer' isKey={ true }>CTI ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='lastUpdate'>Created</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
                         </div>
@@ -385,8 +396,11 @@ class BizCabinet extends Component {
                                                 expandableRow={ this.isExpandableRow }
                                                 expandComponent={(e) => this.expandComponent(e, true, this.state.biz) }
                                 >
-                                    <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='indexer' isKey={ true }>CTI ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='creator'>Creator</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='role'>Role</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='lastUpdate'>Created</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
 
@@ -397,10 +411,11 @@ class BizCabinet extends Component {
                                                 pagination={ true }
                                                 options={ getOptions(this.state.contractTalks.length) }
                                 >
-                                    <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatter} isKey={ true }>CT ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='indexer' dataFormat={this.LinkFormatter} isKey={ true }>CT ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
                                     <TableHeaderColumn dataField='status' dataFormat={this.statusFormatter}>Status</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='lastUpdate'>Updated</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
 
@@ -411,9 +426,10 @@ class BizCabinet extends Component {
                                                 pagination={ true }
                                                 options={ getOptions(this.state.contracts.length) }
                                 >
-                                    <TableHeaderColumn dataField='_id' dataFormat={this.LinkFormatterContract} isKey={ true }>Contract ID</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='indexer' dataFormat={this.LinkFormatterContract} isKey={ true }>Contract ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
                                     <TableHeaderColumn dataField='counterBizName'>Counter Biz</TableHeaderColumn>
+                                    <TableHeaderColumn dataField='lastUpdate'>Created</TableHeaderColumn>
                                 </BootstrapTable>
                             </div>
 
@@ -438,8 +454,9 @@ class BizCabinet extends Component {
                                         expandableRow={ this.isExpandableRow }
                                         expandComponent={ (e) => this.expandComponent(e, false) }
                         >
-                            <TableHeaderColumn dataField='_id' isKey={ true }>CTI ID</TableHeaderColumn>
+                            <TableHeaderColumn dataField='indexer' isKey={ true }>CTI ID</TableHeaderColumn>
                             <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>
+                            <TableHeaderColumn dataField='lastUpdate'>Created</TableHeaderColumn>
                         </BootstrapTable>
                     </div>
                 </div>

@@ -33,6 +33,7 @@ var getAdvertisingTemplate = () =>
     template.actors = actors;
     template.legalIds = legalIds;
     template.contractTerms = contractTerms;
+    template.indexer = "C-01";
 
     var objectTemplate = {};
     objectTemplate.template = template;

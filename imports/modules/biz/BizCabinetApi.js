@@ -27,7 +27,8 @@ export default class BizCabinetApi {
             template: ctiData.template,
             templateId: ctiData.templateId,
             legalIds: ctiData.legalIds,
-            contractTerms: ctiData.contractTerms
+            contractTerms: ctiData.contractTerms,
+            indexer: ctiData.indexer
         };
 
         let contractTalk = {
@@ -38,7 +39,8 @@ export default class BizCabinetApi {
             contractInviteId: ctiData._id,
             legalIds: legalIds,
             currentContractTerms: ctiData.contractTerms,
-            status: 'Contract talk started'
+            status: 'Contract talk started',
+            indexer: contractInvite.indexer + "-T"
         };
 
         const confirmation = 'Contract talk added';

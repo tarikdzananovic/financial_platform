@@ -23,6 +23,8 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
+        contract.lastUpdate = moment().format('MMMM Do YYYY, h:mm:ss a');
+
         return Contracts.insert(contract);
 
     },

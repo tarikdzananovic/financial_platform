@@ -32,3 +32,4 @@ aldeed:simple-schema
 aldeed:collection2-core@2.0.0
 mquandalle:bower
 session
+momentjs:moment
