@@ -24,12 +24,13 @@ const getUserData = () => ({
 const signup = () => {
     const user = getUserData();
 
-    Accounts.createUser(user, (error) => {
+    Accounts.createUser(user, (error, response) => {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            hashHistory.push('/');
-            Bert.alert('Welcome!', 'success');
+            //Accounts.sendVerificationEmail(response);
+            //hashHistory.push('/');
+            Bert.alert('Verification mail has been sent to your email!', 'success');
         }
     });
 };

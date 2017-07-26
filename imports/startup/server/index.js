@@ -4,4 +4,11 @@ import './browser-policy';
 import './fixtures';
 import './api';
 
-process.env.MAIL_URL = "smtps://postmaster%40sandboxfa149cf06b2140deba2d4ea5903efb90.mailgun.org:ac877a23b0d141b6071cc8e9294f5a21@smtp.mailgun.org:465";
+process.env.MAIL_URL = "smtps://postmaster%40sandbox10cbc2ad755c4c01bdcd7b89ed2e25a3.mailgun.org:e69c3bb89fe138260f221d6dfb81010a@smtp.mailgun.org:465";
+
+//-- Application name
+Accounts.emailTemplates.siteName = 'Financial Platform';
+
+Accounts.config({
+    sendVerificationEmail: true
+});
