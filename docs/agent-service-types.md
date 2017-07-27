@@ -17,6 +17,8 @@ It can be JSON file loadable on server startup. For starters lets define:
 - service_type_short_description - YouTube localized banners
 - service_type_description - ad campaing using YouTube video banners locallized for you biz service area
 
+and:
+
 - service_type_name - fb_lclz_banners
 - service_type_short_description - FaceBook localized ad campaing
 - service_type_description - ad campaing runnning on FaceBook tuned for you biz service area
