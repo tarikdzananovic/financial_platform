@@ -24,10 +24,23 @@ It can be JSON file loadable on server startup. For starters lets define:
 Utilization
 -----------
 
-During creation of CTI biz should choose Biz role. In the case Biz selects to be Agent the Biz should be able:
+During creation of CTI biz should choose Biz role.
 
-- specify list of Agent Service Types which Biz is willing to provide. This can be done by giving list of
-multiple choices from list **agent_service_types**. E.g. certain CTI list can be youtube ads only - deselecting facebook item
-in the list.
+In the case Biz selects to be Agent the Biz should be able:
+
+- specify list of Agent Service Types which Biz is willing to provide. The list is saved in CTI and named as **CTI's agent service types**. User interface should give the list of multiple choices from **agent_service_types**. E.g. certain CTI list can be youtube ads only - user will deselect facebook item in the list.
+
+In the case Biz selects to be Company the Biz should be able:
+
+- specify list of Agent Service Types which Biz is willing to consider in contract talk. Similar logic of multiple choice from
+**agent_service types** is applicable here. I.e. **CTI's agent service types** list should be created and saved in CTI object in DB.
+
+
+During Contract Talk either side can choose only one agent service type from *CTI agent service types** list.
+
+Also:
+
 - each CTI should be handled independently
 - further modification of agent_service_types should not affect already created CTIs.
+- during Contract Talk neither Agent nor Company can change list **CTI's agent service types**
+
