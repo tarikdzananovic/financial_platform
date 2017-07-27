@@ -38,7 +38,7 @@ In the case Biz selects to be Company the Biz should be able:
 **agent_service types** is applicable here. I.e. **CTI's agent service types** list should be created and saved in CTI object in DB.
 
 
-During Contract Talk either side can choose only one agent service type from *CTI agent service types** list.
+During Contract Talk either side can choose only one agent service type from **CTI agent service types** list.
 
 Also:
 
