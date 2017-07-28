@@ -29,5 +29,7 @@ Meteor.methods({
 
     sendVerificationMail(userId) {
         return Accounts.sendVerificationEmail(userId);
-    }
+    },
+
+
 });
