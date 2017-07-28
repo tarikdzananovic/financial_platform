@@ -8,6 +8,8 @@ import Signup from '../../ui/pages/auth/Signup.jsx';
 import Login from '../../ui/pages/auth/Login.jsx';
 import NotFound from '../../ui/pages/NotFound.jsx';
 import ForgotPassword from '../../ui/pages/auth/ForgotPassword';
+import ResetPassword from '../../ui/pages/auth/ResetPassword.jsx';
+import VerifyMail from '../../ui/pages/auth/VerifyMail.jsx';
 import Home from '../../ui/pages/Home';
 import Layout from '../../ui/pages/layout/Layout';
 import Profile from '../../ui/pages/Profile';
@@ -32,6 +34,7 @@ const authenticate = (nextState, replace) => {
 Meteor.startup(() => {
     render(
         <Router history={ hashHistory }>
+
             <Route path="/" component={Layout} onEnter={authenticate}>
                 <Redirect from="/" to="/home"/>
                 <IndexRoute component={Home}/>
@@ -54,10 +57,11 @@ Meteor.startup(() => {
                 </Route>
             </Route>
 
-
             <Route path="/login" component={Login}/>
             <Route path="/forgot-password" component={ForgotPassword}/>
             <Route path="/register" component={Signup}/>
+            {/*<Route path="/reset-password/:token" component={ResetPassword}/>
+            <Route path="/verify-email/:token" component={VerifyMail}/>*/}
 
             <Route path="*" component={ NotFound } />
         </Router>,

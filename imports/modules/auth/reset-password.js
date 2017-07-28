@@ -16,7 +16,7 @@ const handleReset = () => {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            hashHistory.push('/');
+            //hashHistory.push('/');
             Bert.alert('Password reset!', 'success');
         }
     });

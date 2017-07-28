@@ -1,8 +1,13 @@
 import React from 'react';
 import { Row, Col, Alert, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import handleResetPassword from '../../modules/auth/reset-password';
+import handleResetPassword from '../../../modules/auth/reset-password';
 
 export default class ResetPassword extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
         handleResetPassword({ component: this, token: this.props.params.token });
     }
@@ -16,7 +21,7 @@ export default class ResetPassword extends React.Component {
             <div className="ResetPassword">
                 <Row>
                     <Col xs={ 12 } sm={ 6 } md= { 4 }>
-                        <h4 className="page-header">Reset Pasword</h4>
+                        <h4 className="page-header">Reset Password</h4>
                         <Alert bsStyle="info">
                             To reset your password, enter a new one below. You will be logged in
                             with your new password.

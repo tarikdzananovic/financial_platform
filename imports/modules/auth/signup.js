@@ -12,26 +12,37 @@ const getUserData = () => ({
     email: document.querySelector('[name="email"]').value,
     password: document.querySelector('[name="password"]').value,
     profile: {
-        name: {
-            first: document.querySelector('[name="firstName"]').value,
-            last: document.querySelector('[name="lastName"]').value,
-        },
+        name: document.querySelector('[name="firstName"]').value + " " + document.querySelector('[name="lastName"]').value,
         phone: document.querySelector('[name="phone"]').value,
         address: document.querySelector('[name="address"]').value,
+        firstName: document.querySelector('[name="firstName"]').value,
+        lastName: document.querySelector('[name="lastName"]').value
     },
 });
 
 const signup = () => {
     const user = getUserData();
 
-    Accounts.createUser(user, (error) => {
+
+    Meteor.call('createUserFromAdmin', user, function(error, response){
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            hashHistory.push('/');
-            Bert.alert('Welcome!', 'success');
+            //Accounts.sendVerificationEmail(response);
+            hashHistory.push('/login');
+            Bert.alert('Verification mail has been sent to your email!', 'success');
         }
     });
+
+    /*Accounts.createUser(user, (error, response) => {
+        if (error) {
+            Bert.alert(error.reason, 'danger');
+        } else {
+            //Accounts.sendVerificationEmail(response);
+            hashHistory.push('/login');
+            Bert.alert('Verification mail has been sent to your email!', 'success');
+        }
+    });*/
 };
 
 const validate = () => {

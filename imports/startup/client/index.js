@@ -3,3 +3,4 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import './routes.jsx';
 
 Bert.defaults.style = 'growl-top-right'
+
