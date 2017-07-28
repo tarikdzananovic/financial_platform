@@ -23,7 +23,7 @@ const createBIZ = () => {
     const confirmation = 'Biz added!';
     const newBiz = getBizData();
 
-    /*Meteor.call('bizes.upsert', newBiz, function(error, response) {
+    Meteor.call('bizes.upsert', newBiz, function(error, response) {
         if (error) {
             console.log("Error: " + JSON.stringify(error));
             Bert.alert(error.reason, 'danger');
@@ -32,23 +32,7 @@ const createBIZ = () => {
             hashHistory.push('/');
             NavigationActions.getItems();
         }
-    });*/
-
-    const message = {
-        name: newBiz.name,
-        email: newBiz.email,
-        message: 'Ask for verification'
-    };
-
-    Meteor.call('sendMessage', message, (error) => {
-        if (error) {
-            Bert.alert(error.reason, 'danger');
-        } else {
-            Bert.alert('Message sent!', 'success');
-        }
     });
-
-
 };
 
 const validate = () => {
