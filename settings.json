@@ -1,0 +1,11 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://<dbuser>:<dbpassword>@ds129023.mlab.com:29023/financial_platform"
+    }
+  },
+  "public": {
+    "emailVerification": false,
+    "sessionExpirationTime": 0.25
+  }
+}

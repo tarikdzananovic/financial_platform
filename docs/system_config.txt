@@ -1,0 +1,22 @@
+Create settings.json file that will be included in meteor deploy.
+
+Fields that will be in that file:
+
+File will be in format:
+
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://<dbuser>:<dbpassword>@ds129023.mlab.com:29023/financial_platform" //Used for deploying on Meteor galaxy
+    }
+  },
+  "public": {
+    "emailVerification": false, // Used for including emailVerification
+    "sessionExpirationTime": 0.25 // Unit is days, so this represents 6 hours i.e
+
+  }
+}
+
+App will be deployed with following syntax with this file create:
+
+sudo meteor --settings settings.json --allow-superuser

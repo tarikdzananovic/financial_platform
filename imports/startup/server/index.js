@@ -33,7 +33,7 @@ var loginAttemptVerifier = function(parameters) {
         // return true if verified email, false otherwise.
         var found = _.find(
             parameters.user.emails,
-            function(thisEmail) { return thisEmail.verified }
+            function(thisEmail) { return thisEmail.verified || !Meteor.settings.public.emailVerification }
         );
 
         if (!found) {
@@ -48,7 +48,7 @@ var loginAttemptVerifier = function(parameters) {
 Accounts.validateLoginAttempt(loginAttemptVerifier);
 
 Accounts.config({
-    sendVerificationEmail: true,
-    loginExpirationInDays: (1 / 24) * 6,
+    sendVerificationEmail: Meteor.settings.public.emailVerification,
+    loginExpirationInDays: Meteor.settings.public.sessionExpirationTime,
     forbidClientAccountCreation: false
 });

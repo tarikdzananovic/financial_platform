@@ -28,9 +28,20 @@ const signup = () => {
         if (error) {
             Bert.alert(error.reason, 'danger');
         } else {
-            //Accounts.sendVerificationEmail(response);
-            hashHistory.push('/login');
-            Bert.alert('Verification mail has been sent to your email!', 'success');
+            if(Meteor.settings.public.emailVerification) {
+                hashHistory.push('/login');
+                Bert.alert('Verification mail has been sent to your email!', 'success');
+            } else {
+                Bert.alert('Welcome', 'success');
+                const { location } = component.props;
+                if (location.state && location.state.nextPathname) {
+                    hashHistory.push(location.state.nextPathname);
+                } else {
+                    hashHistory.push('/');
+                }
+            }
+
+
         }
     });
 

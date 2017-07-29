@@ -10,8 +10,9 @@ Meteor.methods({
     createUserFromAdmin:function(user){
         let userId = Accounts.createUser(user);
         //sendVerificationMail
-        Accounts.sendVerificationEmail(userId);
-
+        if(Meteor.settings.public.emailVerification) {
+            Accounts.sendVerificationEmail(userId);
+        }
     },
 
 });

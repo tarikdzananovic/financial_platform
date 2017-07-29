@@ -10,6 +10,12 @@ if(Meteor.isServer) {
     });
 }
 
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
 Meteor.methods({
 
     'contractTalks.insert'(contractTalk) {
@@ -19,7 +25,10 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
+        let count = ContractTalks.find({ctiOwnerBizId: contractTalk.ctiOwnerBizId}).count() + 1;
+
         contractTalk.lastUpdate = moment().format('MMMM Do YYYY, h:mm:ss a');
+        contractTalk.indexer = contractTalk.indexer + "-" + pad(count, 2);
 
         return ContractTalks.insert(contractTalk);
 

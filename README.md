@@ -4,4 +4,4 @@ Start project in local environment by:
 
  - downloading Meteor from: https://www.meteor.com/install
 
- - going to project directory and typing in terminal: sudo meteor --allow-superuser
+ - going to project directory and typing in terminal: sudo meteor --settings settings.json --allow-superuser
