@@ -4,6 +4,7 @@
 import { hashHistory} from 'react-router';
 import { Accounts} from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Meteor } from 'meteor/meteor';
 import '../validation.js';
 
 let component;
@@ -32,13 +33,9 @@ const signup = () => {
                 hashHistory.push('/login');
                 Bert.alert('Verification mail has been sent to your email!', 'success');
             } else {
-                Bert.alert('Welcome', 'success');
-                const { location } = component.props;
-                if (location.state && location.state.nextPathname) {
-                    hashHistory.push(location.state.nextPathname);
-                } else {
-                    hashHistory.push('/');
-                }
+                //Session.set("UserCreated", true);
+                hashHistory.push('/');
+                Bert.alert('Welcome!', 'success');
             }
 
 

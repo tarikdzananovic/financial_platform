@@ -13,6 +13,7 @@ Meteor.methods({
         if(Meteor.settings.public.emailVerification) {
             Accounts.sendVerificationEmail(userId);
         }
+        return userId;
     },
 
 });

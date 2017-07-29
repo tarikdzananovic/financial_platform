@@ -22,7 +22,7 @@ import ContractTalk from '../../ui/pages/contract/ContractTalk.jsx';
 import Contract from '../../ui/pages/contract/Contract.jsx';
 
 const authenticate = (nextState, replace) => {
-    if (!Meteor.loggingIn() && !Meteor.userId()) {
+    if ((!Meteor.loggingIn() && !Meteor.userId() && !Session.get("UserCreated"))) {
         replace({
             pathname: '/login',
             state: { nextPathname: nextState.location.pathname },
