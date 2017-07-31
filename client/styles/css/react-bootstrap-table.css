@@ -1,6 +1,10 @@
 /*editor error animate*/
 /*@import "~toastr/build/toastr.min.css";*/
 
+.react-bs-select-all{
+  display: none;
+}
+
 .react-bs-table-container .react-bs-table-search-form {
   margin-bottom: 0;
 }
