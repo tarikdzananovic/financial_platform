@@ -10,6 +10,25 @@ import { Bizes } from '../../../api/bizes.js';
 
 import Iframe from 'react-iframe'
 
+
+class BSTable extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        if (this.props.data) {
+            return (
+                <p>
+                    <strong>Description:</strong> {this.props.data}
+                </p>);
+        } else {
+            return (<p>?</p>);
+        }
+    }
+}
+
 class ContractTemplate extends Component {
 
     constructor(props){
@@ -230,7 +249,6 @@ class ContractInvite extends Component {
                 endDate: {
                     greaterThan: ["#startDate","Start Date"]
                 }
-
             },
 
             messages: {
@@ -285,18 +303,97 @@ class ContractInvite extends Component {
         }
     }
 
+    isExpandableRow(row) {
+        if(row.description){
+            return true;
+        }
+        return false;
+    }
+
+    expandComponent(row) {
+        return (
+            <BSTable data={ row.description}/>
+        );
+    }
+
+
+    onRowSelect(row, isSelected, e) {
+        if(!isSelected && this.refs.agentServiceTypes.state.selectedRowKeys.length === 1){
+            return false;
+        }
+    }
+
+    handleExpand(rowKey, isExpand) {
+        //not working
+        if (!isExpand && this.refs.agentServiceTypes.state.selectedRowKeys.length === 1) {
+            return false;
+        }
+        return true;
+    }
+
+
+    getTable(object, inputName){
+        var keyList = [];
+        for(var i = 0 ; i < object.length;i++){
+            if(object[i].name){
+                keyList.push(object[i].name);
+            }
+        }
+        const options = {
+            expandRowBgColor: 'rgb(207, 215, 223)',
+            expanding: keyList,
+            expandBy: 'column',
+            onExpand: this.handleExpand.bind(this)
+        };
+
+        var selectRowProp = (keys) => {
+            const properties = {
+                mode: 'checkbox',
+                clickToSelect: true,  // click to select, default is false
+                clickToExpand: true, // click to expand row, default is false
+                selected: keys,
+                onSelect: this.onRowSelect.bind(this)
+            };
+            return properties;
+        };
+        return (
+            <BootstrapTable ref= {inputName}
+                            data={ object }
+                            options={ options}
+                            expandableRow={ this.isExpandableRow }
+                            expandComponent={ (e) => this.expandComponent(e)}
+                            selectRow={ selectRowProp(keyList)}
+            >
+                <TableHeaderColumn dataField="name" isKey={true}>Name</TableHeaderColumn>
+                <TableHeaderColumn dataField="shortDescription" >Short Description</TableHeaderColumn>
+            </BootstrapTable>
+        );
+    }
+
     getContractTermsInputs(){
         if(this.state.template.contractTerms && this.state.template.role){
             let object = this.state.template.contractTerms;
             var contractTerms = Object.keys(object).map(function(key) {
-                return (
-                    <div className="form-group col-md-12">
-                        <label className="col-md-3 control-label">{key}</label>
-                        <div className="col-md-5">
-                            <input className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
+                if(object[key].type === 'grid_check'){
+                    return(
+                        <div className="form-group col-md-12">
+                            <label className="col-md-3 control-label">{key}</label>
+                            <div className="col-md-5">
+                                {this.getTable(object[key].value, object[key].inputName)}
+                            </div>
                         </div>
-                    </div>
-                );
+                    );
+                }
+                else{
+                    return (
+                        <div className="form-group col-md-12">
+                            <label className="col-md-3 control-label">{key}</label>
+                            <div className="col-md-5">
+                                <input className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
+                            </div>
+                        </div>
+                    );
+                }
             }.bind(this));
             return contractTerms;
         }
