@@ -21,12 +21,23 @@ class Message extends Component{
             if(object){
                 var map = Object.keys(object).map(function (key) {
                     if(object[key].value){
-                        return (
-                            <div className="row" key={key}>
-                                <div className="col-lg-3">{key}:</div>
-                                <div className="col-lg-6">{object[key].value}</div>
-                            </div>
-                        );
+                        if(object[key].type == "grid_check"){
+                            return (
+                                <div className="row" key={key}>
+                                    <div className="col-lg-3">{key}:</div>
+                                    <div className="col-lg-6">{object[key].value.shortDescription}</div>
+                                </div>
+                            );
+                        }
+                        else {
+                            return (
+                                <div className="row" key={key}>
+                                    <div className="col-lg-3">{key}:</div>
+                                    <div className="col-lg-6">{object[key].value}</div>
+                                </div>
+                            );
+                        }
+
                     }
                 });
                 return map;
@@ -364,12 +375,52 @@ class ContractTalk extends Component {
         });
     }
 
+    onContractTermListChange(e, key) {
+        let newContractTermsRequest = this.state.newContractTermsRequest;
+        if(!newContractTermsRequest.contractTerms){
+            newContractTermsRequest.contractTerms = CloneObject(this.state.updatedContractTerms);
+        }
+        newContractTermsRequest.contractTerms[key].value = newContractTermsRequest.contractTerms[key].values[e.target.value];
+        this.setState({
+            newContractTermsRequest : newContractTermsRequest,
+        });
+    }
+
     onCommentRequestUpdate(e) {
         let newContractTermsRequest = this.state.newContractTermsRequest;
         newContractTermsRequest.comment = e.target.value;
         this.setState({
             newContractTermsRequest : newContractTermsRequest,
         });
+    }
+
+    getSelectOptions(list) {
+        var selectOptions = list.map((item, index) => {
+            return (
+                <option key={index} value={index}>{item.shortDescription}</option>
+            );
+        });
+        return selectOptions;
+    }
+
+    getFullDescriptionAndUrl(value){
+        if(!value){
+            return;
+        }
+        if(!value.description && !value.docUrl){
+            return;
+        }
+        return (
+            <div>
+                <strong>Description:</strong>{value.description};
+                <br/>
+                <strong>Url:</strong> <a href={value.docUrl} target="_blank">{value.docUrl}</a>
+            </div>
+        );
+    }
+
+    getSelectedValue(list, item){
+        return list.findIndex(x => x.name==item.name);
     }
 
     getContractTermsInputs(){
@@ -379,14 +430,37 @@ class ContractTalk extends Component {
         }
         if(object){
             var contractTerms = Object.keys(object).map(function(key) {
-                return (
-                    <div className="form-group col-md-12" key={key}>
-                        <label className="col-md-3 control-label">{key}</label>
-                        <div className="col-md-5">
-                            <input className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
+                if(object[key].type == "grid_check"){
+                    return (
+                        <div>
+                            <div className="form-group col-md-12" key={key}>
+                                <label className="col-md-3 control-label">{key}</label>
+                                <div className="col-md-5">
+                                    <select className="form-control" name={object[key].inputName} id={object[key].inputName} value={this.getSelectedValue(object[key].values, object[key].value)} onChange={(e) => this.onContractTermListChange(e, key)}>
+                                        {this.getSelectOptions(object[key].values)}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group col-md-12" key={key + "description"}>
+                                <label className="col-md-3 control-label"></label>
+                                <div className="col-md-9">
+                                    {this.getFullDescriptionAndUrl(object[key].value)}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                );
+                    );
+                }
+                else {
+                    return (
+                        <div className="form-group col-md-12" key={key}>
+                            <label className="col-md-3 control-label">{key}</label>
+                            <div className="col-md-5">
+                                <input className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type} value={object[key].value} placeholder={key} onChange={(e) => this.onContractTermChange(e, key)}/>
+                            </div>
+                        </div>
+                    );
+                }
+
             }.bind(this));
             return contractTerms;
         }

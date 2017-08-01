@@ -17,7 +17,7 @@ var getTemplateInfo = () => {
     let agentLegalIdParam = agentLegalId ? agentLegalId : "{AgentLegalID}";
 
     if(contractTermsValues) {
-        var agentServiceType = contractTermsValues["Agent Service Type"] ? contractTermsValues["Agent Service Type"].value : undefined;
+        var agentServiceType = contractTermsValues["Agent Service Types"] ? contractTermsValues["Agent Service Types"].value.shortDescription : undefined;
         var startDate = contractTermsValues["Start Date"] ? contractTermsValues["Start Date"].value : undefined;
         var endDate = contractTermsValues["End Date"] ? contractTermsValues["End Date"].value : undefined;
         var compensationAmount = contractTermsValues["Compensation Amount"] ? contractTermsValues["Compensation Amount"].value : undefined;

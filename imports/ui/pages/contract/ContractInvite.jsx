@@ -21,7 +21,9 @@ class BSTable extends React.Component {
         if (this.props.data) {
             return (
                 <p>
-                    <strong>Description:</strong> {this.props.data}
+                    <strong>Description:</strong> {this.props.data.description}
+                    <br/>
+                    <strong>Url:</strong> <a href={this.props.data.docUrl} target="_blank">{this.props.data.docUrl}</a>
                 </p>);
         } else {
             return (<p>?</p>);
@@ -166,6 +168,17 @@ class ContractInvite extends Component {
         });
     }
 
+    selectServiceTypes(contractTerms) {
+        var map = Object.keys(contractTerms).map(function (key) {
+            if(contractTerms[key].type === "grid_check"){
+                let contractTermsFiltered = contractTerms[key].values.filter((grid_check_item) => grid_check_item.checked);
+                contractTerms[key].values = contractTermsFiltered;
+                contractTerms[key].value = contractTermsFiltered[0];
+            }
+        });
+        return contractTerms;
+    }
+
     _onWizardComplete(data){
 
         let contractInvite = {
@@ -173,7 +186,7 @@ class ContractInvite extends Component {
             template: this.state.template.template,
             templateId: this.state.templateId,
             legalIds: this.state.template.legalIds,
-            contractTerms: this.state.template.contractTerms,
+            contractTerms: this.selectServiceTypes(this.state.template.contractTerms),
             indexer: this.state.template.indexer
         };
 
@@ -312,7 +325,7 @@ class ContractInvite extends Component {
 
     expandComponent(row) {
         return (
-            <BSTable data={ row.description}/>
+            <BSTable data={ row }/>
         );
     }
 
@@ -321,6 +334,8 @@ class ContractInvite extends Component {
         if(!isSelected && this.refs.agentServiceTypes.state.selectedRowKeys.length === 1){
             return false;
         }
+        row.checked = isSelected;
+
     }
 
     handleExpand(rowKey, isExpand) {
@@ -329,6 +344,7 @@ class ContractInvite extends Component {
             return false;
         }
         return true;
+
     }
 
 
@@ -378,8 +394,8 @@ class ContractInvite extends Component {
                     return(
                         <div className="form-group col-md-12">
                             <label className="col-md-3 control-label">{key}</label>
-                            <div className="col-md-5">
-                                {this.getTable(object[key].value, object[key].inputName)}
+                            <div className="col-md-9">
+                                {this.getTable(object[key].values, object[key].inputName)}
                             </div>
                         </div>
                     );

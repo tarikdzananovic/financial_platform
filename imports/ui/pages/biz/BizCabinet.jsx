@@ -135,7 +135,13 @@ class BSTable extends React.Component {
 
             for (var type in this.props.data.contractTerms) {
                 item = {};
-                item.value = this.props.data.contractTerms[type].value;
+                let descriptions = [];
+                if(this.props.data.contractTerms[type].type === "grid_check"){
+                    this.props.data.contractTerms[type].values.map((grid_check_item) => {
+                        descriptions.push(grid_check_item.shortDescription);
+                    });
+                }
+                item.value = descriptions.join(', ');
                 item.name = type;
                 contractTermsOutput.push(item);
             }
