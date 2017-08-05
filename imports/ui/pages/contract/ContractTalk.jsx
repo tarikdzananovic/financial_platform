@@ -10,6 +10,10 @@ import getTemplateText from '../../../modules/contract/cti/TemplateText'
 import CloneObject from  '../../../utils/object/CloneObj'
 import ContractTalkApi from '../../../modules/contract/ContractTalkApi';
 
+import DatePicker from 'react-datepicker';
+//import 'react-datepicker/dist/react-datepicker.css';
+import '../../../../client/styles/css/react-datepicker.css';
+
 class Message extends Component{
     constructor(props){
         super(props);
@@ -364,12 +368,12 @@ class ContractTalk extends Component {
         }
     }
 
-    onContractTermChange(e, key) {
+    onContractTermChange(e, key, datePicker) {
         let newContractTermsRequest = this.state.newContractTermsRequest;
         if(!newContractTermsRequest.contractTerms){
             newContractTermsRequest.contractTerms = CloneObject(this.state.updatedContractTerms);
         }
-        newContractTermsRequest.contractTerms[key].value = e.target.value;
+        newContractTermsRequest.contractTerms[key].value = datePicker ? moment(e._d).format("YYYY-MM-DD") : e.target.value;
         this.setState({
             newContractTermsRequest : newContractTermsRequest,
         });
@@ -446,6 +450,20 @@ class ContractTalk extends Component {
                                 <div className="col-md-9">
                                     {this.getFullDescriptionAndUrl(object[key].value)}
                                 </div>
+                            </div>
+                        </div>
+                    );
+                }
+                else if (object[key].type === 'date' && !Modernizr.inputtypes.date){
+                    return (
+                        <div className="form-group col-md-12">
+                            <label className="col-md-3 control-label">{key}</label>
+                            <div className="col-md-5">
+                                <DatePicker
+                                    placeholderText="mm/dd/yyyy"
+                                    selected = {object[key].value ? moment(object[key].value) : ''}
+                                    onChange={(e) => this.onContractTermChange(e, key, true)}
+                                    className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type}/>
                             </div>
                         </div>
                     );

@@ -25,6 +25,7 @@
     "react-addons-pure-render-mixin": "^15.5.2",
     "react-bootstrap": "^0.31.0",
     "react-bootstrap-table": "^3.4.2",
+    "react-datepicker": "^0.52.0",
     "react-dom": "^15.5.4",
     "react-iframe": "^1.0.7",
     "react-komposer": "^1.13.1",

@@ -35,16 +35,33 @@ Meteor.methods({
                 legalIds: contractInvite.legalIds,
                 contractTerms: contractInvite.contractTerms,
                 indexer: contractInvite.indexer + "-" + pad(count, 3),
-                lastUpdate: moment().format('MMMM Do YYYY, h:mm:ss a')
+                lastUpdate: moment().format('MMMM Do YYYY, h:mm:ss a'),
+                active: contractInvite.active
             }
         }, { upsert: true });
     },
-    'contractInvites.remove'(contractInviteId) {
+
+    'contractInvites.update'(contractInviteId, active) {
+        // Make sure the user is logged in before inserting a task
+        if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        return ContractInvites.update({_id: contractInviteId}, {
+            $set: {active: active}
+        });
+    },
+
+    'contractInvites.remove'(contractInviteId, active) {
         check(contractInviteId, String);
 
         // Make sure the user is logged in before inserting a task
         if (! Meteor.userId()) {
             throw new Meteor.Error('not-authorized');
+        }
+
+        if(active){
+            throw new Meteor.Error(400, 'Contract Invite used in Contract Talks, cannot be removed!');
         }
 
         ContractInvites.remove(contractInviteId);

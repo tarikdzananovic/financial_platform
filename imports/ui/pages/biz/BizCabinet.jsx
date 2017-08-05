@@ -27,7 +27,7 @@ class BSTable extends React.Component {
 
         this.onClickHandled = this.onClickHandled.bind(this);
         this.onGoToContractTalk = this.onGoToContractTalk.bind(this);
-
+        this.removeCTI = this.removeCTI.bind(this);
     }
 
     componentWillReceiveProps(nextProps, nextState) {
@@ -47,6 +47,10 @@ class BSTable extends React.Component {
 
     onGoToContractTalk() {
         hashHistory.push('/biz/' + this.props.data.interestedBiz._id + '/contractTalk/' + this.props.data.contractTalk._id);
+    }
+
+    removeCTI(){
+        BizCabinetApi.removeCTI(this.props.data._id, this.props.data.active);
     }
 
     onClickHandled() {
@@ -122,9 +126,23 @@ class BSTable extends React.Component {
             }
         }
         else {
-            return(
-              <p></p>
-            );
+            if(this.props.myCti){
+                return (
+                    <div>
+                        <section className="col col-md-4 col-md-offset-7">
+                            <button className="btn btn-block btn-primary" onClick={this.removeCTI} style={{backgroundColor: 'red'}}>
+                                Remove CTI
+                            </button>
+                        </section>
+                    </div>
+                );
+            }
+            else {
+                return(
+                    <p></p>
+                );
+            }
+
         }
     }
 
@@ -140,8 +158,12 @@ class BSTable extends React.Component {
                     this.props.data.contractTerms[type].values.map((grid_check_item) => {
                         descriptions.push(grid_check_item.shortDescription);
                     });
+                    item.value = descriptions.join(', ');
                 }
-                item.value = descriptions.join(', ');
+                else {
+                    item.value = this.props.data.contractTerms[type].value;
+                }
+
                 item.name = type;
                 contractTermsOutput.push(item);
             }
@@ -258,13 +280,13 @@ class BizCabinet extends Component {
         else return false;
     }
 
-    expandComponent(row, canStartContractTalk, interestedBiz) {
+    expandComponent(row, canStartContractTalk, interestedBiz, myCti) {
 
         var data = row;
         data.interestedBiz = interestedBiz;
 
         return (
-            <BSTable data={ data} canStartContractTalk= { canStartContractTalk}/>
+            <BSTable data={ data} canStartContractTalk= { canStartContractTalk} myCti={myCti}/>
         );
     }
 
@@ -386,7 +408,7 @@ class BizCabinet extends Component {
                                                 pagination={ true }
                                                 options={ getOptions(this.state.contractInvites.length) }
                                                 expandableRow={ this.isExpandableRow }
-                                                expandComponent={ (e) => this.expandComponent(e, false)}
+                                                expandComponent={ (e) => this.expandComponent(e, false, undefined, true)}
                                 >
                                     <TableHeaderColumn dataField='indexer' isKey={ true }>CTI ID</TableHeaderColumn>
                                     <TableHeaderColumn dataField='template'>Template Name</TableHeaderColumn>

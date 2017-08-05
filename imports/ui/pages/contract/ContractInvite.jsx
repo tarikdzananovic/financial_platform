@@ -8,8 +8,9 @@ import Wizard from '../../components/forms/wizards/Wizard';
 import getContractInviteTemplate from '../../../modules/contract/cti/ContractTemplate'
 import { Bizes } from '../../../api/bizes.js';
 
-import Iframe from 'react-iframe'
-
+import DatePicker from 'react-datepicker';
+//import 'react-datepicker/dist/react-datepicker.css';
+import '../../../../client/styles/css/react-datepicker.css';
 
 class BSTable extends React.Component {
 
@@ -154,15 +155,20 @@ class ContractInvite extends Component {
     onRoleChange(e) {
         let template = this.state.template;
         template.role = e.target.value;
+
+        Object.keys(template.legalIds).map(function (key) {
+            template.legalIds[key].value = undefined;
+        });
+
         template.legalIds[template.role].value = this.state.biz.legalId;
         this.setState({
             template : template,
         });
     }
 
-    onContractTermChange(e, key) {
+    onContractTermChange(e, key, datePicker) {
         let template = this.state.template;
-        template.contractTerms[key].value = e.target.value;
+        template.contractTerms[key].value = datePicker ? moment(e._d).format("YYYY-MM-DD") : e.target.value;
         this.setState({
             template : template,
         });
@@ -187,7 +193,8 @@ class ContractInvite extends Component {
             templateId: this.state.templateId,
             legalIds: this.state.template.legalIds,
             contractTerms: this.selectServiceTypes(this.state.template.contractTerms),
-            indexer: this.state.template.indexer
+            indexer: this.state.template.indexer,
+            active: false
         };
 
         const confirmation = 'Contract invite added';
@@ -400,7 +407,21 @@ class ContractInvite extends Component {
                         </div>
                     );
                 }
-                else{
+                else if (object[key].type === 'date' && !Modernizr.inputtypes.date){
+                    return (
+                        <div className="form-group col-md-12">
+                            <label className="col-md-3 control-label">{key}</label>
+                            <div className="col-md-5">
+                                <DatePicker
+                                    placeholderText="mm/dd/yyyy"
+                                    selected = {object[key].value ? moment(object[key].value) : ''}
+                                    onChange={(e) => this.onContractTermChange(e, key, true)}
+                                    className="form-control" id={object[key].inputName} name={object[key].inputName} type={object[key].type}/>
+                            </div>
+                        </div>
+                    );
+                }
+                else {
                     return (
                         <div className="form-group col-md-12">
                             <label className="col-md-3 control-label">{key}</label>
@@ -432,7 +453,6 @@ class ContractInvite extends Component {
     }
 
     render() {
-
         return (
 
             <div>

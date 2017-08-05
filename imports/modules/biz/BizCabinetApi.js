@@ -20,6 +20,15 @@ export default class BizCabinetApi {
             }
         }
 
+        Meteor.call('contractInvites.update', ctiData._id, true, function (error, response) {
+            if (error) {
+                console.log("Error: " + JSON.stringify(error));
+                Bert.alert(error.reason, 'danger');
+            } else {
+
+            }
+        });
+
         let contractInvite = {
             _id: ctiData._id,
             biz: ctiData.biz,
@@ -28,7 +37,8 @@ export default class BizCabinetApi {
             templateId: ctiData.templateId,
             legalIds: ctiData.legalIds,
             contractTerms: ctiData.contractTerms,
-            indexer: ctiData.indexer
+            indexer: ctiData.indexer,
+            active: true
         };
 
         let contractTalk = {
@@ -55,6 +65,24 @@ export default class BizCabinetApi {
                 hashHistory.push('/biz/' + bizId + '/contractTalk/' + response);
             }
         });
+    }
+
+    static removeCTI(contractInviteId, active){
+        const confirmation = 'Contract invite removed';
+
+        if (confirm('Are you sure you want to remove Contract Invite?')) {
+            Meteor.call('contractInvites.remove', contractInviteId, active, function(error, response) {
+                if (error) {
+                    console.log("Error: " + JSON.stringify(error));
+                    Bert.alert(error.reason, 'danger');
+                } else {
+                    Bert.alert(confirmation, 'success');
+                }
+            });
+        } else {
+            // Do nothing!
+        }
+
 
     }
 }
